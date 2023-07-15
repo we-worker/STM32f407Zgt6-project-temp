@@ -152,7 +152,7 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>231</LineNumber>
+          <LineNumber>237</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -168,25 +168,9 @@
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>210</LineNumber>
+          <LineNumber>237</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\USER\Screen\Screen_main.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression></Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>229</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134226234</Address>
+          <Address>134226268</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -195,23 +179,7 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>D:\Works\keili\Stm32F407ZGT6浠ｇ爜妗嗘灦\USER\Screen\Screen_main.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\ADC\../USER/Screen/Screen_main.c\229</Expression>
-        </Bp>
-        <Bp>
-          <Number>3</Number>
-          <Type>0</Type>
-          <LineNumber>210</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134226062</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\Works\keili\Stm32F407ZGT6浠ｇ爜妗嗘灦\USER\Screen\Screen_main.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\ADC\../USER/Screen/Screen_main.c\210</Expression>
+          <Expression>\\ADC\../USER/Screen/Screen_main.c\237</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow2>
@@ -253,17 +221,22 @@
         <Ww>
           <count>7</count>
           <WinNumber>2</WinNumber>
-          <ItemText>yValues</ItemText>
+          <ItemText>lBufInArray</ItemText>
         </Ww>
         <Ww>
           <count>8</count>
           <WinNumber>2</WinNumber>
-          <ItemText>((TIM_TypeDef *) (((uint32_t)0x40000000) + 0x0000))-&gt;CR1</ItemText>
+          <ItemText>phases,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>9</count>
           <WinNumber>2</WinNumber>
-          <ItemText>\\ADC\../USER/fft.c\lBufOutArray[1]</ItemText>
+          <ItemText>max_i,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>10</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>Phase</ItemText>
         </Ww>
       </WatchWindow2>
       <Tracepoint>

@@ -16,7 +16,17 @@ float32_t lBufOutArray[FFT_LENGTH];
 // float harmonics[FFT_LENGTH/2]; // 谐波频率数组
 int16_t fft_show_idx = 0; // 用于显示的下标
 
+// void InitBufInArray(void)
+// {
+//   unsigned short i;
+//   float fx;
+//   for (i = 0; i < FFT_LENGTH; i++)
+//   {
+//     fx =  512 * arm_sin_f32(2 * PI * i * 600.0f / Fs+PI/4*5)+23 * arm_sin_f32(2 * PI * i * 3000.0f / Fs+PI);
 
+//     ADC_Value[i] = fx + 1024;
+//   }
+// }
 
 float Han_Win(u16 i, float value)
 {
@@ -36,16 +46,16 @@ void FFT(void)
   }
 
   // 减去直流量
-  //	uint32_t sum=0;
-  //	for(int i = 0; i<FFT_LENGTH; i++)
-  //		sum = sum + lBufInArray[i * 2];
-  //	uint32_t average = sum/FFT_LENGTH;
-  //	for(int i = 0; i<FFT_LENGTH; i++)
-  //		lBufInArray[2*i] = lBufInArray[2*i] - average;
+//  	uint32_t sum=0;
+//  	for(int i = 0; i<FFT_LENGTH; i++)
+//  		sum = sum + lBufInArray[i * 2];
+//  	uint32_t average = sum/FFT_LENGTH;
+//  	for(int i = 0; i<FFT_LENGTH; i++)
+//  		lBufInArray[2*i] = lBufInArray[2*i] - average;
 
-  for (int i = 0; i < FFT_LENGTH / 2; i++)
+  for (int i = 0; i < FFT_LENGTH ; i++)
   {
-    Han_Win(i, lBufInArray[i]);
+    Han_Win(i, lBufInArray[i*2]);
   }
 
   arm_cfft_f32(&arm_cfft_sR_f32_len1024, lBufInArray, 0, 1); // fft变化
