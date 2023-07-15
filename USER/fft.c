@@ -1,32 +1,22 @@
 
-#include "fft.h"
 
+#include "fft.h"
 #include "arm_math.h"
 #include "stdio.h"
 
 #include "adc.h"
 
-#define FFT_LENGTH 1024
+
 
 float32_t lBufInArray[FFT_LENGTH * 2];
-float32_t lBufOutArray[FFT_LENGTH / 2];
-uint16_t ADC_Value[FFT_LENGTH];
+float32_t lBufOutArray[FFT_LENGTH];
+//uint16_t ADC_Value[FFT_LENGTH];
 
 // int numHarmonics ; // 谐波数量
 // float harmonics[FFT_LENGTH/2]; // 谐波频率数组
 int16_t fft_show_idx = 0; // 用于显示的下标
 
-// void InitBufInArray(void)
-// {
-//   unsigned short i;
-//   float fx;
-//   for (i = 0; i < FFT_LENGTH; i++)
-//   {
-//     fx = 1024 * sin(2 * PI * i * 13500.0f / Fs) + 512 * sin(2 * PI * i * 8500.0f / Fs) + 512 * sin(2 * PI * i * 3500.0f / Fs);
 
-//     ADC_Value[i] = fx + 2048;
-//   }
-// }
 
 float Han_Win(u16 i, float value)
 {
@@ -41,7 +31,7 @@ void FFT(void)
   //InitBufInArray();
   for (int i = 0; i < FFT_LENGTH; i++)
   {
-    lBufInArray[i * 2] = adc1_datas[i]; // 实部赋值//虚拟测试ADC_Value
+    lBufInArray[i * 2] = ADC_Value[i]; // 实部赋值//虚拟测试ADC_Value
     lBufInArray[i * 2 + 1] = 0;         // 虚部赋值
   }
 
@@ -61,13 +51,13 @@ void FFT(void)
   arm_cfft_f32(&arm_cfft_sR_f32_len1024, lBufInArray, 0, 1); // fft变化
   arm_cmplx_mag_f32(lBufInArray, lBufOutArray, FFT_LENGTH);  // 取模
 
-  for (int i = 1; i < FFT_LENGTH / 2; i++)
+  for (int i = 1; i < FFT_LENGTH ; i++)
   {
     lBufOutArray[i] /= 512; // 归一到幅值
   }
 
   int16_t max_i = 1;
-  for (int16_t i = 1; i < FFT_LENGTH / 2; i++)
+  for (int16_t i = 1; i < FFT_LENGTH ; i++)
   {
     if (lBufOutArray[max_i] < lBufOutArray[i])
       max_i = i;
@@ -134,56 +124,3 @@ void FFT(void)
 
 
 
-
-//=================上面是基于arm——dsp写的==================下面是基于dsp库写的===========================
-// #include "stm32_dsp.h"
-// #define Fs 100000
-// #define FFT_LENGTH 1024
-// int32_t lBufInArray[FFT_LENGTH] = {0};
-// uint16_t ADC_Value[FFT_LENGTH] = {0};
-// int32_t lBufOutArray[FFT_LENGTH / 2] = {0};
-// int32_t lBufMagArray[FFT_LENGTH / 2] = {0};
-
-// void InitBufInArray(void)
-//{
-//   unsigned short i;
-//   float fx;
-//   for(i = 0; i < FFT_LENGTH; i++)
-//   {
-//     fx = 1024*sin(2*PI*i * 13500.0 / Fs)
-//		+512*sin(2*PI*i * 8500.0 / Fs)
-//		+512*sin(2*PI*i * 3500.0 / Fs);
-//		ADC_Value[i] = fx+2048;
-//     lBufInArray[i] = ((signed short)ADC_Value[i]) << 16;
-////		printf("%d\n", ADC_Value[i]);
-//  }
-//}
-// void GetPowerMag(void)
-//{
-//  signed short lX, lY;
-//  float X, Y, Mag;
-//  unsigned short i;
-//  for(i = 0; i < FFT_LENGTH / 2; i++)
-//  {
-//    lX  = (lBufOutArray[i] << 16) >> 16;
-//    lY  = (lBufOutArray[i] >> 16);
-//    X = FFT_LENGTH * ((float)lX) / 32768;
-//    Y = FFT_LENGTH * ((float)lY) / 32768;
-//    Mag = sqrt(X * X + Y * Y) / FFT_LENGTH;
-//    if(i == 0)
-//      lBufMagArray[i] = (unsigned long)(Mag * 32768);
-//    else
-//      lBufMagArray[i] = (unsigned long)(Mag * 65536);
-//  }
-//}
-
-// void FFT(void)
-//{
-//	InitBufInArray();
-//	cr4_fft_1024_stm32(lBufOutArray, lBufInArray, FFT_LENGTH);
-//	GetPowerMag();
-//   for(int16_t i = 1; i < FFT_LENGTH/2; i++)
-//   {
-//     printf("%d\n",lBufMagArray[i]);
-//   }
-// }

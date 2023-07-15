@@ -1,16 +1,16 @@
 #include "lcd.h"
 #include "math.h"
-#include "SPI.h"
+//#include "SPI.h"
 #include "key.h"
 #include "adc.h"
-#include "dac.h"
+//#include "dac.h"
 #include "touch.h"
 #include "timer.h"
 #include "Input_event.h"
 #include "Screen_main.h"
 #include "timer4.h"
 #include "fft.h"
-#include "uart.h"
+//#include "uart.h"
 // #include "AD9959.h"
 // #include "AD9959_Outset.h"
 #include "AD9833.h"
@@ -24,17 +24,20 @@ int main()
 
 	Touch_Init(); // 触摸屏初始化
 
-	SPI_init(); // spi初始化
+//	SPI_init(); // spi初始化
 	// USART6_Init();
 
 	KEY_Init();	 // 按键初始化
-	DAC1_Init(); // DAC通道1初始化
+//	DAC1_Init(); // DAC通道1初始化
 	// DAC1_Init2();
 
 	if (Fs == 700000)
 	{
 		ADC1_Init2();	  // 高速信号采集dma、等
 		TIM2_Init2(9, 5); // 定时器2时钟84M，分频系数84，84M/6=14000K 所以9次为1400k
+	}else if(Fs ==280000){
+		ADC1_Init2();	  // 高速信号采集dma、等
+		TIM2_Init2(49, 5); // 定时器2时钟84M，分频系数84，84M/6=14000K 所以49次为280k
 	}
 	else
 	{
@@ -57,9 +60,9 @@ int main()
 	//		AD9959_enablechannel3(); 				//使能通道3
 	//		AD9959_SetAM2(5e6);
 
-//	AD9833_Init();							 // 初始化与AD9833连接的硬件接口
-//	AD9833_WaveSeting(10e3, 0, SIN_WAVE, 0); // 2KHz,	频率寄存器0，正弦波输出 ,初相位0
-//	AD9833_AmpSet(100);						 // 设置幅值，幅值最大 255
+	AD9833_Init();							 // 初始化与AD9833连接的硬件接口
+	AD9833_WaveSeting(20e2, 0, SIN_WAVE, 0); // 2KHz,	频率寄存器0，正弦波输出 ,初相位0
+	AD9833_AmpSet(100);						 // 设置幅值，幅值最大 255
 						//=================================
 
 	while (1)

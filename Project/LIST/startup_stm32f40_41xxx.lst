@@ -62,7 +62,7 @@ ARM Macro Assembler    Page 1
    38 00000000         ;   <o> Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
    39 00000000         ; </h>
    40 00000000         
-   41 00000000 00000400 
+   41 00000000 00000F00 
 
 
 
@@ -70,24 +70,24 @@ ARM Macro Assembler    Page 2
 
 
                        Stack_Size
-                               EQU              0x00000400
+                               EQU              0x00000F00
    42 00000000         
    43 00000000                 AREA             STACK, NOINIT, READWRITE, ALIGN
 =3
    44 00000000         Stack_Mem
                                SPACE            Stack_Size
-   45 00000400         __initial_sp
-   46 00000400         
-   47 00000400         
-   48 00000400         ; <h> Heap Configuration
-   49 00000400         ;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
-   50 00000400         ; </h>
-   51 00000400         
-   52 00000400 00000200 
+   45 00000F00         __initial_sp
+   46 00000F00         
+   47 00000F00         
+   48 00000F00         ; <h> Heap Configuration
+   49 00000F00         ;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
+   50 00000F00         ; </h>
+   51 00000F00         
+   52 00000F00 00000200 
                        Heap_Size
                                EQU              0x00000200
-   53 00000400         
-   54 00000400                 AREA             HEAP, NOINIT, READWRITE, ALIGN=
+   53 00000F00         
+   54 00000F00                 AREA             HEAP, NOINIT, READWRITE, ALIGN=
 3
    55 00000000         __heap_base
    56 00000000         Heap_Mem
@@ -864,7 +864,7 @@ ARM Macro Assembler    Page 14
               00000000 
               00000000 
               00000000 
-              00000400 
+              00000F00 
               00000200 
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
@@ -898,7 +898,7 @@ Symbol: Stack_Mem
       At line 423 in file ..\Startup_config\startup_stm32f40_41xxx.s
       At line 425 in file ..\Startup_config\startup_stm32f40_41xxx.s
 
-__initial_sp 00000400
+__initial_sp 00000F00
 
 Symbol: __initial_sp
    Definitions
@@ -1938,7 +1938,7 @@ Symbol: Heap_Size
       At line 56 in file ..\Startup_config\startup_stm32f40_41xxx.s
       At line 424 in file ..\Startup_config\startup_stm32f40_41xxx.s
 
-Stack_Size 00000400
+Stack_Size 00000F00
 
 Symbol: Stack_Size
    Definitions

@@ -152,10 +152,10 @@ void TIM2_IRQHandler(void)
 	if (TIM_GetITStatus(TIM2, TIM_IT_Update) == SET) // 溢出中断
 	{
 		//下面两行配合adc——init原始，实现定时器软触发。
-		adc1_datas[adc1_data_count] = Get_Adc(ADC_Channel_6);
+		ADC_Value[adc1_data_count] = Get_Adc(ADC_Channel_6);
 		adc1_data_count++;
 
-		if (adc1_data_count >= ADC_BUFFER_SIZE)
+		if (adc1_data_count >= FFT_LENGTH)
 		{
 			
 			adc1_data_count=0;
@@ -163,8 +163,8 @@ void TIM2_IRQHandler(void)
 			//自动前移数据
 			//adc1_data_count = ADC_BUFFER_SIZE;
 			
-//			memmove(&adc1_datas[0], &adc1_datas[1], (ADC_BUFFER_SIZE - 1) * sizeof(int));
-//			adc1_datas[ADC_BUFFER_SIZE - 1] = Get_Adc(ADC_Channel_6);
+//			memmove(&ADC_Value[0], &ADC_Value[1], (ADC_BUFFER_SIZE - 1) * sizeof(int));
+//			ADC_Value[ADC_BUFFER_SIZE - 1] = Get_Adc(ADC_Channel_6);
 		}
 		
 		

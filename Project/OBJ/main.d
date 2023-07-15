@@ -38,10 +38,8 @@
 .\obj\main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_fsmc.h
 .\obj\main.o: C:\Works\keilv537\ARM\ac506\Bin\..\include\stdlib.h
 .\obj\main.o: C:\Works\keilv537\ARM\ac506\Bin\..\include\math.h
-.\obj\main.o: ..\USER\SPI.h
 .\obj\main.o: ..\USER\KEY\key.h
 .\obj\main.o: ..\USER\ADC\adc.h
-.\obj\main.o: ..\USER\DAC\dac.h
 .\obj\main.o: ..\USER\TOUCH\touch.h
 .\obj\main.o: ..\USER\timer.h
 .\obj\main.o: ..\USER\Input_event.h
@@ -53,7 +51,4 @@
 .\obj\main.o: ..\STM32F4_FWLIB\DSP\arm_common_tables.h
 .\obj\main.o: ..\USER\Screen\Screen_main.h
 .\obj\main.o: ..\USER\timer4.h
-.\obj\main.o: ..\USER\Uart\uart.h
-.\obj\main.o: C:\Works\keilv537\ARM\ac506\Bin\..\include\stdio.h
-.\obj\main.o: C:\Works\keilv537\ARM\ac506\Bin\..\include\stdarg.h
 .\obj\main.o: ..\USER\DDS\AD9833.h
