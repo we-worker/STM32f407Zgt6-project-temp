@@ -152,7 +152,23 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>237</LineNumber>
+          <LineNumber>257</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134226914</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>D:\Works\keili\Stm32F407ZGT6浠ｇ爜妗嗘灦\USER\Screen\Screen_main.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\ADC\../USER/Screen/Screen_main.c\257</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>263</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -165,28 +181,12 @@
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
-        <Bp>
-          <Number>1</Number>
-          <Type>0</Type>
-          <LineNumber>237</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134226268</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\Works\keili\Stm32F407ZGT6浠ｇ爜妗嗘灦\USER\Screen\Screen_main.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\ADC\../USER/Screen/Screen_main.c\237</Expression>
-        </Bp>
       </Breakpoint>
       <WatchWindow2>
         <Ww>
           <count>0</count>
           <WinNumber>2</WinNumber>
-          <ItemText>((ADC_TypeDef *) ((((uint32_t)0x40000000) + 0x00010000) + 0x2000))-&gt;DR</ItemText>
+          <ItemText>ADC2</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
@@ -226,7 +226,7 @@
         <Ww>
           <count>8</count>
           <WinNumber>2</WinNumber>
-          <ItemText>phases,0x0A</ItemText>
+          <ItemText>TIM2</ItemText>
         </Ww>
         <Ww>
           <count>9</count>
@@ -237,6 +237,11 @@
           <count>10</count>
           <WinNumber>2</WinNumber>
           <ItemText>Phase</ItemText>
+        </Ww>
+        <Ww>
+          <count>11</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>ADC2_Value,0x0A</ItemText>
         </Ww>
       </WatchWindow2>
       <Tracepoint>

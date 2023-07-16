@@ -159,7 +159,7 @@ void TIM2_IRQHandler(void)
 		{
 			
 			adc1_data_count=0;
-			FFT();
+			FFT(ADC_Value);
 			//自动前移数据
 			//adc1_data_count = ADC_BUFFER_SIZE;
 			

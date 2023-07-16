@@ -5,9 +5,9 @@
 
 
 //FFT长度（16/64/256/1024/4096）,即采样点的个数
-#define Fs  28000   //虚拟是100000  正常使用定时器是20000    //目前最快模式是700000
+#define Fs  700000   //虚拟是100000  正常使用定时器是20000    //目前最快模式是700000
 #define FFT_LENGTH 1024
-void FFT(void);
+void FFT(uint16_t * ADC_Value);
 
 void all_result_x4(float * pSrc,float * Amp,float * rate,float * Phase);//计算各点幅值、频率、相位
 

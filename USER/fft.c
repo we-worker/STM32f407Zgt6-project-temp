@@ -36,7 +36,7 @@ float Han_Win(u16 i, float value)
   return Wn;
 }
 
-void FFT(void)
+void FFT(uint16_t * ADC_Value)
 {
   //InitBufInArray();
   for (int i = 0; i < FFT_LENGTH; i++)

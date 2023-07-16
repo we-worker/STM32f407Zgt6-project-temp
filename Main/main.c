@@ -34,9 +34,11 @@ int main()
 	if (Fs == 700000)
 	{
 		ADC1_Init2();	  // 高速信号采集dma、等
+		ADC2_Init2();
 		TIM2_Init2(9, 5); // 定时器2时钟84M，分频系数84，84M/6=14000K 所以9次为1400k
 	}else if(Fs ==28000){
 		ADC1_Init2();	  // 高速信号采集dma、等
+		ADC2_Init2();
 		TIM2_Init2(499, 5); // 定时器2时钟84M，分频系数84，84M/6=14000K 所以499次为280k
 	}
 	else
@@ -61,7 +63,7 @@ int main()
 	//		AD9959_SetAM2(5e6);
 
 	AD9833_Init();							 // 初始化与AD9833连接的硬件接口
-	AD9833_WaveSeting(20e2, 0, SIN_WAVE, 0); // 2KHz,	频率寄存器0，正弦波输出 ,初相位0
+	AD9833_WaveSeting(50e3, 0, SIN_WAVE, 0); // 2KHz,	频率寄存器0，正弦波输出 ,初相位0
 	AD9833_AmpSet(100);						 // 设置幅值，幅值最大 255
 						//=================================
 
@@ -70,7 +72,8 @@ int main()
 
 		input_event();
 		Screen_main();
-
+		//ADC2_Value[0]=Get_Adc(ADC_Channel_7);;
+		
 		// USART_OUT(USART6, "字符串是：%s","abcdefg");
 		// while (USART_GetFlagStatus(USART6, USART_FLAG_TXE) == RESET); // 等待发送完成
 		/*
