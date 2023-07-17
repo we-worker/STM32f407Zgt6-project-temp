@@ -13,6 +13,10 @@
 ".\obj\fft.o"
 ".\obj\touch.o"
 ".\obj\screen_main.o"
+".\obj\dac.o"
+".\obj\pid.o"
+".\obj\spi.o"
+".\obj\19c_main_progress.o"
 ".\obj\misc.o"
 ".\obj\stm32f4xx_gpio.o"
 ".\obj\stm32f4xx_fsmc.o"
@@ -28,6 +32,7 @@
 ".\obj\common.o"
 "..\STM32F4_FWLIB\DSP\arm_cortexM4lf_math.lib"
 ".\obj\ad9833.o"
+".\obj\valuepack.o"
 --strict --scatter ".\OBJ\ADC.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

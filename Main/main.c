@@ -10,10 +10,21 @@
 #include "Screen_main.h"
 #include "timer4.h"
 #include "fft.h"
-//#include "uart.h"
+#include "valuepack.h"
 // #include "AD9959.h"
 // #include "AD9959_Outset.h"
 #include "AD9833.h"
+
+
+//TxPack txpack;
+//RxPack rxpack;
+//		if(readValuePack(&rxpack))
+//			{
+//				// 这里是将接收的数据原样回传
+//				txpack.floats[0] = rxpack.floats[0];
+//			}
+//			// 在此对数据包赋值并将数据发送到手机
+//			sendValuePack(&txpack);
 
 int main()
 {
@@ -25,7 +36,7 @@ int main()
 	Touch_Init(); // 触摸屏初始化
 
 //	SPI_init(); // spi初始化
-	// USART6_Init();
+	initValuePack(115200);
 
 	KEY_Init();	 // 按键初始化
 //	DAC1_Init(); // DAC通道1初始化
@@ -72,6 +83,10 @@ int main()
 
 		input_event();
 		Screen_main();
+		
+
+
+		
 		//ADC2_Value[0]=Get_Adc(ADC_Channel_7);;
 		
 		// USART_OUT(USART6, "字符串是：%s","abcdefg");

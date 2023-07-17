@@ -1,6 +1,6 @@
 Dependencies for Project 'ADC', Target 'Target 1': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ac506
-F (..\Main\main.c)(0x64B4D35E)(--c99 -c --cpu Cortex-M4.fp.sp -g -O0 -Otime --apcs=interwork -I ..\Common -I ..\Main -I ..\Startup_config -I ..\STM32F4_FWLIB\inc -I ..\USER\LCD -I ..\USER\LED -I ..\USER\usart1 -I ..\USER\KEY -I ..\USER\ADC -I ..\USER -I ..\USER\TOUCH -I ..\USER\DAC -I ..\STM32F4_FWLIB\DSP -I ..\USER\Screen -I ..\USER\Uart -I ..\USER\DDS-I.\RTE\_Target_1-IC:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Works\keilv537\ARM\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__TARGET_FPU_VFP -D__FPU_PRESENT="1"-o .\obj\main.o --omf_browse .\obj\main.crf --depend .\obj\main.d)
+F (..\Main\main.c)(0x64B53462)(--c99 -c --cpu Cortex-M4.fp.sp -g -O0 -Otime --apcs=interwork -I ..\Common -I ..\Main -I ..\Startup_config -I ..\STM32F4_FWLIB\inc -I ..\USER\LCD -I ..\USER\LED -I ..\USER\usart1 -I ..\USER\KEY -I ..\USER\ADC -I ..\USER -I ..\USER\TOUCH -I ..\USER\DAC -I ..\STM32F4_FWLIB\DSP -I ..\USER\Screen -I ..\USER\Uart -I ..\USER\DDS-I.\RTE\_Target_1-IC:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Works\keilv537\ARM\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__TARGET_FPU_VFP -D__FPU_PRESENT="1"-o .\obj\main.o --omf_browse .\obj\main.crf --depend .\obj\main.d)
 I (..\USER\LCD\lcd.h)(0x64A42375)
 I (..\Common\common.h)(0x555E03A1)
 I (..\Startup_config\stm32f4xx.h)(0x550A89BE)
@@ -51,6 +51,9 @@ I (C:\Works\keilv537\ARM\ac506\include\string.h)(0x5E8E3CC2)
 I (..\STM32F4_FWLIB\DSP\arm_common_tables.h)(0x649BB891)
 I (..\USER\Screen\Screen_main.h)(0x62DF8D66)
 I (..\USER\timer4.h)(0x62DA0346)
+I (..\USER\Uart\valuepack.h)(0x64B533C8)
+I (C:\Works\keilv537\ARM\ac506\include\stdio.h)(0x5E8E3CC2)
+I (C:\Works\keilv537\ARM\ac506\include\stdarg.h)(0x5E8E3CC2)
 I (..\USER\DDS\AD9833.h)(0x64ABB1B7)
 F (..\Main\stm32f4xx_it.c)(0x5426CDF4)(--c99 -c --cpu Cortex-M4.fp.sp -g -O0 -Otime --apcs=interwork -I ..\Common -I ..\Main -I ..\Startup_config -I ..\STM32F4_FWLIB\inc -I ..\USER\LCD -I ..\USER\LED -I ..\USER\usart1 -I ..\USER\KEY -I ..\USER\ADC -I ..\USER -I ..\USER\TOUCH -I ..\USER\DAC -I ..\STM32F4_FWLIB\DSP -I ..\USER\Screen -I ..\USER\Uart -I ..\USER\DDS-I.\RTE\_Target_1-IC:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Works\keilv537\ARM\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__TARGET_FPU_VFP -D__FPU_PRESENT="1"-o .\obj\stm32f4xx_it.o --omf_browse .\obj\stm32f4xx_it.crf --depend .\obj\stm32f4xx_it.d)
 I (..\Main\stm32f4xx_it.h)(0x5426CDC1)
@@ -500,7 +503,7 @@ I (..\USER\TOUCH\xpt2046.h)(0x5B91E579)
 I (..\USER\LCD\lcd.h)(0x64A42375)
 I (C:\Works\keilv537\ARM\ac506\include\stdlib.h)(0x5E8E3CC2)
 I (..\USER\LED\led.h)(0x59CBA1F1)
-F (..\USER\Screen\Screen_main.c)(0x64B4EE84)(--c99 -c --cpu Cortex-M4.fp.sp -g -O0 -Otime --apcs=interwork -I ..\Common -I ..\Main -I ..\Startup_config -I ..\STM32F4_FWLIB\inc -I ..\USER\LCD -I ..\USER\LED -I ..\USER\usart1 -I ..\USER\KEY -I ..\USER\ADC -I ..\USER -I ..\USER\TOUCH -I ..\USER\DAC -I ..\STM32F4_FWLIB\DSP -I ..\USER\Screen -I ..\USER\Uart -I ..\USER\DDS-I.\RTE\_Target_1-IC:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Works\keilv537\ARM\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__TARGET_FPU_VFP -D__FPU_PRESENT="1"-o .\obj\screen_main.o --omf_browse .\obj\screen_main.crf --depend .\obj\screen_main.d)
+F (..\USER\Screen\Screen_main.c)(0x64B53C5C)(--c99 -c --cpu Cortex-M4.fp.sp -g -O0 -Otime --apcs=interwork -I ..\Common -I ..\Main -I ..\Startup_config -I ..\STM32F4_FWLIB\inc -I ..\USER\LCD -I ..\USER\LED -I ..\USER\usart1 -I ..\USER\KEY -I ..\USER\ADC -I ..\USER -I ..\USER\TOUCH -I ..\USER\DAC -I ..\STM32F4_FWLIB\DSP -I ..\USER\Screen -I ..\USER\Uart -I ..\USER\DDS-I.\RTE\_Target_1-IC:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Works\keilv537\ARM\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__TARGET_FPU_VFP -D__FPU_PRESENT="1"-o .\obj\screen_main.o --omf_browse .\obj\screen_main.crf --depend .\obj\screen_main.d)
 I (..\USER\Screen\Screen_main.h)(0x62DF8D66)
 I (..\Common\common.h)(0x555E03A1)
 I (..\Startup_config\stm32f4xx.h)(0x550A89BE)
@@ -550,9 +553,169 @@ I (C:\Works\keilv537\ARM\ac506\include\stdio.h)(0x5E8E3CC2)
 I (..\USER\input_event.h)(0x64A4E02F)
 I (..\USER\KEY\key.h)(0x5655BDA8)
 I (..\USER\TOUCH\touch.h)(0x62DE9BB4)
-I (..\USER\Uart\uart.h)(0x64AB6FCB)
-I (C:\Works\keilv537\ARM\ac506\include\stdarg.h)(0x5E8E3CC2)
 I (..\USER\SPI.h)(0x62DE8F59)
+I (..\USER\DDS\AD9833.h)(0x64ABB1B7)
+I (..\USER\Uart\valuepack.h)(0x64B533C8)
+I (C:\Works\keilv537\ARM\ac506\include\stdarg.h)(0x5E8E3CC2)
+I (..\USER\19C_main_progress.h)(0x64B53C0F)
+F (..\USER\DAC\dac.c)(0x64A90A5F)(--c99 -c --cpu Cortex-M4.fp.sp -g -O0 -Otime --apcs=interwork -I ..\Common -I ..\Main -I ..\Startup_config -I ..\STM32F4_FWLIB\inc -I ..\USER\LCD -I ..\USER\LED -I ..\USER\usart1 -I ..\USER\KEY -I ..\USER\ADC -I ..\USER -I ..\USER\TOUCH -I ..\USER\DAC -I ..\STM32F4_FWLIB\DSP -I ..\USER\Screen -I ..\USER\Uart -I ..\USER\DDS-I.\RTE\_Target_1-IC:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Works\keilv537\ARM\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__TARGET_FPU_VFP -D__FPU_PRESENT="1"-o .\obj\dac.o --omf_browse .\obj\dac.crf --depend .\obj\dac.d)
+I (..\USER\DAC\dac.h)(0x64A904E8)
+I (..\Common\common.h)(0x555E03A1)
+I (..\Startup_config\stm32f4xx.h)(0x550A89BE)
+I (..\Startup_config\core_cm4.h)(0x53C7D530)
+I (C:\Works\keilv537\ARM\ac506\include\stdint.h)(0x5E8E3CC2)
+I (..\Startup_config\core_cmInstr.h)(0x53C7D530)
+I (..\Startup_config\core_cmFunc.h)(0x53C7D530)
+I (..\Startup_config\core_cm4_simd.h)(0x53C7D530)
+I (..\Startup_config\system_stm32f4xx.h)(0x53DBA499)
+I (..\Startup_config\stm32f4xx_conf.h)(0x53DBB3CB)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_adc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_crc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dbgmcu.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dma.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_exti.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_flash.h)(0x53DF9330)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_gpio.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_i2c.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_iwdg.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_pwr.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_rcc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_rtc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_sdio.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_spi.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_syscfg.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_tim.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_usart.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_wwdg.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\misc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_cryp.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_hash.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_rng.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_can.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dac.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dcmi.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_fsmc.h)(0x53DBAFAD)
+I (C:\Works\keilv537\ARM\ac506\include\math.h)(0x5E8E3CC2)
+F (..\USER\pid.c)(0x62DF9E40)(--c99 -c --cpu Cortex-M4.fp.sp -g -O0 -Otime --apcs=interwork -I ..\Common -I ..\Main -I ..\Startup_config -I ..\STM32F4_FWLIB\inc -I ..\USER\LCD -I ..\USER\LED -I ..\USER\usart1 -I ..\USER\KEY -I ..\USER\ADC -I ..\USER -I ..\USER\TOUCH -I ..\USER\DAC -I ..\STM32F4_FWLIB\DSP -I ..\USER\Screen -I ..\USER\Uart -I ..\USER\DDS-I.\RTE\_Target_1-IC:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Works\keilv537\ARM\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__TARGET_FPU_VFP -D__FPU_PRESENT="1"-o .\obj\pid.o --omf_browse .\obj\pid.crf --depend .\obj\pid.d)
+I (..\USER\pid.h)(0x62DF8D30)
+I (..\Common\common.h)(0x555E03A1)
+I (..\Startup_config\stm32f4xx.h)(0x550A89BE)
+I (..\Startup_config\core_cm4.h)(0x53C7D530)
+I (C:\Works\keilv537\ARM\ac506\include\stdint.h)(0x5E8E3CC2)
+I (..\Startup_config\core_cmInstr.h)(0x53C7D530)
+I (..\Startup_config\core_cmFunc.h)(0x53C7D530)
+I (..\Startup_config\core_cm4_simd.h)(0x53C7D530)
+I (..\Startup_config\system_stm32f4xx.h)(0x53DBA499)
+I (..\Startup_config\stm32f4xx_conf.h)(0x53DBB3CB)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_adc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_crc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dbgmcu.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dma.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_exti.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_flash.h)(0x53DF9330)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_gpio.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_i2c.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_iwdg.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_pwr.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_rcc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_rtc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_sdio.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_spi.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_syscfg.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_tim.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_usart.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_wwdg.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\misc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_cryp.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_hash.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_rng.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_can.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dac.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dcmi.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_fsmc.h)(0x53DBAFAD)
+I (..\USER\DAC\dac.h)(0x64A904E8)
+I (..\USER\ADC\adc.h)(0x64B3856E)
+I (..\USER\LCD\lcd.h)(0x64A42375)
+I (C:\Works\keilv537\ARM\ac506\include\stdlib.h)(0x5E8E3CC2)
+F (..\USER\SPI.c)(0x64AB691A)(--c99 -c --cpu Cortex-M4.fp.sp -g -O0 -Otime --apcs=interwork -I ..\Common -I ..\Main -I ..\Startup_config -I ..\STM32F4_FWLIB\inc -I ..\USER\LCD -I ..\USER\LED -I ..\USER\usart1 -I ..\USER\KEY -I ..\USER\ADC -I ..\USER -I ..\USER\TOUCH -I ..\USER\DAC -I ..\STM32F4_FWLIB\DSP -I ..\USER\Screen -I ..\USER\Uart -I ..\USER\DDS-I.\RTE\_Target_1-IC:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Works\keilv537\ARM\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__TARGET_FPU_VFP -D__FPU_PRESENT="1"-o .\obj\spi.o --omf_browse .\obj\spi.crf --depend .\obj\spi.d)
+I (..\USER\SPI.h)(0x62DE8F59)
+I (..\Common\common.h)(0x555E03A1)
+I (..\Startup_config\stm32f4xx.h)(0x550A89BE)
+I (..\Startup_config\core_cm4.h)(0x53C7D530)
+I (C:\Works\keilv537\ARM\ac506\include\stdint.h)(0x5E8E3CC2)
+I (..\Startup_config\core_cmInstr.h)(0x53C7D530)
+I (..\Startup_config\core_cmFunc.h)(0x53C7D530)
+I (..\Startup_config\core_cm4_simd.h)(0x53C7D530)
+I (..\Startup_config\system_stm32f4xx.h)(0x53DBA499)
+I (..\Startup_config\stm32f4xx_conf.h)(0x53DBB3CB)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_adc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_crc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dbgmcu.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dma.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_exti.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_flash.h)(0x53DF9330)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_gpio.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_i2c.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_iwdg.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_pwr.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_rcc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_rtc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_sdio.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_spi.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_syscfg.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_tim.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_usart.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_wwdg.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\misc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_cryp.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_hash.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_rng.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_can.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dac.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dcmi.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_fsmc.h)(0x53DBAFAD)
+F (..\USER\19C_main_progress.c)(0x64B53C2F)(--c99 -c --cpu Cortex-M4.fp.sp -g -O0 -Otime --apcs=interwork -I ..\Common -I ..\Main -I ..\Startup_config -I ..\STM32F4_FWLIB\inc -I ..\USER\LCD -I ..\USER\LED -I ..\USER\usart1 -I ..\USER\KEY -I ..\USER\ADC -I ..\USER -I ..\USER\TOUCH -I ..\USER\DAC -I ..\STM32F4_FWLIB\DSP -I ..\USER\Screen -I ..\USER\Uart -I ..\USER\DDS-I.\RTE\_Target_1-IC:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Works\keilv537\ARM\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__TARGET_FPU_VFP -D__FPU_PRESENT="1"-o .\obj\19c_main_progress.o --omf_browse .\obj\19c_main_progress.crf --depend .\obj\19c_main_progress.d)
+I (..\USER\19C_main_progress.h)(0x64B53C0F)
+I (..\Common\common.h)(0x555E03A1)
+I (..\Startup_config\stm32f4xx.h)(0x550A89BE)
+I (..\Startup_config\core_cm4.h)(0x53C7D530)
+I (C:\Works\keilv537\ARM\ac506\include\stdint.h)(0x5E8E3CC2)
+I (..\Startup_config\core_cmInstr.h)(0x53C7D530)
+I (..\Startup_config\core_cmFunc.h)(0x53C7D530)
+I (..\Startup_config\core_cm4_simd.h)(0x53C7D530)
+I (..\Startup_config\system_stm32f4xx.h)(0x53DBA499)
+I (..\Startup_config\stm32f4xx_conf.h)(0x53DBB3CB)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_adc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_crc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dbgmcu.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dma.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_exti.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_flash.h)(0x53DF9330)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_gpio.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_i2c.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_iwdg.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_pwr.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_rcc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_rtc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_sdio.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_spi.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_syscfg.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_tim.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_usart.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_wwdg.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\misc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_cryp.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_hash.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_rng.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_can.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dac.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dcmi.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_fsmc.h)(0x53DBAFAD)
+I (..\USER\LCD\lcd.h)(0x64A42375)
+I (C:\Works\keilv537\ARM\ac506\include\stdlib.h)(0x5E8E3CC2)
+I (..\USER\ADC\adc.h)(0x64B3856E)
+I (C:\Works\keilv537\ARM\ac506\include\math.h)(0x5E8E3CC2)
+I (C:\Works\keilv537\ARM\ac506\include\stdio.h)(0x5E8E3CC2)
 I (..\USER\DDS\AD9833.h)(0x64ABB1B7)
 F (..\STM32F4_FWLIB\src\misc.c)(0x53DBB014)(--c99 -c --cpu Cortex-M4.fp.sp -g -O0 -Otime --apcs=interwork -I ..\Common -I ..\Main -I ..\Startup_config -I ..\STM32F4_FWLIB\inc -I ..\USER\LCD -I ..\USER\LED -I ..\USER\usart1 -I ..\USER\KEY -I ..\USER\ADC -I ..\USER -I ..\USER\TOUCH -I ..\USER\DAC -I ..\STM32F4_FWLIB\DSP -I ..\USER\Screen -I ..\USER\Uart -I ..\USER\DDS-I.\RTE\_Target_1-IC:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Works\keilv537\ARM\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__TARGET_FPU_VFP -D__FPU_PRESENT="1"-o .\obj\misc.o --omf_browse .\obj\misc.crf --depend .\obj\misc.d)
 I (..\STM32F4_FWLIB\inc\misc.h)(0x53DBAFAD)
@@ -1052,3 +1215,42 @@ I (..\STM32F4_FWLIB\inc\stm32f4xx_can.h)(0x53DBAFAD)
 I (..\STM32F4_FWLIB\inc\stm32f4xx_dac.h)(0x53DBAFAD)
 I (..\STM32F4_FWLIB\inc\stm32f4xx_dcmi.h)(0x53DBAFAD)
 I (..\STM32F4_FWLIB\inc\stm32f4xx_fsmc.h)(0x53DBAFAD)
+F (..\USER\Uart\valuepack.c)(0x64B51423)(--c99 -c --cpu Cortex-M4.fp.sp -g -O0 -Otime --apcs=interwork -I ..\Common -I ..\Main -I ..\Startup_config -I ..\STM32F4_FWLIB\inc -I ..\USER\LCD -I ..\USER\LED -I ..\USER\usart1 -I ..\USER\KEY -I ..\USER\ADC -I ..\USER -I ..\USER\TOUCH -I ..\USER\DAC -I ..\STM32F4_FWLIB\DSP -I ..\USER\Screen -I ..\USER\Uart -I ..\USER\DDS-I.\RTE\_Target_1-IC:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Works\keilv537\ARM\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -D__CC_ARM -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__TARGET_FPU_VFP -D__FPU_PRESENT="1"-o .\obj\valuepack.o --omf_browse .\obj\valuepack.crf --depend .\obj\valuepack.d)
+I (..\USER\Uart\valuepack.h)(0x64B533C8)
+I (..\Common\common.h)(0x555E03A1)
+I (..\Startup_config\stm32f4xx.h)(0x550A89BE)
+I (..\Startup_config\core_cm4.h)(0x53C7D530)
+I (C:\Works\keilv537\ARM\ac506\include\stdint.h)(0x5E8E3CC2)
+I (..\Startup_config\core_cmInstr.h)(0x53C7D530)
+I (..\Startup_config\core_cmFunc.h)(0x53C7D530)
+I (..\Startup_config\core_cm4_simd.h)(0x53C7D530)
+I (..\Startup_config\system_stm32f4xx.h)(0x53DBA499)
+I (..\Startup_config\stm32f4xx_conf.h)(0x53DBB3CB)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_adc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_crc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dbgmcu.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dma.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_exti.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_flash.h)(0x53DF9330)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_gpio.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_i2c.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_iwdg.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_pwr.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_rcc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_rtc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_sdio.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_spi.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_syscfg.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_tim.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_usart.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_wwdg.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\misc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_cryp.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_hash.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_rng.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_can.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dac.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dcmi.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_fsmc.h)(0x53DBAFAD)
+I (C:\Works\keilv537\ARM\ac506\include\stdio.h)(0x5E8E3CC2)
+I (C:\Works\keilv537\ARM\ac506\include\stdarg.h)(0x5E8E3CC2)

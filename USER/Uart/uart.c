@@ -1,12 +1,9 @@
 #include "uart.h"
-#define BUFFER_SIZE 128
 
 __IO uint8_t nRx2Counter=0; //接收字节数
 __IO uint8_t USART_Rx2Buff[FRAME_BYTE_LENGTH]; //接收缓冲区
 __IO uint8_t USART_FrameFlag = 0; //接收完整数据帧标志，1完整，0不完整
 
-volatile uint8_t rx_buffer[BUFFER_SIZE];
-volatile uint8_t rx_index = 0;
 
 void USART6_Init(void) {
     // 使能 USART6 时钟
@@ -51,7 +48,7 @@ void USART6_Init(void) {
     USART_Init(USART6, &USART_InitStruct);
 
 
-
+	USART_ClearITPendingBit(USART6,USART_IT_RXNE);
     // 配置接收中断
     USART_ITConfig(USART6, USART_IT_RXNE, ENABLE);
 
@@ -219,31 +216,51 @@ void USART_GetChar(uint8_t nChar) //串口接收到一个字节
 }
 
 
-//ch1,ch2,ch3这样一组
-void Xuehui_app_send(uint8_t *string){
-	uint8_t cmdf[2]={0x03,0xFC};//帧头
-	uint8_t cmdr[2]={0xFC,0x03};//帧头
-	
-	USART_OUT(USART6,cmdf);
-	USART_OUT(USART6,string);
-	USART_OUT(USART6,cmdr);
 
+void USART_Process(void) //处理数据帧
+{
+	if(USART_FrameFlag == 1)
+	{
+		//将数据原封不动发送回去
+		for(uint8_t i=0;i<FRAME_BYTE_LENGTH;i++)
+		{
+			USART_SendData(USART6,USART_Rx2Buff[i]);
+			while(USART_GetFlagStatus(USART6, USART_FLAG_TC)==RESET);
+		}
+		
+		if(USART_Rx2Buff[1] == 0x11) //如果命令字节等于0x11，则是设置PID参数指令，这些协议可以自己定义
+		{
+
+		}
+		else if(USART_Rx2Buff[1] == 0x12) //如果命令字节等于0x12，则是设置加速度参数指令，这些协议可以自己定义
+		{
+
+		}
+		//处理完毕，将标志清0
+		USART_FrameFlag = 0; 
+	}
 }
 
 void USART6_IRQHandler(void) {
-    if (USART_GetITStatus(USART6, USART_IT_RXNE) != RESET) {
-					// 从 USART6 接收数据
-        uint8_t data = USART_ReceiveData(USART6);
+		
+		
+	uint8_t getchar;
+  if(USART_GetITStatus(USART6, USART_IT_RXNE) !=RESET)	   //判断读寄存器是否为空
+  {	
 
-        // 在这里进行接收数据的处理
-        // 例如，将数据存储到缓冲区
-        rx_buffer[rx_index++] = data;
+    getchar = USART_ReceiveData(USART6);   //将读寄存器的数据缓存到接收缓冲区里
+	
+    USART_GetChar(getchar);
+		 USART_ClearITPendingBit(USART6, USART_IT_RXNE);
+  }
 
-        // 如果缓冲区已满，则重置索引
-        if (rx_index >= BUFFER_SIZE) {
-            rx_index = 0;
-        }
 
-        USART_ClearITPendingBit(USART6, USART_IT_RXNE);
-    }
+  if(USART_GetITStatus(USART6, USART_IT_TXE) != RESET)                   //这段是为了避免STM32 USART第一个字节发送不出去的BUG 
+  { 
+     USART_ITConfig(USART6, USART_IT_TXE, DISABLE);					     //禁止发送缓冲器空中断
+  }	
+  
 }
+
+
+

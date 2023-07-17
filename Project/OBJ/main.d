@@ -51,4 +51,7 @@
 .\obj\main.o: ..\STM32F4_FWLIB\DSP\arm_common_tables.h
 .\obj\main.o: ..\USER\Screen\Screen_main.h
 .\obj\main.o: ..\USER\timer4.h
+.\obj\main.o: ..\USER\Uart\valuepack.h
+.\obj\main.o: C:\Works\keilv537\ARM\ac506\Bin\..\include\stdio.h
+.\obj\main.o: C:\Works\keilv537\ARM\ac506\Bin\..\include\stdarg.h
 .\obj\main.o: ..\USER\DDS\AD9833.h

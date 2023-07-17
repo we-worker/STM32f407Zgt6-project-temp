@@ -50,7 +50,8 @@
 .\obj\screen_main.o: ..\USER\input_event.h
 .\obj\screen_main.o: ..\USER\KEY\key.h
 .\obj\screen_main.o: ..\USER\TOUCH\touch.h
-.\obj\screen_main.o: ..\USER\Uart\uart.h
-.\obj\screen_main.o: C:\Works\keilv537\ARM\ac506\Bin\..\include\stdarg.h
 .\obj\screen_main.o: ..\USER\SPI.h
 .\obj\screen_main.o: ..\USER\DDS\AD9833.h
+.\obj\screen_main.o: ..\USER\Uart\valuepack.h
+.\obj\screen_main.o: C:\Works\keilv537\ARM\ac506\Bin\..\include\stdarg.h
+.\obj\screen_main.o: ..\USER\19C_main_progress.h
