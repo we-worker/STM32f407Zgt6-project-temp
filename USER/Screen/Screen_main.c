@@ -26,7 +26,7 @@ void Screen_main(void)
 {
 
 	Screen_flash_cnt++;
-	if (Screen_flash_cnt >= 30)
+	if (Screen_flash_cnt >= 1000)
 		Screen_flash_cnt = 0;
 
 	char display_str[30];
@@ -46,8 +46,8 @@ void Screen_main(void)
 			// 清空屏幕
 			LCD_Fill_onecolor(0, 0, lcd_width - 1, lcd_height - 1, 0xffff);
 		u16 waveform_height = lcd_height; // 计算波形显示区域的高度
-		float adc_value_range = waveform_height / 1000.0f; // 假设ADC的取值范围为0-4095
-		int show_buffer_size = 100;						   // 绘制的范围，避免太多了。
+		float adc_value_range = waveform_height / 4000.0f; // 假设ADC的取值范围为0-4095
+		int show_buffer_size = 50;						   // 绘制的范围，避免太多了。
 		drawWaveform(show_buffer_size, ADC_Value, 0, lcd_height / 2, lcd_height / 2, adc_value_range, RED);
 		drawWaveform(show_buffer_size, ADC2_Value, 0, lcd_height / 2,lcd_height / 2, adc_value_range, BLUE);
 
@@ -126,8 +126,8 @@ void display_waveform()
 	// 计算波形显示区域的高度
 	u16 waveform_height = lcd_height / 2;
 	// 计算每个ADC值在屏幕上的垂直位置范围
-	float adc_value_range = waveform_height / 2000.0f; // 假设ADC的取值范围为0-4095
-	int show_buffer_size = 512;						   // 绘制的范围，避免太多了。
+	float adc_value_range = waveform_height / 4000.0f; // 假设ADC的取值范围为0-4095
+	int show_buffer_size = 1024;						   // 绘制的范围，避免太多了。
 
 	drawWaveform(show_buffer_size, ADC2_Value, 0, lcd_height / 2, 0, adc_value_range, RED);
 }
@@ -182,11 +182,14 @@ void Display_characteristic()
 	int key_index[show_len] = {0};
 	int show_index = 0;
 
-	for (int i = 0; i < 300; i++)
+			int sqrt2_index=0;
+		int minsqrt2=10000;
+	
+	for (int i = 0; i < 150; i++)
 	{
 		uint16_t freq = (i + 1);
 		// 设置频率
-		AD9833_WaveSeting(freq * 0.5e3, 0, SIN_WAVE, 0); // 2KHz, 频率寄存器0，正弦波输出，初相位0
+		AD9833_WaveSeting(freq * 1e2, 0, SIN_WAVE, 0); // 2KHz, 频率寄存器0，正弦波输出，初相位0
 		delay_ms(1);
 		TIM_Cmd(TIM2, ENABLE); // 使能定时器2
 		while (TIM2->CR1 != 0)
@@ -194,14 +197,14 @@ void Display_characteristic()
 		} // 等待被关闭，说明采样完毕
 		  //		 display_fft();
 		  //			// 清空屏幕
-		LCD_Fill_onecolor(0, 0, lcd_width - 1, lcd_height, 0xffff);
+		//LCD_Fill_onecolor(0, 0, lcd_width - 1, lcd_height, 0xffff);
 		// 计算波形显示区域的高度
 		u16 waveform_height = lcd_height / 2;
 		// 计算每个ADC值在屏幕上的垂直位置范围
 		float adc_value_range = waveform_height / 2000.0f; // 假设ADC的取值范围为0-4095
 		int show_buffer_size = 50;						   // 绘制的范围，避免太多了。
-		drawWaveform(show_buffer_size, ADC_Value, 0, lcd_height / 2, 0, adc_value_range, RED);
-		drawWaveform(show_buffer_size, ADC2_Value, 0, lcd_height / 2, 0, adc_value_range, BLUE);
+//		drawWaveform(show_buffer_size, ADC_Value, 0, lcd_height / 2, 0, adc_value_range, RED);
+//		drawWaveform(show_buffer_size, ADC2_Value, 0, lcd_height / 2, 0, adc_value_range, BLUE);
 		LCD_DrawLine(100, 0, 100, lcd_height - 1, BLUE); // 使用
 		FFT(ADC_Value); // 计算fft
 		// 找到最大频率点
@@ -219,7 +222,7 @@ void Display_characteristic()
 		double uo_sum = 0;
 		for (int i = -3; i < 3; i++)
 		{
-			if (max_i + i < 0)
+			if (max_i + i <= 0)
 				continue;
 			uo_sum += lBufOutArray[max_i + i] * lBufOutArray[max_i + i];
 		}
@@ -241,18 +244,26 @@ void Display_characteristic()
 		}
 		float Phase2 = atan2(lBufInArray[2 * max_i + 1], lBufInArray[2 * max_i]) * 180.0f / 3.1415926f + 90 + 10.39;
 		
+		if(Phase2-Phase1<-50)
+			Phase2+=360;
+		
 
-		if (real_part[max_i / 2] == 0)
+		if(fabs(uo_sum-real_part[3]*1.414f/2)<minsqrt2){
+			minsqrt2=fabs(uo_sum-real_part[3]*1.414f/2);
+			sqrt2_index=max_i;
+		}
+		
+		if (real_part[max_i/2] == 0)
 		{
-			key_index[show_index] = max_i / 2;
+			key_index[show_index] = max_i/2;
 			show_index++;
-			real_part[max_i / 2] = uo_sum; // 幅度
-			imag_part[max_i / 2] = Phase2*10-Phase1*10;  // 相位
+			real_part[max_i/2] = uo_sum; // 幅度
+			imag_part[max_i/2] = Phase2*10-Phase1*10;  // 相位
 		}
 		else
 		{
-			real_part[max_i / 2] = (real_part[max_i / 2] + uo_sum) / 2.0f; // 幅度
-			imag_part[max_i / 2] = (imag_part[max_i / 2] +Phase2*10-Phase1*10) / 2.0f;  // 相位
+			real_part[max_i/2 ] = (real_part[max_i/2 ] + uo_sum) / 2.0f; // 幅度
+			imag_part[max_i/2] = (imag_part[max_i/2 ] +Phase2*10-Phase1*10) / 2.0f;  // 相位
 		}
 		//			char display_str[30];
 		//			sprintf((char *)display_str, "Phase:%.4f",Phase); // 1024/2
@@ -261,14 +272,28 @@ void Display_characteristic()
 
 	// 清空屏幕
 	LCD_Fill_onecolor(0, 0, lcd_width, lcd_height, 0xffff);
+	
+	if(real_part[key_index[3]]-real_part[key_index[show_index-2]]<100){
+			char display_str[30];
+		int uo=real_part[key_index[3]];
+	sprintf((char *)display_str, "Rvalue:%.4f", 98.6f*uo/(1572-uo)   ); // 1024/2
+		LCD_DisplayString(50, 24, 24, display_str);			   // 实际电压数值																			   // 实际电压数值
+	}else{
+			char display_str[30];
+	sprintf((char *)display_str, "Cvalue:%.4f", 1/(2*3.1415926*(Fs * 1.0 / FFT_LENGTH) *sqrt2_index*98.6f)*1e9   ); // 1024/2
+		LCD_DisplayString(50, 24, 24, display_str);			   // 实际电压数值																			   // 实际电压数值
+	}
 
+	
+	
 	u16 waveform_height = lcd_height / 2; // 计算波形显示区域的高度
 
 	// 计算每个ADC值在屏幕上的垂直位置范围
-	float adc_value_range1 = waveform_height / 1000.0f; // 假设ADC的取值范围为0-4095
-	float adc_value_range2 = waveform_height / 500.0f;	// 假设ADC的取值范围为0-4095
+	float adc_value_range1 = waveform_height / 2800.0f; // 假设ADC的取值范围为0-4095
+	float adc_value_range2 = waveform_height / 2500.0f;	// 假设ADC的取值范围为0-4095
 	int show_buffer_size = show_index;					// 绘制的范围，避免太多了。
 
+	
 	// 绘制幅频波形,相频
 	for (int i = 0; i < show_buffer_size; i++)
 	{
@@ -279,7 +304,7 @@ void Display_characteristic()
 		//					phase=-80;
 		// 计算波形点的坐标
 		u16 x = i * (lcd_width * 1.0f / show_buffer_size);
-		u16 y1 = lcd_height / 2 - (amplitude * adc_value_range1);
+		u16 y1 = lcd_height / 2- (amplitude * adc_value_range1);
 		u16 y2 = lcd_height / 4 * 3 + (phase * adc_value_range2);
 		// 绘制当前幅度值的波形点
 		LCD_Color_DrawPoint(x, y1, RED);
