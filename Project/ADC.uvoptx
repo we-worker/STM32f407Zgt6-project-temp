@@ -152,7 +152,7 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>284</LineNumber>
+          <LineNumber>374</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -168,41 +168,41 @@
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>281</LineNumber>
+          <LineNumber>79</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
+          <Address>134230708</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\USER\Screen\Screen_main.c</Filename>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>D:\Works\keili\Stm32F407ZGT6浠ｇ爜妗嗘灦\USER\19C_main_progress.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\\../USER/19C_main_progress.c\79</Expression>
         </Bp>
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>282</LineNumber>
+          <LineNumber>83</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
+          <Address>134230728</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\USER\Screen\Screen_main.c</Filename>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>D:\Works\keili\Stm32F407ZGT6浠ｇ爜妗嗘灦\USER\19C_main_progress.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\\../USER/19C_main_progress.c\83</Expression>
         </Bp>
         <Bp>
           <Number>3</Number>
           <Type>0</Type>
-          <LineNumber>279</LineNumber>
+          <LineNumber>322</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134227390</Address>
+          <Address>134227130</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -211,23 +211,23 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>D:\Works\keili\Stm32F407ZGT6浠ｇ爜妗嗘灦\USER\Screen\Screen_main.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\ADC\../USER/Screen/Screen_main.c\279</Expression>
+          <Expression>\\ADC\../USER/Screen/Screen_main.c\322</Expression>
         </Bp>
         <Bp>
           <Number>4</Number>
           <Type>0</Type>
-          <LineNumber>60</LineNumber>
+          <LineNumber>374</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
+          <Address>134227670</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\USER\Screen\Screen_main.c</Filename>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>D:\Works\keili\Stm32F407ZGT6浠ｇ爜妗嗘灦\USER\Screen\Screen_main.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\ADC\../USER/Screen/Screen_main.c\374</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow2>
@@ -306,7 +306,35 @@
           <WinNumber>2</WinNumber>
           <ItemText>uo_sum</ItemText>
         </Ww>
+        <Ww>
+          <count>15</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>sqrt2_index,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>16</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>ADC1</ItemText>
+        </Ww>
+        <Ww>
+          <count>17</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>((DMA_Stream_TypeDef *) (((((uint32_t)0x40000000) + 0x00020000) + 0x6400) + 0x010))</ItemText>
+        </Ww>
+        <Ww>
+          <count>18</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>((uint32_t)0x10000020)</ItemText>
+        </Ww>
       </WatchWindow2>
+      <MemoryWindow4>
+        <Mm>
+          <WinNumber>4</WinNumber>
+          <SubType>0</SubType>
+          <ItemText>ADC_Value[i]</ItemText>
+          <AccSizeX>0</AccSizeX>
+        </Mm>
+      </MemoryWindow4>
       <Tracepoint>
         <THDelay>0</THDelay>
       </Tracepoint>

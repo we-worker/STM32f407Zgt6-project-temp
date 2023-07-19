@@ -50,7 +50,7 @@ int main()
 	}else if(Fs ==28000){
 		ADC1_Init2();	  // 高速信号采集dma、等
 		ADC2_Init2();
-		TIM2_Init2(499, 5); // 定时器2时钟84M，分频系数84，84M/6=14000K 所以499次为280k
+		TIM2_Init2(499, 5); // 定时器2时钟84M，分频系数84，84M/6=14000K 所以499次为28k
 	}
 	else
 	{
@@ -74,7 +74,7 @@ int main()
 	//		AD9959_SetAM2(5e6);
 
 	AD9833_Init();							 // 初始化与AD9833连接的硬件接口
-	AD9833_WaveSeting(50000, 0, SIN_WAVE, 0); // 2KHz,	频率寄存器0，正弦波输出 ,初相位0
+	AD9833_WaveSeting(52000, 0, SIN_WAVE, 0); // 2KHz,	频率寄存器0，正弦波输出 ,初相位0
 	AD9833_AmpSet(100);						 // 设置幅值，幅值最大 255
 						//=================================
 
@@ -121,7 +121,7 @@ void freq(void)
 	}
 	Frequency_avg /= 100;
 
-	sprintf((char *)display_str, "VPP:%.4f", adc_data1);
+//	sprintf((char *)display_str, "VPP:%.4f", adc_data1);
 	LCD_DisplayString(10, 110, 24, display_str); // 实际电压数值
 
 	if (Frequency_avg > 10000)

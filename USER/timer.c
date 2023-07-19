@@ -14,35 +14,8 @@
  * 返回参数：无
  * 说    明：定时器溢出时间计算方法:Tout=((auto_data+1)*(fractional+1))/Ft(us)  Ft定时器时钟
  ****************************************************************************/
-float adc_data1 = 0; // ADC1的数据
-float adc_data2 = 0; // ADC2的数据
 
-u32 adc_data1_t = 0; // ADC1的数据临时
-u32 adc_data2_t = 0; // ADC2的数据临时
-// 下面用来去掉最大和最小值
-u16 adc_data1_t_max = 0;
-u16 adc_data1_t_min = 65535;
-u16 adc_data2_t_max = 0;
-u16 adc_data2_t_min = 65535;
-
-u16 adc1_data_count = 0;
-
-float temp = 0;
-int adc_count = 20;
-
-float adc1_Vref = 3.996;
-float adc2_Vref = 3.259;
-
-//#define PI 3.14159
-//#define VREF 3.3 //参考电压
-//#define N 36 //采样点
-////定义一个变量，用来存储36点的电压值
-//float dac1_sinval2[N];
-//			//计算每个采样点的电压值，转换为12位DAC数据
-//	for (int i = 0; i < N; i++)
-//	{
-//		dac1_sinval2[i]  = VREF * (0.99 + sin(2.0 * PI * i / N))/2*1000; //计算电压值，范围为0~VREF
-//	}
+uint16_t adc1_data_count=0;
 
 void TIM2_Init(u16 auto_data, u16 fractional)
 {
