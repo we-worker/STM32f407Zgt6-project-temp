@@ -1,4 +1,4 @@
-./obj/main.o: ..\Main\main.c ..\USER\LCD\lcd.h ..\Common\common.h \
+./obj/ui.o: ..\USER\Screen\UI.c ..\USER\Screen\UI.h ..\Common\common.h \
   ..\Startup_config\stm32f4xx.h ..\Startup_config\core_cm4.h \
   C:\Works\keilv537\ARM\ARMCLANG\Bin\..\include\stdint.h \
   C:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_version.h \
@@ -33,15 +33,5 @@
   ..\STM32F4_FWLIB\inc\stm32f4xx_dcmi.h \
   ..\STM32F4_FWLIB\inc\stm32f4xx_fsmc.h \
   C:\Works\keilv537\ARM\ARMCLANG\Bin\..\include\stdlib.h \
-  C:\Works\keilv537\ARM\ARMCLANG\Bin\..\include\math.h ..\USER\KEY\key.h \
-  ..\USER\ADC\adc.h ..\USER\TOUCH\touch.h ..\USER\timer.h \
-  ..\USER\Input_event.h ..\USER\fft.h \
-  ..\STM32F4_FWLIB\DSP\arm_const_structs.h \
-  ..\STM32F4_FWLIB\DSP\arm_math.h \
   C:\Works\keilv537\ARM\ARMCLANG\Bin\..\include\string.h \
-  ..\STM32F4_FWLIB\DSP\arm_common_tables.h ..\USER\timer4.h \
-  ..\USER\Uart\valuepack.h \
-  C:\Works\keilv537\ARM\ARMCLANG\Bin\..\include\stdio.h \
-  C:\Works\keilv537\ARM\ARMCLANG\Bin\..\include\stdarg.h \
-  ..\USER\DDS\AD9833.h ..\USER\Screen\05D_UI_progress.h \
-  ..\USER\Screen\UI.h ..\USER\TOUCH\xpt2046.h
+  ..\USER\LCD\lcd.h ..\USER\TOUCH\xpt2046.h

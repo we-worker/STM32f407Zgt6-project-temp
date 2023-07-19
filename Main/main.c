@@ -7,14 +7,14 @@
 #include "touch.h"
 #include "timer.h"
 #include "Input_event.h"
-#include "Screen_main.h"
+//#include "Screen_main.h"
 #include "timer4.h"
 #include "fft.h"
 #include "valuepack.h"
 // #include "AD9959.h"
 // #include "AD9959_Outset.h"
 #include "AD9833.h"
-
+#include "05D_UI_progress.h"
 
 //TxPack txpack;
 //RxPack rxpack;
@@ -58,7 +58,7 @@ int main()
 		TIM2_Init(49, 83); // 定时器2时钟84M，分频系数84，84M/84=1000K 所以9次为10.0us,100k
 	}
 
-	// delay_ms(1000);
+	Screen_main2_init();
 
 	//=========================DDS===========================
 	//		GPIO_AD9959_Configuration();
@@ -82,7 +82,7 @@ int main()
 	{
 
 		input_event();
-		Screen_main();
+		Screen_main2();
 		
 
 

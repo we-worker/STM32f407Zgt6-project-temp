@@ -9,10 +9,10 @@
 #include "valuepack.h"
 #include "19C_main_progress.h"
 #include "timer.h"
+#include "UI.h"
 
 
 uint16_t Screen_flash_cnt = 0; // 屏幕刷新次数计数，实现简易延迟动画。
-uint32_t flash=0;
 uint8_t SPI_data[7];
 
 void drawpic(void);
@@ -29,6 +29,16 @@ void ADC_progress(void);
 
 void Screen_main(void)
 {
+Button btn_start; //定义一个按钮结构体
+btn_start.x = 100; //设置按钮左上角的x坐标为100
+btn_start.y = 200; //设置按钮左上角的y坐标为200
+btn_start.width = 80; //设置按钮的宽度为80
+btn_start.height = 40; //设置按钮的高度为40
+btn_start.color = 0x895C ; //设置按钮的颜色为红色
+btn_start.text = "Start"; //设置按钮上显示的文字为“开始”
+btn_start.size = 16; //设置文字的大小为16
+btn_start.state = 0; //设置按钮的初始状态为未按下
+btn_start.action = Screen_main; //设置按钮按下时触发的函数为start
 
     Screen_flash_cnt++;
 		//delay_ms(1);
@@ -54,10 +64,13 @@ void Screen_main(void)
             u16 waveform_height = lcd_height;				   // 计算波形显示区域的高度
             float adc_value_range = waveform_height / 4000.0f; // 假设ADC的取值范围为0-4095
 						useless_main();
+					
 					  int show_buffer_size = Fs*10/2/frequency;						   // 绘制的范围，避免太多了。
             drawWaveform(show_buffer_size, ADC_Value, 0, lcd_height / 2, lcd_height / 2, adc_value_range, RED);
             drawWaveform(show_buffer_size, ADC2_Value, 0, lcd_height / 2, lcd_height / 2, adc_value_range, BLUE);
-            // for (int i = 0; i < 7; i++)
+          LCD_DrawButton(&btn_start); //画出开始按钮  
+					LCD_CheckButton(&btn_start);
+					// for (int i = 0; i < 7; i++)
             // {
             // 	SPI_data[i] = RecvFrom_FPGA(i, 4);
             // 	sprintf((char *)display_str, "data:%#x", SPI_data[i]); // 浮点型数据  e-01  就是除于10      /10
@@ -118,7 +131,7 @@ void useless_main(void)
     sprintf((char *)display_str, "ADC1 freq:%.4f", frequency); // 浮点型数据  e-01  就是除于10      /10
     LCD_DisplayString(10, 110, 24, display_str);			  // 实际电压数值
 
-    sprintf((char *)display_str, "peak to p:%d", flash++); // 浮点型数据  e-01  就是除于10      /10
+    sprintf((char *)display_str, "peak to p:%d", peak_to_peak ); // 浮点型数据  e-01  就是除于10      /10
     LCD_DisplayString(10, 170, 24, display_str);		// 实际电压数值
 }
 

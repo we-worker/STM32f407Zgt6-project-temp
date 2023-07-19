@@ -1,7 +1,7 @@
 Dependencies for Project 'ADC', Target 'Target 1': (DO NOT MODIFY !)
 CompilerVersion: 6180000::V6.18::ARMCLANG
-F (..\Main\main.c)(0x64B7CC5B)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O3 -fno-function-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Common -I ../Main -I ../Startup_config -I ../STM32F4_FWLIB/inc -I ../USER/LCD -I ../USER/LED -I ../USER/usart1 -I ../USER/KEY -I ../USER/ADC -I ../USER -I ../USER/TOUCH -I ../USER/DAC -I ../STM32F4_FWLIB/DSP -I ../USER/Screen -I ../USER/Uart -I ../USER/DDS-I./RTE/_Target_1-IC:/Works/keilv537/ARM/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Works/keilv537/ARM/Packs/Keil/STM32F4xx_DFP/2.16.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__TARGET_FPU_VFP -D__FPU_PRESENT="1"-o ./obj/main.o -MD)
-I (..\USER\LCD\lcd.h)(0x64A42375)
+F (..\Main\main.c)(0x64B7ED6E)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O3 -fno-function-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Common -I ../Main -I ../Startup_config -I ../STM32F4_FWLIB/inc -I ../USER/LCD -I ../USER/LED -I ../USER/usart1 -I ../USER/KEY -I ../USER/ADC -I ../USER -I ../USER/TOUCH -I ../USER/DAC -I ../STM32F4_FWLIB/DSP -I ../USER/Screen -I ../USER/Uart -I ../USER/DDS-I./RTE/_Target_1-IC:/Works/keilv537/ARM/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Works/keilv537/ARM/Packs/Keil/STM32F4xx_DFP/2.16.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__TARGET_FPU_VFP -D__FPU_PRESENT="1"-o ./obj/main.o -MD)
+I (..\USER\LCD\lcd.h)(0x64B7E1B9)
 I (..\Common\common.h)(0x555E03A1)
 I (..\Startup_config\stm32f4xx.h)(0x550A89BE)
 I (..\Startup_config\core_cm4.h)(0x64B7C8C3)
@@ -50,12 +50,14 @@ I (..\STM32F4_FWLIB\DSP\arm_const_structs.h)(0x649BB891)
 I (..\STM32F4_FWLIB\DSP\arm_math.h)(0x649BB891)
 I (C:\Works\keilv537\ARM\ARMCLANG\include\string.h)(0x625260D6)
 I (..\STM32F4_FWLIB\DSP\arm_common_tables.h)(0x649BB891)
-I (..\USER\Screen\Screen_main.h)(0x62DF8D66)
 I (..\USER\timer4.h)(0x62DA0346)
 I (..\USER\Uart\valuepack.h)(0x64B533C8)
 I (C:\Works\keilv537\ARM\ARMCLANG\include\stdio.h)(0x625260D6)
 I (C:\Works\keilv537\ARM\ARMCLANG\include\stdarg.h)(0x625260D8)
 I (..\USER\DDS\AD9833.h)(0x64ABB1B7)
+I (..\USER\Screen\05D_UI_progress.h)(0x64B7F520)
+I (..\USER\Screen\UI.h)(0x64B7FBFD)
+I (..\USER\TOUCH\xpt2046.h)(0x5B91E579)
 F (..\Main\stm32f4xx_it.c)(0x5426CDF4)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O3 -fno-function-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Common -I ../Main -I ../Startup_config -I ../STM32F4_FWLIB/inc -I ../USER/LCD -I ../USER/LED -I ../USER/usart1 -I ../USER/KEY -I ../USER/ADC -I ../USER -I ../USER/TOUCH -I ../USER/DAC -I ../STM32F4_FWLIB/DSP -I ../USER/Screen -I ../USER/Uart -I ../USER/DDS-I./RTE/_Target_1-IC:/Works/keilv537/ARM/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Works/keilv537/ARM/Packs/Keil/STM32F4xx_DFP/2.16.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__TARGET_FPU_VFP -D__FPU_PRESENT="1"-o ./obj/stm32f4xx_it.o -MD)
 I (..\Main\stm32f4xx_it.h)(0x5426CDC1)
 I (..\Startup_config\stm32f4xx.h)(0x550A89BE)
@@ -131,7 +133,7 @@ I (..\STM32F4_FWLIB\inc\stm32f4xx_dac.h)(0x53DBAFAD)
 I (..\STM32F4_FWLIB\inc\stm32f4xx_dcmi.h)(0x53DBAFAD)
 I (..\STM32F4_FWLIB\inc\stm32f4xx_fsmc.h)(0x53DBAFAD)
 F (..\USER\LCD\lcd.c)(0x64B13B79)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -fno-function-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Common -I ../Main -I ../Startup_config -I ../STM32F4_FWLIB/inc -I ../USER/LCD -I ../USER/LED -I ../USER/usart1 -I ../USER/KEY -I ../USER/ADC -I ../USER -I ../USER/TOUCH -I ../USER/DAC -I ../STM32F4_FWLIB/DSP -I ../USER/Screen -I ../USER/Uart -I ../USER/DDS-I./RTE/_Target_1-IC:/Works/keilv537/ARM/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Works/keilv537/ARM/Packs/Keil/STM32F4xx_DFP/2.16.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__TARGET_FPU_VFP -D__FPU_PRESENT="1"-o ./obj/lcd.o -MD)
-I (..\USER\LCD\lcd.h)(0x64A42375)
+I (..\USER\LCD\lcd.h)(0x64B7E1B9)
 I (..\Common\common.h)(0x555E03A1)
 I (..\Startup_config\stm32f4xx.h)(0x550A89BE)
 I (..\Startup_config\core_cm4.h)(0x64B7C8C3)
@@ -417,7 +419,7 @@ I (..\STM32F4_FWLIB\inc\stm32f4xx_dcmi.h)(0x53DBAFAD)
 I (..\STM32F4_FWLIB\inc\stm32f4xx_fsmc.h)(0x53DBAFAD)
 I (..\USER\KEY\key.h)(0x5655BDA8)
 I (..\USER\TOUCH\touch.h)(0x62DE9BB4)
-I (..\USER\LCD\lcd.h)(0x64A42375)
+I (..\USER\LCD\lcd.h)(0x64B7E1B9)
 I (C:\Works\keilv537\ARM\ARMCLANG\include\stdlib.h)(0x625260D6)
 I (..\USER\fft.h)(0x64B7638B)
 I (..\STM32F4_FWLIB\DSP\arm_const_structs.h)(0x649BB891)
@@ -473,7 +475,7 @@ I (C:\Works\keilv537\ARM\ARMCLANG\include\math.h)(0x625260D6)
 I (..\STM32F4_FWLIB\DSP\arm_common_tables.h)(0x649BB891)
 I (C:\Works\keilv537\ARM\ARMCLANG\include\stdio.h)(0x625260D6)
 I (..\USER\ADC\adc.h)(0x64B3856E)
-F (..\USER\TOUCH\touch.c)(0x62DE9BB4)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O3 -fno-function-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Common -I ../Main -I ../Startup_config -I ../STM32F4_FWLIB/inc -I ../USER/LCD -I ../USER/LED -I ../USER/usart1 -I ../USER/KEY -I ../USER/ADC -I ../USER -I ../USER/TOUCH -I ../USER/DAC -I ../STM32F4_FWLIB/DSP -I ../USER/Screen -I ../USER/Uart -I ../USER/DDS-I./RTE/_Target_1-IC:/Works/keilv537/ARM/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Works/keilv537/ARM/Packs/Keil/STM32F4xx_DFP/2.16.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__TARGET_FPU_VFP -D__FPU_PRESENT="1"-o ./obj/touch.o -MD)
+F (..\USER\TOUCH\touch.c)(0x64B7E1F6)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O3 -fno-function-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Common -I ../Main -I ../Startup_config -I ../STM32F4_FWLIB/inc -I ../USER/LCD -I ../USER/LED -I ../USER/usart1 -I ../USER/KEY -I ../USER/ADC -I ../USER -I ../USER/TOUCH -I ../USER/DAC -I ../STM32F4_FWLIB/DSP -I ../USER/Screen -I ../USER/Uart -I ../USER/DDS-I./RTE/_Target_1-IC:/Works/keilv537/ARM/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Works/keilv537/ARM/Packs/Keil/STM32F4xx_DFP/2.16.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__TARGET_FPU_VFP -D__FPU_PRESENT="1"-o ./obj/touch.o -MD)
 I (..\USER\TOUCH\touch.h)(0x62DE9BB4)
 I (..\Common\common.h)(0x555E03A1)
 I (..\Startup_config\stm32f4xx.h)(0x550A89BE)
@@ -512,66 +514,9 @@ I (..\STM32F4_FWLIB\inc\stm32f4xx_dac.h)(0x53DBAFAD)
 I (..\STM32F4_FWLIB\inc\stm32f4xx_dcmi.h)(0x53DBAFAD)
 I (..\STM32F4_FWLIB\inc\stm32f4xx_fsmc.h)(0x53DBAFAD)
 I (..\USER\TOUCH\xpt2046.h)(0x5B91E579)
-I (..\USER\LCD\lcd.h)(0x64A42375)
+I (..\USER\LCD\lcd.h)(0x64B7E1B9)
 I (C:\Works\keilv537\ARM\ARMCLANG\include\stdlib.h)(0x625260D6)
 I (..\USER\LED\led.h)(0x59CBA1F1)
-F (..\USER\Screen\Screen_main.c)(0x64B7D225)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O3 -fno-function-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Common -I ../Main -I ../Startup_config -I ../STM32F4_FWLIB/inc -I ../USER/LCD -I ../USER/LED -I ../USER/usart1 -I ../USER/KEY -I ../USER/ADC -I ../USER -I ../USER/TOUCH -I ../USER/DAC -I ../STM32F4_FWLIB/DSP -I ../USER/Screen -I ../USER/Uart -I ../USER/DDS-I./RTE/_Target_1-IC:/Works/keilv537/ARM/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Works/keilv537/ARM/Packs/Keil/STM32F4xx_DFP/2.16.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__TARGET_FPU_VFP -D__FPU_PRESENT="1"-o ./obj/screen_main.o -MD)
-I (..\USER\Screen\Screen_main.h)(0x62DF8D66)
-I (..\Common\common.h)(0x555E03A1)
-I (..\Startup_config\stm32f4xx.h)(0x550A89BE)
-I (..\Startup_config\core_cm4.h)(0x64B7C8C3)
-I (C:\Works\keilv537\ARM\ARMCLANG\include\stdint.h)(0x625260D8)
-I (C:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_version.h)(0x626F4ADE)
-I (C:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_compiler.h)(0x626F4ADE)
-I (C:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_armclang.h)(0x626F4ADE)
-I (C:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\mpu_armv7.h)(0x626F4ADE)
-I (..\Startup_config\system_stm32f4xx.h)(0x53DBA499)
-I (..\Startup_config\stm32f4xx_conf.h)(0x53DBB3CB)
-I (..\STM32F4_FWLIB\inc\stm32f4xx_adc.h)(0x53DBAFAD)
-I (..\STM32F4_FWLIB\inc\stm32f4xx_crc.h)(0x53DBAFAD)
-I (..\STM32F4_FWLIB\inc\stm32f4xx_dbgmcu.h)(0x53DBAFAD)
-I (..\STM32F4_FWLIB\inc\stm32f4xx_dma.h)(0x53DBAFAD)
-I (..\STM32F4_FWLIB\inc\stm32f4xx_exti.h)(0x53DBAFAD)
-I (..\STM32F4_FWLIB\inc\stm32f4xx_flash.h)(0x53DF9330)
-I (..\STM32F4_FWLIB\inc\stm32f4xx_gpio.h)(0x53DBAFAD)
-I (..\STM32F4_FWLIB\inc\stm32f4xx_i2c.h)(0x53DBAFAD)
-I (..\STM32F4_FWLIB\inc\stm32f4xx_iwdg.h)(0x53DBAFAD)
-I (..\STM32F4_FWLIB\inc\stm32f4xx_pwr.h)(0x53DBAFAD)
-I (..\STM32F4_FWLIB\inc\stm32f4xx_rcc.h)(0x53DBAFAD)
-I (..\STM32F4_FWLIB\inc\stm32f4xx_rtc.h)(0x53DBAFAD)
-I (..\STM32F4_FWLIB\inc\stm32f4xx_sdio.h)(0x53DBAFAD)
-I (..\STM32F4_FWLIB\inc\stm32f4xx_spi.h)(0x53DBAFAD)
-I (..\STM32F4_FWLIB\inc\stm32f4xx_syscfg.h)(0x53DBAFAD)
-I (..\STM32F4_FWLIB\inc\stm32f4xx_tim.h)(0x53DBAFAD)
-I (..\STM32F4_FWLIB\inc\stm32f4xx_usart.h)(0x53DBAFAD)
-I (..\STM32F4_FWLIB\inc\stm32f4xx_wwdg.h)(0x53DBAFAD)
-I (..\STM32F4_FWLIB\inc\misc.h)(0x53DBAFAD)
-I (..\STM32F4_FWLIB\inc\stm32f4xx_cryp.h)(0x53DBAFAD)
-I (..\STM32F4_FWLIB\inc\stm32f4xx_hash.h)(0x53DBAFAD)
-I (..\STM32F4_FWLIB\inc\stm32f4xx_rng.h)(0x53DBAFAD)
-I (..\STM32F4_FWLIB\inc\stm32f4xx_can.h)(0x53DBAFAD)
-I (..\STM32F4_FWLIB\inc\stm32f4xx_dac.h)(0x53DBAFAD)
-I (..\STM32F4_FWLIB\inc\stm32f4xx_dcmi.h)(0x53DBAFAD)
-I (..\STM32F4_FWLIB\inc\stm32f4xx_fsmc.h)(0x53DBAFAD)
-I (..\USER\LCD\lcd.h)(0x64A42375)
-I (C:\Works\keilv537\ARM\ARMCLANG\include\stdlib.h)(0x625260D6)
-I (..\USER\fft.h)(0x64B7638B)
-I (..\STM32F4_FWLIB\DSP\arm_const_structs.h)(0x649BB891)
-I (..\STM32F4_FWLIB\DSP\arm_math.h)(0x649BB891)
-I (C:\Works\keilv537\ARM\ARMCLANG\include\string.h)(0x625260D6)
-I (C:\Works\keilv537\ARM\ARMCLANG\include\math.h)(0x625260D6)
-I (..\STM32F4_FWLIB\DSP\arm_common_tables.h)(0x649BB891)
-I (..\USER\ADC\adc.h)(0x64B3856E)
-I (C:\Works\keilv537\ARM\ARMCLANG\include\stdio.h)(0x625260D6)
-I (..\USER\input_event.h)(0x64A4E02F)
-I (..\USER\KEY\key.h)(0x5655BDA8)
-I (..\USER\TOUCH\touch.h)(0x62DE9BB4)
-I (..\USER\SPI.h)(0x62DE8F59)
-I (..\USER\DDS\AD9833.h)(0x64ABB1B7)
-I (..\USER\Uart\valuepack.h)(0x64B533C8)
-I (C:\Works\keilv537\ARM\ARMCLANG\include\stdarg.h)(0x625260D8)
-I (..\USER\19C_main_progress.h)(0x64B53C0F)
-I (..\USER\timer.h)(0x64B742BA)
 F (..\USER\DAC\dac.c)(0x64A90A5F)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O3 -fno-function-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Common -I ../Main -I ../Startup_config -I ../STM32F4_FWLIB/inc -I ../USER/LCD -I ../USER/LED -I ../USER/usart1 -I ../USER/KEY -I ../USER/ADC -I ../USER -I ../USER/TOUCH -I ../USER/DAC -I ../STM32F4_FWLIB/DSP -I ../USER/Screen -I ../USER/Uart -I ../USER/DDS-I./RTE/_Target_1-IC:/Works/keilv537/ARM/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Works/keilv537/ARM/Packs/Keil/STM32F4xx_DFP/2.16.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__TARGET_FPU_VFP -D__FPU_PRESENT="1"-o ./obj/dac.o -MD)
 I (..\USER\DAC\dac.h)(0x64A904E8)
 I (..\Common\common.h)(0x555E03A1)
@@ -651,7 +596,7 @@ I (..\STM32F4_FWLIB\inc\stm32f4xx_dcmi.h)(0x53DBAFAD)
 I (..\STM32F4_FWLIB\inc\stm32f4xx_fsmc.h)(0x53DBAFAD)
 I (..\USER\DAC\dac.h)(0x64A904E8)
 I (..\USER\ADC\adc.h)(0x64B3856E)
-I (..\USER\LCD\lcd.h)(0x64A42375)
+I (..\USER\LCD\lcd.h)(0x64B7E1B9)
 I (C:\Works\keilv537\ARM\ARMCLANG\include\stdlib.h)(0x625260D6)
 F (..\USER\SPI.c)(0x64AB691A)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O3 -fno-function-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Common -I ../Main -I ../Startup_config -I ../STM32F4_FWLIB/inc -I ../USER/LCD -I ../USER/LED -I ../USER/usart1 -I ../USER/KEY -I ../USER/ADC -I ../USER -I ../USER/TOUCH -I ../USER/DAC -I ../STM32F4_FWLIB/DSP -I ../USER/Screen -I ../USER/Uart -I ../USER/DDS-I./RTE/_Target_1-IC:/Works/keilv537/ARM/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Works/keilv537/ARM/Packs/Keil/STM32F4xx_DFP/2.16.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__TARGET_FPU_VFP -D__FPU_PRESENT="1"-o ./obj/spi.o -MD)
 I (..\USER\SPI.h)(0x62DE8F59)
@@ -729,12 +674,106 @@ I (..\STM32F4_FWLIB\inc\stm32f4xx_can.h)(0x53DBAFAD)
 I (..\STM32F4_FWLIB\inc\stm32f4xx_dac.h)(0x53DBAFAD)
 I (..\STM32F4_FWLIB\inc\stm32f4xx_dcmi.h)(0x53DBAFAD)
 I (..\STM32F4_FWLIB\inc\stm32f4xx_fsmc.h)(0x53DBAFAD)
-I (..\USER\LCD\lcd.h)(0x64A42375)
+I (..\USER\LCD\lcd.h)(0x64B7E1B9)
 I (C:\Works\keilv537\ARM\ARMCLANG\include\stdlib.h)(0x625260D6)
 I (..\USER\ADC\adc.h)(0x64B3856E)
 I (C:\Works\keilv537\ARM\ARMCLANG\include\math.h)(0x625260D6)
 I (C:\Works\keilv537\ARM\ARMCLANG\include\stdio.h)(0x625260D6)
 I (..\USER\DDS\AD9833.h)(0x64ABB1B7)
+F (..\USER\Screen\UI.c)(0x64B7FD37)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O3 -fno-function-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Common -I ../Main -I ../Startup_config -I ../STM32F4_FWLIB/inc -I ../USER/LCD -I ../USER/LED -I ../USER/usart1 -I ../USER/KEY -I ../USER/ADC -I ../USER -I ../USER/TOUCH -I ../USER/DAC -I ../STM32F4_FWLIB/DSP -I ../USER/Screen -I ../USER/Uart -I ../USER/DDS-I./RTE/_Target_1-IC:/Works/keilv537/ARM/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Works/keilv537/ARM/Packs/Keil/STM32F4xx_DFP/2.16.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__TARGET_FPU_VFP -D__FPU_PRESENT="1"-o ./obj/ui.o -MD)
+I (..\USER\Screen\UI.h)(0x64B7FBFD)
+I (..\Common\common.h)(0x555E03A1)
+I (..\Startup_config\stm32f4xx.h)(0x550A89BE)
+I (..\Startup_config\core_cm4.h)(0x64B7C8C3)
+I (C:\Works\keilv537\ARM\ARMCLANG\include\stdint.h)(0x625260D8)
+I (C:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_version.h)(0x626F4ADE)
+I (C:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_compiler.h)(0x626F4ADE)
+I (C:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_armclang.h)(0x626F4ADE)
+I (C:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\mpu_armv7.h)(0x626F4ADE)
+I (..\Startup_config\system_stm32f4xx.h)(0x53DBA499)
+I (..\Startup_config\stm32f4xx_conf.h)(0x53DBB3CB)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_adc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_crc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dbgmcu.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dma.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_exti.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_flash.h)(0x53DF9330)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_gpio.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_i2c.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_iwdg.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_pwr.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_rcc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_rtc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_sdio.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_spi.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_syscfg.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_tim.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_usart.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_wwdg.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\misc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_cryp.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_hash.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_rng.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_can.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dac.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dcmi.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_fsmc.h)(0x53DBAFAD)
+I (C:\Works\keilv537\ARM\ARMCLANG\include\stdlib.h)(0x625260D6)
+I (C:\Works\keilv537\ARM\ARMCLANG\include\string.h)(0x625260D6)
+I (..\USER\LCD\lcd.h)(0x64B7E1B9)
+I (..\USER\TOUCH\xpt2046.h)(0x5B91E579)
+F (..\USER\Screen\05D_UI_progress.c)(0x64B8055B)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O0 -fno-function-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Common -I ../Main -I ../Startup_config -I ../STM32F4_FWLIB/inc -I ../USER/LCD -I ../USER/LED -I ../USER/usart1 -I ../USER/KEY -I ../USER/ADC -I ../USER -I ../USER/TOUCH -I ../USER/DAC -I ../STM32F4_FWLIB/DSP -I ../USER/Screen -I ../USER/Uart -I ../USER/DDS-I./RTE/_Target_1-IC:/Works/keilv537/ARM/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Works/keilv537/ARM/Packs/Keil/STM32F4xx_DFP/2.16.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__TARGET_FPU_VFP -D__FPU_PRESENT="1"-o ./obj/05d_ui_progress.o -MD)
+I (..\USER\Screen\05D_UI_progress.h)(0x64B7F520)
+I (..\Common\common.h)(0x555E03A1)
+I (..\Startup_config\stm32f4xx.h)(0x550A89BE)
+I (..\Startup_config\core_cm4.h)(0x64B7C8C3)
+I (C:\Works\keilv537\ARM\ARMCLANG\include\stdint.h)(0x625260D8)
+I (C:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_version.h)(0x626F4ADE)
+I (C:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_compiler.h)(0x626F4ADE)
+I (C:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_armclang.h)(0x626F4ADE)
+I (C:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\mpu_armv7.h)(0x626F4ADE)
+I (..\Startup_config\system_stm32f4xx.h)(0x53DBA499)
+I (..\Startup_config\stm32f4xx_conf.h)(0x53DBB3CB)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_adc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_crc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dbgmcu.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dma.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_exti.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_flash.h)(0x53DF9330)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_gpio.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_i2c.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_iwdg.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_pwr.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_rcc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_rtc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_sdio.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_spi.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_syscfg.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_tim.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_usart.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_wwdg.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\misc.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_cryp.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_hash.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_rng.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_can.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dac.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_dcmi.h)(0x53DBAFAD)
+I (..\STM32F4_FWLIB\inc\stm32f4xx_fsmc.h)(0x53DBAFAD)
+I (C:\Works\keilv537\ARM\ARMCLANG\include\stdlib.h)(0x625260D6)
+I (C:\Works\keilv537\ARM\ARMCLANG\include\stdio.h)(0x625260D6)
+I (C:\Works\keilv537\ARM\ARMCLANG\include\string.h)(0x625260D6)
+I (..\USER\Screen\UI.h)(0x64B7FBFD)
+I (..\USER\LCD\lcd.h)(0x64B7E1B9)
+I (..\USER\TOUCH\xpt2046.h)(0x5B91E579)
+I (..\USER\input_event.h)(0x64A4E02F)
+I (..\USER\KEY\key.h)(0x5655BDA8)
+I (..\USER\TOUCH\touch.h)(0x62DE9BB4)
+I (..\USER\fft.h)(0x64B7638B)
+I (..\STM32F4_FWLIB\DSP\arm_const_structs.h)(0x649BB891)
+I (..\STM32F4_FWLIB\DSP\arm_math.h)(0x649BB891)
+I (C:\Works\keilv537\ARM\ARMCLANG\include\math.h)(0x625260D6)
+I (..\STM32F4_FWLIB\DSP\arm_common_tables.h)(0x649BB891)
 F (..\STM32F4_FWLIB\src\misc.c)(0x53DBB014)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O3 -fno-function-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Common -I ../Main -I ../Startup_config -I ../STM32F4_FWLIB/inc -I ../USER/LCD -I ../USER/LED -I ../USER/usart1 -I ../USER/KEY -I ../USER/ADC -I ../USER -I ../USER/TOUCH -I ../USER/DAC -I ../STM32F4_FWLIB/DSP -I ../USER/Screen -I ../USER/Uart -I ../USER/DDS-I./RTE/_Target_1-IC:/Works/keilv537/ARM/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Works/keilv537/ARM/Packs/Keil/STM32F4xx_DFP/2.16.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__TARGET_FPU_VFP -D__FPU_PRESENT="1"-o ./obj/misc.o -MD)
 I (..\STM32F4_FWLIB\inc\misc.h)(0x53DBAFAD)
 I (..\Startup_config\stm32f4xx.h)(0x550A89BE)
@@ -989,7 +1028,7 @@ I (..\STM32F4_FWLIB\inc\stm32f4xx_can.h)(0x53DBAFAD)
 I (..\STM32F4_FWLIB\inc\stm32f4xx_dac.h)(0x53DBAFAD)
 I (..\STM32F4_FWLIB\inc\stm32f4xx_dcmi.h)(0x53DBAFAD)
 I (..\STM32F4_FWLIB\inc\stm32f4xx_fsmc.h)(0x53DBAFAD)
-I (..\USER\LCD\lcd.h)(0x64A42375)
+I (..\USER\LCD\lcd.h)(0x64B7E1B9)
 I (C:\Works\keilv537\ARM\ARMCLANG\include\stdlib.h)(0x625260D6)
 F (..\STM32F4_FWLIB\src\stm32f4xx_spi.c)(0x53DBB014)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O3 -fno-function-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Common -I ../Main -I ../Startup_config -I ../STM32F4_FWLIB/inc -I ../USER/LCD -I ../USER/LED -I ../USER/usart1 -I ../USER/KEY -I ../USER/ADC -I ../USER -I ../USER/TOUCH -I ../USER/DAC -I ../STM32F4_FWLIB/DSP -I ../USER/Screen -I ../USER/Uart -I ../USER/DDS-I./RTE/_Target_1-IC:/Works/keilv537/ARM/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Works/keilv537/ARM/Packs/Keil/STM32F4xx_DFP/2.16.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DARM_MATH_CM4 -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__TARGET_FPU_VFP -D__FPU_PRESENT="1"-o ./obj/stm32f4xx_spi.o -MD)
 I (..\STM32F4_FWLIB\inc\stm32f4xx_spi.h)(0x53DBAFAD)

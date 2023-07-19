@@ -43,4 +43,5 @@
   ..\USER\input_event.h ..\USER\KEY\key.h ..\USER\TOUCH\touch.h \
   ..\USER\SPI.h ..\USER\DDS\AD9833.h ..\USER\Uart\valuepack.h \
   C:\Works\keilv537\ARM\ARMCLANG\Bin\..\include\stdarg.h \
-  ..\USER\19C_main_progress.h ..\USER\timer.h
+  ..\USER\19C_main_progress.h ..\USER\timer.h ..\USER\Screen\UI.h \
+  ..\USER\TOUCH\xpt2046.h

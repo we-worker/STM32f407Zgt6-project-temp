@@ -71,7 +71,7 @@ void LCD_DrawPoint(u16 x,u16 y);									//画点
 void LCD_Color_DrawPoint(u16 x,u16 y,u16 color);	//颜色画点
 u16  LCD_GetPoint(u16 x,u16 y); 								  //读点 
 
-void LCD_Open_Window(u16 X0,u16 Y0,u16 width,u16 height); 	
+void LCD_Open_Window(u16 X0,u16 Y0,u16 width,u16 height); 	//开窗口,并设置画点坐标到窗口左上角(X0,Y0)
 void Set_Scan_Direction(u8 direction);					 
 void Set_Display_Mode(u8 mode);						 
 
