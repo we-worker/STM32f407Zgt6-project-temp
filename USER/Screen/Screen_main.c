@@ -8,11 +8,11 @@
 #include "AD9833.h"
 #include "valuepack.h"
 #include "19C_main_progress.h"
-
+#include "timer.h"
 
 
 uint16_t Screen_flash_cnt = 0; // 屏幕刷新次数计数，实现简易延迟动画。
-
+uint32_t flash=0;
 uint8_t SPI_data[7];
 
 void drawpic(void);
@@ -31,7 +31,7 @@ void Screen_main(void)
 {
 
     Screen_flash_cnt++;
-		delay_ms(1);
+		//delay_ms(1);
     if (Screen_flash_cnt >= 100)
         Screen_flash_cnt = 0;
 
@@ -118,7 +118,7 @@ void useless_main(void)
     sprintf((char *)display_str, "ADC1 freq:%.4f", frequency); // 浮点型数据  e-01  就是除于10      /10
     LCD_DisplayString(10, 110, 24, display_str);			  // 实际电压数值
 
-    sprintf((char *)display_str, "peak to p:%.4f", peak_to_peak); // 浮点型数据  e-01  就是除于10      /10
+    sprintf((char *)display_str, "peak to p:%d", flash++); // 浮点型数据  e-01  就是除于10      /10
     LCD_DisplayString(10, 170, 24, display_str);		// 实际电压数值
 }
 
@@ -319,13 +319,13 @@ void ADC_progress()
     double max, min; // 最大值、最小值、峰值、
     int i, j, k; // 索引
 		double total_time; // 总时间
-		int M=10; // 测量周期数
-		if(frequency>1000 && Fs==700000)
-			M=frequency/2000; // 测量周期数
-		else if(frequency>1000)
-			M=frequency/200; // 测量周期数
-		else
-			M=1;
+//		int M=10; // 测量周期数
+//		if(frequency>1000 && Fs==700000)
+//			M=frequency/2000; // 测量周期数
+//		else if(frequency>1000)
+//			M=frequency/200; // 测量周期数
+//		else
+//			M=1;
 
 		float E=0.01; // 中心点判断偏移量
     // 找到最大值和最小值
@@ -346,37 +346,58 @@ void ADC_progress()
         average += ADC_Value[i];
     average /= FFT_LENGTH;
 
-    // 找到第一个大于平均值的元素的索引
-    for (i = 0; i < FFT_LENGTH; i++)
-        if (ADC_Value[i] > average + E)
-            break;
+//    // 找到第一个大于平均值的元素的索引
+//    for (i = 0; i < FFT_LENGTH; i++)
+//        if (ADC_Value[i] > average + E)
+//            break;
 
-    // 初始化总时间为零
-    total_time = 0;
+//    // 初始化总时间为零
+//    total_time = 0;
 
-    // 循环测量M个周期的时间
-    for (int m = 0; m < M; m++)
-    {
-        // 找到第一个小于平均值的元素的索引
-        for (j = i + 1; j < FFT_LENGTH; j++)
-            if (ADC_Value[j] < average - E)
-                break;
+//    // 循环测量M个周期的时间
+//    for (int m = 0; m < M; m++)
+//    {
+//        // 找到第一个小于平均值的元素的索引
+//        for (j = i + 1; j < FFT_LENGTH; j++)
+//            if (ADC_Value[j] < average - E)
+//                break;
 
-        // 找到第二个大于平均值的元素的索引
-        for (k = j + 1; k < FFT_LENGTH; k++)
-            if (ADC_Value[k] > average + E)
-                break;
+//        // 找到第二个大于平均值的元素的索引
+//        for (k = j + 1; k < FFT_LENGTH; k++)
+//            if (ADC_Value[k] > average + E)
+//                break;
 
-        // 累加一个周期的时间
-        total_time += (k - i) * 1.0f/(Fs);
+//        // 累加一个周期的时间
+//        total_time += (k - i) * 1.0f/(Fs);
 
-        // 更新i为k，继续下一个周期的测量
-        i = k;
-    }
-    // 计算周期和频率
-    period = total_time / M;
-    frequency = 1 / period;
-
-
+//        // 更新i为k，继续下一个周期的测量
+//        i = k;
+//    }
+//    // 计算周期和频率
+//    period = total_time / M;
+//    frequency = 1 / period;
+		
+		//使用FFT进行频率计算方案，待定
+		FFT(ADC_Value);
+				// 找到最大频率点
+		int max_i = 1;
+		for (int j = 1; j < FFT_LENGTH / 2; j++)
+		{
+				if (lBufOutArray[max_i] < lBufOutArray[j])
+						max_i = j;
+		}
+		frequency=(Fs * 1.0 / FFT_LENGTH) * max_i;
+//		if(frequency>=10e3){
+//		Fs=700000;
+//				ADC1_Init2();	  // 高速信号采集dma、等
+//		ADC2_Init2();
+//		TIM2_Init2(9, 5); // 定时器2时钟84M，分频系数84，84M/6=14000K 所以9次为1400k
+//		}else{
+//					Fs=28000;
+//				ADC1_Init2();	  // 高速信号采集dma、等
+//		ADC2_Init2();
+//		TIM2_Init2(499, 5); // 定时器2时钟84M，分频系数84，84M/6=14000K 所以499次为28k
+//		}
+		
 }
 

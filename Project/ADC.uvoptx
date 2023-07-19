@@ -152,7 +152,7 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>374</LineNumber>
+          <LineNumber>155</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -161,73 +161,57 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\USER\Screen\Screen_main.c</Filename>
+          <Filename>..\USER\TOUCH\xpt2046.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>79</LineNumber>
+          <LineNumber>155</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134230708</Address>
+          <Address>134242138</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\Works\keili\Stm32F407ZGT6浠ｇ爜妗嗘灦\USER\19C_main_progress.c</Filename>
+          <Filename>D:\Works\keili\Stm32F407ZGT6浠ｇ爜妗嗘灦 - 鍓湰\USER\TOUCH\xpt2046.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\\../USER/19C_main_progress.c\79</Expression>
+          <Expression>\\ADC\../USER/TOUCH/xpt2046.c\155</Expression>
         </Bp>
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>83</LineNumber>
+          <LineNumber>155</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134230728</Address>
+          <Address>134242328</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\Works\keili\Stm32F407ZGT6浠ｇ爜妗嗘灦\USER\19C_main_progress.c</Filename>
+          <Filename>D:\Works\keili\Stm32F407ZGT6浠ｇ爜妗嗘灦 - 鍓湰\USER\TOUCH\xpt2046.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\\../USER/19C_main_progress.c\83</Expression>
+          <Expression>\\\../USER/TOUCH/xpt2046.c\155</Expression>
         </Bp>
         <Bp>
           <Number>3</Number>
           <Type>0</Type>
-          <LineNumber>322</LineNumber>
+          <LineNumber>155</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134227130</Address>
+          <Address>134242438</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\Works\keili\Stm32F407ZGT6浠ｇ爜妗嗘灦\USER\Screen\Screen_main.c</Filename>
+          <Filename>D:\Works\keili\Stm32F407ZGT6浠ｇ爜妗嗘灦 - 鍓湰\USER\TOUCH\xpt2046.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\ADC\../USER/Screen/Screen_main.c\322</Expression>
-        </Bp>
-        <Bp>
-          <Number>4</Number>
-          <Type>0</Type>
-          <LineNumber>374</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134227670</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\Works\keili\Stm32F407ZGT6浠ｇ爜妗嗘灦\USER\Screen\Screen_main.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\ADC\../USER/Screen/Screen_main.c\374</Expression>
+          <Expression>\\ADC\../USER/TOUCH/xpt2046.c\155</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow2>
@@ -325,6 +309,26 @@
           <count>18</count>
           <WinNumber>2</WinNumber>
           <ItemText>((uint32_t)0x10000020)</ItemText>
+        </Ww>
+        <Ww>
+          <count>19</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>Xdown</ItemText>
+        </Ww>
+        <Ww>
+          <count>20</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>Ydown</ItemText>
+        </Ww>
+        <Ww>
+          <count>21</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>Xup</ItemText>
+        </Ww>
+        <Ww>
+          <count>22</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>Yup</ItemText>
         </Ww>
       </WatchWindow2>
       <MemoryWindow4>
@@ -629,7 +633,7 @@
 
   <Group>
     <GroupName>STM32F4_FWLIB</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -781,7 +785,7 @@
 
   <Group>
     <GroupName>Common</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -801,7 +805,7 @@
 
   <Group>
     <GroupName>DSP</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -821,7 +825,7 @@
 
   <Group>
     <GroupName>DDS</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

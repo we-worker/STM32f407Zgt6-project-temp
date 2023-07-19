@@ -109,29 +109,40 @@ void GPIO_bits_OUT(GPIO_TypeDef* GPIOx, u8 start_bit, u8 bit_size,u16 outdata)
 *****************************************************************************/
 //THUMB指令不支持汇编内联
 //采用如下方法实现执行汇编指令WFI  
-__asm void WFI_SET(void)
+//使用 __attribute__((naked)) 声明裸函数
+__attribute__((naked)) void WFI_SET(void)
 {
-	WFI;		  
+    __asm volatile( //使用 __asm volatile 开始内联汇编
+        "wfi\n"      //使用 \n 结束每一条指令
+        "bx lr\n"    //返回调用者
+    );
 }
 //关闭所有中断(但是不包括fault和NMI中断)
-__asm void INTX_DISABLE(void)
+__attribute__((naked)) void INTX_DISABLE(void)
 {
-	CPSID   I
-	BX      LR	  
+    __asm volatile(
+        "cpsid i\n"
+        "bx lr\n"
+    );
 }
 //开启所有中断
-__asm void INTX_ENABLE(void)
+__attribute__((naked)) void INTX_ENABLE(void)
 {
-	CPSIE   I
-	BX      LR  
+    __asm volatile(
+        "cpsie i\n"
+        "bx lr\n"
+    );
 }
 //设置栈顶地址
 //addr:栈顶地址
-__asm void MSR_MSP(u32 addr) 
+__attribute__((naked)) void MSR_MSP(u32 addr) 
 {
-	MSR MSP, r0 			//set Main Stack value
-	BX r14
+    __asm volatile(
+        "msr msp, r0\n" //使用 r0 作为参数传递
+        "bx lr\n"
+    );
 }
+
 
 //利用系统滴答定时，编写的延时函数
 

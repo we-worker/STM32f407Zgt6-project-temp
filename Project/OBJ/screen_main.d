@@ -1,57 +1,46 @@
-.\obj\screen_main.o: ..\USER\Screen\Screen_main.c
-.\obj\screen_main.o: ..\USER\Screen\Screen_main.h
-.\obj\screen_main.o: ..\Common\common.h
-.\obj\screen_main.o: ..\Startup_config\stm32f4xx.h
-.\obj\screen_main.o: ..\Startup_config\core_cm4.h
-.\obj\screen_main.o: C:\Works\keilv537\ARM\ac506\Bin\..\include\stdint.h
-.\obj\screen_main.o: ..\Startup_config\core_cmInstr.h
-.\obj\screen_main.o: ..\Startup_config\core_cmFunc.h
-.\obj\screen_main.o: ..\Startup_config\core_cm4_simd.h
-.\obj\screen_main.o: ..\Startup_config\system_stm32f4xx.h
-.\obj\screen_main.o: ..\Startup_config\stm32f4xx_conf.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_adc.h
-.\obj\screen_main.o: ..\Startup_config\stm32f4xx.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_crc.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_dbgmcu.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_dma.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_exti.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_flash.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_gpio.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_i2c.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_iwdg.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_pwr.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_rcc.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_rtc.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_sdio.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_spi.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_syscfg.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_tim.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_usart.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_wwdg.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\misc.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_cryp.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_hash.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_rng.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_can.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_dac.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_dcmi.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\inc\stm32f4xx_fsmc.h
-.\obj\screen_main.o: ..\USER\LCD\lcd.h
-.\obj\screen_main.o: C:\Works\keilv537\ARM\ac506\Bin\..\include\stdlib.h
-.\obj\screen_main.o: ..\USER\fft.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\DSP\arm_const_structs.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\DSP\arm_math.h
-.\obj\screen_main.o: ..\Startup_config\core_cm4.h
-.\obj\screen_main.o: C:\Works\keilv537\ARM\ac506\Bin\..\include\string.h
-.\obj\screen_main.o: C:\Works\keilv537\ARM\ac506\Bin\..\include\math.h
-.\obj\screen_main.o: ..\STM32F4_FWLIB\DSP\arm_common_tables.h
-.\obj\screen_main.o: ..\USER\ADC\adc.h
-.\obj\screen_main.o: C:\Works\keilv537\ARM\ac506\Bin\..\include\stdio.h
-.\obj\screen_main.o: ..\USER\input_event.h
-.\obj\screen_main.o: ..\USER\KEY\key.h
-.\obj\screen_main.o: ..\USER\TOUCH\touch.h
-.\obj\screen_main.o: ..\USER\SPI.h
-.\obj\screen_main.o: ..\USER\DDS\AD9833.h
-.\obj\screen_main.o: ..\USER\Uart\valuepack.h
-.\obj\screen_main.o: C:\Works\keilv537\ARM\ac506\Bin\..\include\stdarg.h
-.\obj\screen_main.o: ..\USER\19C_main_progress.h
+./obj/screen_main.o: ..\USER\Screen\Screen_main.c \
+  ..\USER\Screen\Screen_main.h ..\Common\common.h \
+  ..\Startup_config\stm32f4xx.h ..\Startup_config\core_cm4.h \
+  C:\Works\keilv537\ARM\ARMCLANG\Bin\..\include\stdint.h \
+  C:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_version.h \
+  C:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_compiler.h \
+  C:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_armclang.h \
+  C:\Works\keilv537\ARM\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\mpu_armv7.h \
+  ..\Startup_config\system_stm32f4xx.h \
+  ..\Startup_config\stm32f4xx_conf.h \
+  ..\STM32F4_FWLIB\inc\stm32f4xx_adc.h \
+  ..\STM32F4_FWLIB\inc\stm32f4xx_crc.h \
+  ..\STM32F4_FWLIB\inc\stm32f4xx_dbgmcu.h \
+  ..\STM32F4_FWLIB\inc\stm32f4xx_dma.h \
+  ..\STM32F4_FWLIB\inc\stm32f4xx_exti.h \
+  ..\STM32F4_FWLIB\inc\stm32f4xx_flash.h \
+  ..\STM32F4_FWLIB\inc\stm32f4xx_gpio.h \
+  ..\STM32F4_FWLIB\inc\stm32f4xx_i2c.h \
+  ..\STM32F4_FWLIB\inc\stm32f4xx_iwdg.h \
+  ..\STM32F4_FWLIB\inc\stm32f4xx_pwr.h \
+  ..\STM32F4_FWLIB\inc\stm32f4xx_rcc.h \
+  ..\STM32F4_FWLIB\inc\stm32f4xx_rtc.h \
+  ..\STM32F4_FWLIB\inc\stm32f4xx_sdio.h \
+  ..\STM32F4_FWLIB\inc\stm32f4xx_spi.h \
+  ..\STM32F4_FWLIB\inc\stm32f4xx_syscfg.h \
+  ..\STM32F4_FWLIB\inc\stm32f4xx_tim.h \
+  ..\STM32F4_FWLIB\inc\stm32f4xx_usart.h \
+  ..\STM32F4_FWLIB\inc\stm32f4xx_wwdg.h ..\STM32F4_FWLIB\inc\misc.h \
+  ..\STM32F4_FWLIB\inc\stm32f4xx_cryp.h \
+  ..\STM32F4_FWLIB\inc\stm32f4xx_hash.h \
+  ..\STM32F4_FWLIB\inc\stm32f4xx_rng.h \
+  ..\STM32F4_FWLIB\inc\stm32f4xx_can.h \
+  ..\STM32F4_FWLIB\inc\stm32f4xx_dac.h \
+  ..\STM32F4_FWLIB\inc\stm32f4xx_dcmi.h \
+  ..\STM32F4_FWLIB\inc\stm32f4xx_fsmc.h ..\USER\LCD\lcd.h \
+  C:\Works\keilv537\ARM\ARMCLANG\Bin\..\include\stdlib.h ..\USER\fft.h \
+  ..\STM32F4_FWLIB\DSP\arm_const_structs.h \
+  ..\STM32F4_FWLIB\DSP\arm_math.h \
+  C:\Works\keilv537\ARM\ARMCLANG\Bin\..\include\string.h \
+  C:\Works\keilv537\ARM\ARMCLANG\Bin\..\include\math.h \
+  ..\STM32F4_FWLIB\DSP\arm_common_tables.h ..\USER\ADC\adc.h \
+  C:\Works\keilv537\ARM\ARMCLANG\Bin\..\include\stdio.h \
+  ..\USER\input_event.h ..\USER\KEY\key.h ..\USER\TOUCH\touch.h \
+  ..\USER\SPI.h ..\USER\DDS\AD9833.h ..\USER\Uart\valuepack.h \
+  C:\Works\keilv537\ARM\ARMCLANG\Bin\..\include\stdarg.h \
+  ..\USER\19C_main_progress.h ..\USER\timer.h
