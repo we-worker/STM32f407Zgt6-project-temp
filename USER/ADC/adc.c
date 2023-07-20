@@ -194,17 +194,17 @@ void ADC2_Init2(void)
 	DMA_Init(DMA2_Stream2, &DMA_InitStructure);							// 初始化DMA Stream
 
 	// 使能DMA中断
-	// DMA_ITConfig(DMA2_Stream2, DMA_IT_TC, ENABLE);
+//	DMA_ITConfig(DMA2_Stream2, DMA_IT_TC, ENABLE);
 
 	// 开启DMA传输
 	DMA_Cmd(DMA2_Stream2, ENABLE);
 
-	// NVIC_InitTypeDef NVIC_InitStructure;
-	// NVIC_InitStructure.NVIC_IRQChannel = DMA2_Stream2_IRQn;	  // DMA2_Stream0中断
-	// NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0; // 抢占优先级1
-	// NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;		  // 子优先级1
-	// NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			  // IRQ通道使能
-	// NVIC_Init(&NVIC_InitStructure);							  // 根据指定的参数初始化NVIC寄存器
+//	NVIC_InitTypeDef NVIC_InitStructure;
+//	NVIC_InitStructure.NVIC_IRQChannel = DMA2_Stream2_IRQn;	  // DMA2_Stream0中断
+//	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0; // 抢占优先级1
+//	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;		  // 子优先级1
+//	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			  // IRQ通道使能
+//	NVIC_Init(&NVIC_InitStructure);							  // 根据指定的参数初始化NVIC寄存器
 
 	GPIO_InitTypeDef GPIO_InitStructure;
 	ADC_CommonInitTypeDef ADC_CommonInitStructure;

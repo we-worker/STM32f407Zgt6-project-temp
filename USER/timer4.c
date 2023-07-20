@@ -142,4 +142,31 @@ void TIM3_IRQHandler(void)
 	}
 }
 
+// 频率测量模块
+void freq(void)
+{
+    TIM3_Init(9999, 8399); // 定时器2时钟84M，分频系数8400，84M/8400=10K 所以计数10000次为1000ms
 
+    TIM4_Init2(0xffff, 3); // 低频模式
+    // EXTIX_Init();				//PD14外部中断，测频
+    extern uint32_t Frequency;
+
+    char display_str[30];
+    uint32_t Frequency_avg = 0;
+    for (int i = 0; i < 100; i++)
+    {
+        Frequency_avg += Frequency;
+        // delay_ms(100);
+    }
+    Frequency_avg /= 100;
+
+//	sprintf((char *)display_str, "VPP:%.4f", adc_data1);
+    LCD_DisplayString(10, 110, 24, display_str); // 实际电压数值
+
+    if (Frequency_avg > 10000)
+    {
+        sprintf((char *)display_str, "freq:%dkhz      ", Frequency_avg / 1000);
+    }
+    else
+        sprintf((char *)display_str, "freq:%d      ", Frequency_avg);
+}

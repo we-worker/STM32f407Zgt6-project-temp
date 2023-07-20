@@ -4,6 +4,7 @@
 		"fft.h": "c",
 		"common.h": "c",
 		"arm_const_structs.h": "c",
-		"adc.h": "c"
+		"adc.h": "c",
+		"ad9851.h": "c"
 	}
 }

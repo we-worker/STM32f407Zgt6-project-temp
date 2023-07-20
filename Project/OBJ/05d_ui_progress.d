@@ -41,4 +41,4 @@
   ..\USER\fft.h ..\STM32F4_FWLIB\DSP\arm_const_structs.h \
   ..\STM32F4_FWLIB\DSP\arm_math.h \
   C:\Works\keilv537\ARM\ARMCLANG\Bin\..\include\math.h \
-  ..\STM32F4_FWLIB\DSP\arm_common_tables.h
+  ..\STM32F4_FWLIB\DSP\arm_common_tables.h ..\USER\DAC\dac.h

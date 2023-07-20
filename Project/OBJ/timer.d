@@ -36,4 +36,8 @@
   C:\Works\keilv537\ARM\ARMCLANG\Bin\..\include\string.h ..\USER\fft.h \
   ..\STM32F4_FWLIB\DSP\arm_const_structs.h \
   ..\STM32F4_FWLIB\DSP\arm_math.h \
-  ..\STM32F4_FWLIB\DSP\arm_common_tables.h ..\USER\DAC\dac.h
+  ..\STM32F4_FWLIB\DSP\arm_common_tables.h ..\USER\DAC\dac.h \
+  ..\USER\Screen\05D_UI_progress.h \
+  C:\Works\keilv537\ARM\ARMCLANG\Bin\..\include\stdlib.h \
+  C:\Works\keilv537\ARM\ARMCLANG\Bin\..\include\stdio.h \
+  ..\USER\Screen\UI.h ..\USER\LCD\lcd.h ..\USER\TOUCH\xpt2046.h

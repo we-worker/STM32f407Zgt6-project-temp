@@ -5,7 +5,7 @@
 #include <string.h>
 #include "fft.h"
 #include "dac.h"
-
+#include "05D_UI_progress.h"
 /****************************************************************************
  * 名    称: TIM2_Init(u16 auto_data,u16 fractional)
  * 功    能：定时器2初始化
@@ -124,21 +124,23 @@ void TIM2_IRQHandler(void)
 {
 	if (TIM_GetITStatus(TIM2, TIM_IT_Update) == SET) // 溢出中断
 	{
-		//下面两行配合adc——init原始，实现定时器软触发。
-		ADC_Value[adc1_data_count] = Get_Adc(ADC_Channel_6);
-		adc1_data_count++;
-
-		if (adc1_data_count >= FFT_LENGTH)
-		{
-			
-			adc1_data_count=0;
-			FFT(ADC_Value);
+//		//下面两行配合adc——init原始，实现定时器软触发。
+//		ADC_Value[adc1_data_count] = Get_Adc(ADC_Channel_6);
+		//adc1_data_count++;
+		Dac1_Set_Vol(dac1_sinval[dac_sin_index++]*out_with_sin);
+		if(dac_sin_index>=128)
+			dac_sin_index=0;
+//		if (adc1_data_count >= FFT_LENGTH)
+//		{
+//			
+//			adc1_data_count=0;
+//			FFT(ADC_Value);
 			//自动前移数据
 			//adc1_data_count = ADC_BUFFER_SIZE;
 			
 //			memmove(&ADC_Value[0], &ADC_Value[1], (ADC_BUFFER_SIZE - 1) * sizeof(int));
 //			ADC_Value[ADC_BUFFER_SIZE - 1] = Get_Adc(ADC_Channel_6);
-		}
+		//}
 		
 		
 		// u16 t2 = Get_Adc(ADC_Channel_7);

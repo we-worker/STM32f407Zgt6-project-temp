@@ -31,4 +31,4 @@
   ..\STM32F4_FWLIB\inc\stm32f4xx_can.h \
   ..\STM32F4_FWLIB\inc\stm32f4xx_dac.h \
   ..\STM32F4_FWLIB\inc\stm32f4xx_dcmi.h \
-  ..\STM32F4_FWLIB\inc\stm32f4xx_fsmc.h
+  ..\STM32F4_FWLIB\inc\stm32f4xx_fsmc.h ..\Common\common.h

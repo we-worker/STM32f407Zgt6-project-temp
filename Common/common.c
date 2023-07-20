@@ -149,6 +149,17 @@ __attribute__((naked)) void MSR_MSP(u32 addr)
 static u8  fac_us=0; //us延时倍乘数			   
 static u16 fac_ms=0; //ms延时倍乘数,在ucos下,代表每个节拍的ms数
 
+static __IO uint32_t TimingDelay; //SysTick计数变量
+__IO uint8_t b10msFlag; //每隔1ms由滴答中断置1，调用后请及时清零。
+/*全局变量TimingDelay减一函数，直到0为止*/
+void TimingDelay_Decrement(void)
+{
+  if (TimingDelay != 0x00)
+  { 
+    TimingDelay--;
+  }
+}
+
 /****************************************************************************
 * 名    称: delay_init()
 * 功    能：延时函数初始化

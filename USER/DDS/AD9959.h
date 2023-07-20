@@ -10,6 +10,7 @@
 
 //Òý½ÅÓ³Éä±í
 /*
+//PDN--GND
 //PD11 PG3 PD12 PF11 PB0 PA15
 //PG5  PG4 PD13 PB1 PC5 PC4
 

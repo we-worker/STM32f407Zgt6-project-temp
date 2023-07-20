@@ -34,8 +34,8 @@
   ..\STM32F4_FWLIB\inc\stm32f4xx_fsmc.h \
   C:\Works\keilv537\ARM\ARMCLANG\Bin\..\include\stdlib.h \
   C:\Works\keilv537\ARM\ARMCLANG\Bin\..\include\math.h ..\USER\KEY\key.h \
-  ..\USER\ADC\adc.h ..\USER\TOUCH\touch.h ..\USER\timer.h \
-  ..\USER\Input_event.h ..\USER\fft.h \
+  ..\USER\ADC\adc.h ..\USER\DAC\dac.h ..\USER\TOUCH\touch.h \
+  ..\USER\timer.h ..\USER\Input_event.h ..\USER\fft.h \
   ..\STM32F4_FWLIB\DSP\arm_const_structs.h \
   ..\STM32F4_FWLIB\DSP\arm_math.h \
   C:\Works\keilv537\ARM\ARMCLANG\Bin\..\include\string.h \
@@ -43,5 +43,6 @@
   ..\USER\Uart\valuepack.h \
   C:\Works\keilv537\ARM\ARMCLANG\Bin\..\include\stdio.h \
   C:\Works\keilv537\ARM\ARMCLANG\Bin\..\include\stdarg.h \
-  ..\USER\DDS\AD9833.h ..\USER\Screen\05D_UI_progress.h \
-  ..\USER\Screen\UI.h ..\USER\TOUCH\xpt2046.h
+  ..\USER\DDS\AD9959.h ..\USER\DDS\AD9959_Outset.h \
+  ..\USER\Screen\05D_UI_progress.h ..\USER\Screen\UI.h \
+  ..\USER\TOUCH\xpt2046.h

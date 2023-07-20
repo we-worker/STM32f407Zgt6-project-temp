@@ -57,6 +57,8 @@ extern u16  BACK_COLOR; //背景颜色.默认为白色
 #define  CYAN         0x7FFF
 #define  YELLOW       0xFFE0
 
+//运用宏封装起来：
+#define RGB888_To_RGB565(R,G,B)  (uint16_t)((R & 0x1f)<<11|(G & 0x3f)<<5|(B & 0x1f))
 	    			
 void LCD_WriteReg(u16 LCD_Reg, u16 LCD_Value);
 u16 LCD_ReadReg(u16 LCD_Reg);
