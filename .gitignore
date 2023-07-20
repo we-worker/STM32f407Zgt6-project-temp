@@ -1,0 +1,71 @@
+# Prerequisites
+*.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+
+# Vscode File
+.vscode
+
+# CubeMX project File
+.mxproject
+
+# Keil Object Files
+**/MDK-ARM/DebugConfig
+**/MDK-ARM/*.uvguix.User
+**/MDK-ARM/*.scvd
+#一个是编译器输出，还有一个是编辑过的用户信息不上传
+**/project/LIST/
+**/project/OBJ/
+**/project/RET/
+**/MDK-ARM/*.uvguix.*
+#cubemx自动文件备份也不上传
+**/Core/Src/Backup/
+**/Core/Inc/Backup/
