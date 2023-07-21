@@ -62,10 +62,10 @@ dkms.conf
 **/MDK-ARM/*.uvguix.User
 **/MDK-ARM/*.scvd
 #一个是编译器输出，还有一个是编辑过的用户信息不上传
-**/project/LIST/
-**/project/OBJ/
-**/project/RET/
-**/MDK-ARM/*.uvguix.*
+project/LIST/
+project/OBJ/
+project/RET/
+*.uvguix.*
 #cubemx自动文件备份也不上传
 **/Core/Src/Backup/
 **/Core/Inc/Backup/
