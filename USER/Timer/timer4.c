@@ -1,6 +1,7 @@
 #include "timer4.h"
 #include "math.h"
 #include "lcd.h"
+#include "stdio.h"
 
 uint32_t Frequency; //输入脉冲的频率HZ
 uint32_t Frequency_temp; //输入脉冲的频率HZ

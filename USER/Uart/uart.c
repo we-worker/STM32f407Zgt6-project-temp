@@ -1,11 +1,11 @@
 #include "uart.h"
 
-__IO uint8_t nRx2Counter=0; //接收字节数
-__IO uint8_t USART_Rx2Buff[FRAME_BYTE_LENGTH]; //接收缓冲区
-__IO uint8_t USART_FrameFlag = 0; //接收完整数据帧标志，1完整，0不完整
+__IO uint8_t nRx2Counter = 0;                  // 接收字节数
+__IO uint8_t USART_Rx2Buff[FRAME_BYTE_LENGTH]; // 接收缓冲区
+__IO uint8_t USART_FrameFlag = 0;              // 接收完整数据帧标志，1完整，0不完整
 
-
-void USART6_Init(void) {
+void USART6_Init(void)
+{
     // 使能 USART6 时钟
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART6, ENABLE);
 
@@ -13,7 +13,6 @@ void USART6_Init(void) {
     GPIO_InitTypeDef GPIO_InitStruct;
     USART_InitTypeDef USART_InitStruct;
     NVIC_InitTypeDef NVIC_InitStruct;
-
 
     // 配置 USART6 引脚
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
@@ -35,8 +34,8 @@ void USART6_Init(void) {
     GPIO_Init(GPIOC, &GPIO_InitStruct);
 
     // 将 PC6 和 PC7 引脚与 USART6 的功能映射起来
-    GPIO_PinAFConfig(GPIOC, GPIO_PinSource6, GPIO_AF_USART6);  // USART6_TX
-    GPIO_PinAFConfig(GPIOC, GPIO_PinSource7, GPIO_AF_USART6);  // USART6_RX
+    GPIO_PinAFConfig(GPIOC, GPIO_PinSource6, GPIO_AF_USART6); // USART6_TX
+    GPIO_PinAFConfig(GPIOC, GPIO_PinSource7, GPIO_AF_USART6); // USART6_RX
 
     // 配置 USART6
     USART_InitStruct.USART_BaudRate = 115200;
@@ -47,8 +46,7 @@ void USART6_Init(void) {
     USART_InitStruct.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
     USART_Init(USART6, &USART_InitStruct);
 
-
-	USART_ClearITPendingBit(USART6,USART_IT_RXNE);
+    USART_ClearITPendingBit(USART6, USART_IT_RXNE);
     // 配置接收中断
     USART_ITConfig(USART6, USART_IT_RXNE, ENABLE);
 
@@ -64,83 +62,92 @@ void USART6_Init(void) {
     NVIC_Init(&NVIC_InitStruct);
 }
 
-
 /******************************************************
-		格式化串口输出函数
-        "\r"	回车符	   USART_OUT(USART1, "abcdefg\r")   
-		"\n"	换行符	   USART_OUT(USART1, "abcdefg\r\n")
-		"%s"	字符串	   USART_OUT(USART1, "字符串是：%s","abcdefg")
-		"%d"	十进制	   USART_OUT(USART1, "a=%d",10)
+        格式化串口输出函数
+        "\r"	回车符	   USART_OUT(USART1, "abcdefg\r")
+        "\n"	换行符	   USART_OUT(USART1, "abcdefg\r\n")
+        "%s"	字符串	   USART_OUT(USART1, "字符串是：%s","abcdefg")
+        "%d"	十进制	   USART_OUT(USART1, "a=%d",10)
 **********************************************************/
-void USART_OUT(USART_TypeDef* USARTx, uint8_t *Data,...){ 
-	const char *s;
+void USART_OUT(USART_TypeDef *USARTx, uint8_t *Data, ...)
+{
+    const char *s;
     int d;
     char buf[16];
     va_list ap;
     va_start(ap, Data);
 
-	while(*Data!=0){				                          //判断是否到达字符串结束符
-		if(*Data==0x5c){									  //'\'
-			switch (*++Data){
-				case 'r':							          //回车符
-					USART_SendData(USARTx, 0x0d);	   
-					Data++;
-					break;
-				case 'n':							          //换行符
-					USART_SendData(USARTx, 0x0a);	
-					Data++;
-					break;
-				
-				default:
-					Data++;
-				    break;
-			}
-	
-			 
-		}
-		else if(*Data=='%'){									  //
-			switch (*++Data){				
-				case 's':										  //字符串
-                	s = va_arg(ap, const char *);
-                	for ( ; *s; s++) {
-                    	USART_SendData(USARTx,*s);
-						while(USART_GetFlagStatus(USARTx, USART_FLAG_TC)==RESET);
-                	}
-					Data++;
-                	break;
-            	case 'd':										  //十进制
-                	d = va_arg(ap, int);
-                	itoa(d, buf, 10);
-                	for (s = buf; *s; s++) {
-                    	USART_SendData(USARTx,*s);
-						while(USART_GetFlagStatus(USARTx, USART_FLAG_TC)==RESET);
-                	}
-					Data++;
-                	break;
-				default:
-					Data++;
-				    break;
-			}		 
-		}
-		else USART_SendData(USARTx, *Data++);
-		while(USART_GetFlagStatus(USARTx, USART_FLAG_TC)==RESET);
-	}
+    while (*Data != 0)
+    { // 判断是否到达字符串结束符
+        if (*Data == 0x5c)
+        { //'\'
+            switch (*++Data)
+            {
+            case 'r': // 回车符
+                USART_SendData(USARTx, 0x0d);
+                Data++;
+                break;
+            case 'n': // 换行符
+                USART_SendData(USARTx, 0x0a);
+                Data++;
+                break;
+
+            default:
+                Data++;
+                break;
+            }
+        }
+        else if (*Data == '%')
+        { //
+            switch (*++Data)
+            {
+            case 's': // 字符串
+                s = va_arg(ap, const char *);
+                for (; *s; s++)
+                {
+                    USART_SendData(USARTx, *s);
+                    while (USART_GetFlagStatus(USARTx, USART_FLAG_TC) == RESET)
+                        ;
+                }
+                Data++;
+                break;
+            case 'd': // 十进制
+                d = va_arg(ap, int);
+                itoa(d, buf, 10);
+                for (s = buf; *s; s++)
+                {
+                    USART_SendData(USARTx, *s);
+                    while (USART_GetFlagStatus(USARTx, USART_FLAG_TC) == RESET)
+                        ;
+                }
+                Data++;
+                break;
+            default:
+                Data++;
+                break;
+            }
+        }
+        else
+            USART_SendData(USARTx, *Data++);
+        while (USART_GetFlagStatus(USARTx, USART_FLAG_TC) == RESET)
+            ;
+    }
 }
 /******************************************************
-		整形数据转字符串函数
+        整形数据转字符串函数
         char *itoa(int value, char *string, int radix)
-		radix=10 标示是10进制	非十进制，转换结果为0;  
+        radix=10 标示是10进制	非十进制，转换结果为0;
 
-	    例：d=-379;
-		执行	itoa(d, buf, 10); 后
-		
-		buf="-379"							   			  
+        例：d=-379;
+        执行	itoa(d, buf, 10); 后
+
+        buf="-379"
 **********************************************************/
 char *itoa(int value, char *string, int radix)
 {
-    int     i, d;
-    int     flag = 0;
-    char    *ptr = string;
+    int i, d;
+    int flag = 0;
+    char *ptr = string;
 
     /* This implementation only works for decimal numbers. */
     if (radix != 10)
@@ -184,83 +191,77 @@ char *itoa(int value, char *string, int radix)
 
 } /* NCL_Itoa */
 
-//重定向printf到串口
+// 重定向printf到串口
 int fputc(int ch, FILE *f)
 {
- 	USART_SendData(USART6, (unsigned char) ch);
- 	while( USART_GetFlagStatus(USART6,USART_FLAG_TC)!= SET);
-	return (ch);
+    USART_SendData(USART6, (unsigned char)ch);
+    while (USART_GetFlagStatus(USART6, USART_FLAG_TC) != SET)
+        ;
+    return (ch);
 }
 
-void USART_GetChar(uint8_t nChar) //串口接收到一个字节
+void USART_GetChar(uint8_t nChar) // 串口接收到一个字节
 {
 
-	if(USART_FrameFlag == 1) return;   //如果上次的数据帧还没处理过，则返回
-	
-	if(nRx2Counter==0 && nChar == FRAME_START)
-	{
-		USART_Rx2Buff[nRx2Counter++]=nChar;  //保存到缓冲区
-	}
-	else if(nRx2Counter>0) //接收到帧头以后才继续保存
-	{
-		USART_Rx2Buff[nRx2Counter++]=nChar;  //保存到缓冲区
-		if(nRx2Counter>=FRAME_BYTE_LENGTH)  //接收到一帧数据
-		{
-			nRx2Counter = 0;
-			if(USART_Rx2Buff[FRAME_BYTE_LENGTH-1] == FRAME_END) //如果最后一个字节是帧尾，则数据帧完整
-			{
-				USART_FrameFlag=1;
-			}
-		}
-	}	
+    if (USART_FrameFlag == 1)
+        return; // 如果上次的数据帧还没处理过，则返回
+
+    if (nRx2Counter == 0 && nChar == FRAME_START)
+    {
+        USART_Rx2Buff[nRx2Counter++] = nChar; // 保存到缓冲区
+    }
+    else if (nRx2Counter > 0) // 接收到帧头以后才继续保存
+    {
+        USART_Rx2Buff[nRx2Counter++] = nChar; // 保存到缓冲区
+        if (nRx2Counter >= FRAME_BYTE_LENGTH) // 接收到一帧数据
+        {
+            nRx2Counter = 0;
+            if (USART_Rx2Buff[FRAME_BYTE_LENGTH - 1] == FRAME_END) // 如果最后一个字节是帧尾，则数据帧完整
+            {
+                USART_FrameFlag = 1;
+            }
+        }
+    }
 }
 
-
-
-void USART_Process(void) //处理数据帧
+void USART_Process(void) // 处理数据帧
 {
-	if(USART_FrameFlag == 1)
-	{
-		//将数据原封不动发送回去
-		for(uint8_t i=0;i<FRAME_BYTE_LENGTH;i++)
-		{
-			USART_SendData(USART6,USART_Rx2Buff[i]);
-			while(USART_GetFlagStatus(USART6, USART_FLAG_TC)==RESET);
-		}
-		
-		if(USART_Rx2Buff[1] == 0x11) //如果命令字节等于0x11，则是设置PID参数指令，这些协议可以自己定义
-		{
+    if (USART_FrameFlag == 1)
+    {
+        // 将数据原封不动发送回去
+        for (uint8_t i = 0; i < FRAME_BYTE_LENGTH; i++)
+        {
+            USART_SendData(USART6, USART_Rx2Buff[i]);
+            while (USART_GetFlagStatus(USART6, USART_FLAG_TC) == RESET)
+                ;
+        }
 
-		}
-		else if(USART_Rx2Buff[1] == 0x12) //如果命令字节等于0x12，则是设置加速度参数指令，这些协议可以自己定义
-		{
-
-		}
-		//处理完毕，将标志清0
-		USART_FrameFlag = 0; 
-	}
+        if (USART_Rx2Buff[1] == 0x11) // 如果命令字节等于0x11，则是设置PID参数指令，这些协议可以自己定义
+        {
+        }
+        else if (USART_Rx2Buff[1] == 0x12) // 如果命令字节等于0x12，则是设置加速度参数指令，这些协议可以自己定义
+        {
+        }
+        // 处理完毕，将标志清0
+        USART_FrameFlag = 0;
+    }
 }
 
-void USART6_IRQHandler(void) {
-		
-		
-	uint8_t getchar;
-  if(USART_GetITStatus(USART6, USART_IT_RXNE) !=RESET)	   //判断读寄存器是否为空
-  {	
+void USART6_IRQHandler(void)
+{
 
-    getchar = USART_ReceiveData(USART6);   //将读寄存器的数据缓存到接收缓冲区里
-	
-    USART_GetChar(getchar);
-		 USART_ClearITPendingBit(USART6, USART_IT_RXNE);
-  }
+    uint8_t getchar;
+    if (USART_GetITStatus(USART6, USART_IT_RXNE) != RESET) // 判断读寄存器是否为空
+    {
 
+        getchar = USART_ReceiveData(USART6); // 将读寄存器的数据缓存到接收缓冲区里
 
-  if(USART_GetITStatus(USART6, USART_IT_TXE) != RESET)                   //这段是为了避免STM32 USART第一个字节发送不出去的BUG 
-  { 
-     USART_ITConfig(USART6, USART_IT_TXE, DISABLE);					     //禁止发送缓冲器空中断
-  }	
-  
+        USART_GetChar(getchar);
+        USART_ClearITPendingBit(USART6, USART_IT_RXNE);
+    }
+
+    if (USART_GetITStatus(USART6, USART_IT_TXE) != RESET) // 这段是为了避免STM32 USART第一个字节发送不出去的BUG
+    {
+        USART_ITConfig(USART6, USART_IT_TXE, DISABLE); // 禁止发送缓冲器空中断
+    }
 }
-
-
-

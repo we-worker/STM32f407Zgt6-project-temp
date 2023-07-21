@@ -2,18 +2,6 @@
 #include "stm32f4xx_dma.h" //DMA头文件
 #include "fft.h"
 
-/*********************************************************************************
-************************启明欣欣 STM32F407核心开发板******************************
-**********************************************************************************
-* 文件名称: adc.c                                                                *
-* 文件简述：ADC初始化                                                            *
-* 创建日期：2017.08.30                                                           *
-* 版    本：V1.0                                                                 *
-* 作    者：Clever                                                               *
-* 说    明：                                                                     *
-**********************************************************************************
-*********************************************************************************/
-
 uint16_t ADC_Value[ADC_BUFFER_SIZE];
 uint16_t ADC2_Value[ADC_BUFFER_SIZE];
 // 初始化ADC
@@ -72,6 +60,7 @@ u16 Get_Adc(u8 ch)
 
 	return ADC_GetConversionValue(ADC1); // 返回最近一次ADC1规则组的转换结果
 }
+
 
 //====================init2配置了tim2定时器触发adc采集，dma数据搬运，速度更快
 
@@ -194,17 +183,17 @@ void ADC2_Init2(void)
 	DMA_Init(DMA2_Stream2, &DMA_InitStructure);							// 初始化DMA Stream
 
 	// 使能DMA中断
-//	DMA_ITConfig(DMA2_Stream2, DMA_IT_TC, ENABLE);
+	//	DMA_ITConfig(DMA2_Stream2, DMA_IT_TC, ENABLE);
 
 	// 开启DMA传输
 	DMA_Cmd(DMA2_Stream2, ENABLE);
 
-//	NVIC_InitTypeDef NVIC_InitStructure;
-//	NVIC_InitStructure.NVIC_IRQChannel = DMA2_Stream2_IRQn;	  // DMA2_Stream0中断
-//	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0; // 抢占优先级1
-//	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;		  // 子优先级1
-//	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			  // IRQ通道使能
-//	NVIC_Init(&NVIC_InitStructure);							  // 根据指定的参数初始化NVIC寄存器
+	//	NVIC_InitTypeDef NVIC_InitStructure;
+	//	NVIC_InitStructure.NVIC_IRQChannel = DMA2_Stream2_IRQn;	  // DMA2_Stream0中断
+	//	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0; // 抢占优先级1
+	//	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;		  // 子优先级1
+	//	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;			  // IRQ通道使能
+	//	NVIC_Init(&NVIC_InitStructure);							  // 根据指定的参数初始化NVIC寄存器
 
 	GPIO_InitTypeDef GPIO_InitStructure;
 	ADC_CommonInitTypeDef ADC_CommonInitStructure;
@@ -244,7 +233,9 @@ void ADC2_Init2(void)
 	// 开启AD转换器
 	ADC_Cmd(ADC2, ENABLE);
 }
-uint16_t dma_inter_count = 0;
+
+
+// uint16_t dma_inter_count = 0;
 // DMA中断服务函数
 void DMA2_Stream0_IRQHandler(void)
 {
@@ -257,7 +248,7 @@ void DMA2_Stream0_IRQHandler(void)
 		//		dma_inter_count++;
 		//		if(dma_inter_count==0)//故意慢一点执行。
 
-		TIM_Cmd(TIM2, DISABLE); // 使能定时器2
+		TIM_Cmd(TIM2, DISABLE); // 关闭定时器2
 		// FFT(ADC_Value);
 	}
 }

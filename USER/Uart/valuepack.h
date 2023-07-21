@@ -5,6 +5,19 @@
 #include "stdio.h"
 #include "stdarg.h"
 
+//=============================使用案例=====================
+//与UART只需要存在一个文件即可。
+// TxPack txpack;
+// RxPack rxpack;
+//		if(readValuePack(&rxpack))
+//			{
+//				// 这里是将接收的数据原样回传
+//				txpack.floats[0] = rxpack.floats[0];
+//			}
+//			// 在此对数据包赋值并将数据发送到手机
+//			sendValuePack(&txpack);
+
+
 
 // 本程序通过USART 配合接收中断 进行数据包的接收和发送
 // 接收的数据在接收中断中写入到buffer中，通过定时调用readValuePack()函数来解析，定时间隔建议在10ms以内。

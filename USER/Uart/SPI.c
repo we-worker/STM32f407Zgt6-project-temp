@@ -1,26 +1,23 @@
 #include "SPI.h"
 
-
 //==================================
-//与UART同时使用时，PC7会冲突。
+// 与UART同时使用时，PC7会冲突。
 ////==========================================
-#define CLK PCout(6)   //引脚定义clk信号C6
-#define CS_N PCout(8)  //引脚定义cs片选信号C8
-#define MOSI PCout(9) //引脚定义MOSI信号C9
-#define MISO PCin(11)   //引脚定义MISO信号C11
+#define CLK  PCout(6)  // 引脚定义clk信号C6
+#define CS_N PCout(8) // 引脚定义cs片选信号C8
+#define MOSI PCout(9) // 引脚定义MOSI信号C9
+#define MISO PCin(11) // 引脚定义MISO信号C11
 
-
-
-//初始化spi用的引脚
+// 初始化spi用的引脚
 void SPI_init()
 {
     GPIO_InitTypeDef GPIO_InitStructure;
-    //使用某个引脚前要先启用引脚的时钟
+    // 使用某个引脚前要先启用引脚的时钟
 
-    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE); //使能GPIOC时钟
+    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE); // 使能GPIOC时钟
 
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 |GPIO_Pin_8|GPIO_Pin_9;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;     //推挽输出
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_8 | GPIO_Pin_9;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;     // 推挽输出
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; // IO口速度为50MHz
 
     GPIO_Init(GPIOC, &GPIO_InitStructure);
@@ -33,7 +30,7 @@ void SPI_init()
     CS_N = 1;
 }
 
-//发送给fpga，不用看
+// 发送给fpga，不用看
 void SendTo_FPGA(unsigned long dataSend, unsigned char address, unsigned char NumOfBits)
 {
     unsigned char i = 0;
@@ -71,7 +68,7 @@ void SendTo_FPGA(unsigned long dataSend, unsigned char address, unsigned char Nu
     CS_N = 1;
 }
 
-//从fpga接受信号
+// 从fpga接受信号
 unsigned long RecvFrom_FPGA(unsigned char address, unsigned char NumOfBits)
 {
     unsigned char i = 0;

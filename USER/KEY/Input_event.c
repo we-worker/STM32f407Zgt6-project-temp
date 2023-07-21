@@ -40,12 +40,12 @@ void Event_handle()
 	if (keydown_data == KEY0_DATA)
 	{
 
-		fft_show_idx += 1;
+		// fft_show_idx += 1;
 	}
 	else if (keydown_data == KEY1_DATA)
 	{
 
-		fft_show_idx -= 1;
+		// fft_show_idx -= 1;
 	}
 	else if (keydown_data == KEY2_DATA)
 	{
