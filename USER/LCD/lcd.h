@@ -57,6 +57,8 @@ extern u16  BACK_COLOR; //背景颜色.默认为白色
 #define  CYAN         0x7FFF
 #define  YELLOW       0xFFE0
 
+//运用宏封装起来：
+#define RGB888_To_RGB565(R,G,B)  (uint16_t)((R & 0x1f)<<11|(G & 0x3f)<<5|(B & 0x1f))
 	    			
 void LCD_WriteReg(u16 LCD_Reg, u16 LCD_Value);
 u16 LCD_ReadReg(u16 LCD_Reg);
@@ -71,7 +73,7 @@ void LCD_DrawPoint(u16 x,u16 y);									//画点
 void LCD_Color_DrawPoint(u16 x,u16 y,u16 color);	//颜色画点
 u16  LCD_GetPoint(u16 x,u16 y); 								  //读点 
 
-void LCD_Open_Window(u16 X0,u16 Y0,u16 width,u16 height); 	
+void LCD_Open_Window(u16 X0,u16 Y0,u16 width,u16 height); 	//开窗口,并设置画点坐标到窗口左上角(X0,Y0)
 void Set_Scan_Direction(u8 direction);					 
 void Set_Display_Mode(u8 mode);						 
 
@@ -79,7 +81,7 @@ void LCD_Fill_onecolor(u16 sx,u16 sy,u16 ex,u16 ey,u16 color);		//填充单个�
 void LCD_Draw_Picture(u16 sx,u16 sy,u16 ex,u16 ey,u16 *color);		//填充指定颜色
 void LCD_DisplayChar(u16 x,u16 y,u8 word,u8 size);						      //显示一个字符
 void LCD_DisplayString(u16 x,u16 y,u8 size,char *p);		           //显示一个12/16/24字体字符串
-void LCD_DisplayString_color(u16 x,u16 y,u8 size,u8 *p,u16 brushcolor,u16 backcolor); //显示一个12/16/24字体自定义颜色的字符串
+void LCD_DisplayString_color(u16 x,u16 y,u8 size,char *p,u16 brushcolor,u16 backcolor); //显示一个12/16/24字体自定义颜色的字符串
 void LCD_DisplayNum(u16 x,u16 y,u32 num,u8 len,u8 size,u8 mode);				//显示 数字
 void LCD_DisplayNum_color(u16 x,u16 y,u32 num,u8 len,u8 size,u8 mode,u16 brushcolor,u16 backcolor); //显示自定义颜色数字	  	   																			 
 

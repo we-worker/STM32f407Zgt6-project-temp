@@ -29,7 +29,8 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_it.h"
- 
+#include "common.h"
+uint16_t nTickCount=0;
 
 /** @addtogroup Template_Project
   * @{
@@ -141,7 +142,13 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
- 
+	TimingDelay_Decrement();
+	nTickCount++;
+	if(nTickCount>=999)
+	{
+		b10msFlag = 1;
+		nTickCount = 0;
+	}	
 }
 
 /******************************************************************************/

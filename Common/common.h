@@ -99,6 +99,9 @@ void delay_init(void);
 void delay_ms(u16 nms);
 void delay_us(u32 nus);
 
+extern __IO uint8_t b10msFlag; //每隔1ms由滴答中断置1，调用后请及时清零。
+void TimingDelay_Decrement(void);
+
 #endif
 
 
