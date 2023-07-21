@@ -830,7 +830,7 @@ void LCD_DisplayString(u16 x,u16 y,u8 size,char *p)
 * 返回参数：无
 * 说    明：  ?B
 ****************************************************************************/	  
-void LCD_DisplayString_color(u16 x,u16 y,u8 size,u8 *p,u16 brushcolor,u16 backcolor)
+void LCD_DisplayString_color(u16 x,u16 y,u8 size,char *p,u16 brushcolor,u16 backcolor)
 {
    u16 bh_color,bk_color;
 	

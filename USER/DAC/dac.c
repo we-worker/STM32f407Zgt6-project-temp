@@ -42,7 +42,7 @@ void DAC1_Init(void)
 	
 			for(int i =0 ;i < 128 ; i++)
 	{
-			dac1_sinval[i] = 2047.0f*sin((1.0f/64) * PI*i) + 2048; 
+			dac1_sinval[i] = 512.0f*sin((1.0f/64) * PI*i) + 512; 
 	}
 	
 }
@@ -74,7 +74,7 @@ void DAC1_Init2(void)
 	
 		for(int i =0 ;i < 128 ; i++)
 	{
-			dac1_sinval[i] = 2047.0f*sin((1.0f/64) * PI*i) + 2048; 
+			dac1_sinval[i] = 512.0f*sin((1.0f/64) * PI*i) + 512; 
 	}
 	
   GPIO_InitTypeDef  GPIO_InitStructure;

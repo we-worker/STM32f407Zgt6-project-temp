@@ -80,5 +80,44 @@ void LCD_Update_Label(Label *label) {
 
 
 
+// 绘制波形的函数,Xpoint:x轴要绘制的点数,yValues:数据,isfloat,输入数据是否是浮点型，仅支持浮点型或u16
+// Height绘制屏幕范围，y_offset:绘制高度偏移，Maxvalue：数据最大值，方面画图大小
+void drawWaveform(u16 Xpoint, void *yValues, uint8_t isfloat, u16 Height, u16 y_offset,float Maxvalue, u16 color)
+{
+   //先画边框
+  // LCD_DrawLine(0, label->y, label->x + label->width, label->y, label->border_color); //上边
+  // LCD_DrawLine(label->x, label->y + label->height, label->x + label->width, label->y + label->height, label->border_color); //下边
+  // LCD_DrawLine(label->x, label->y, label->x, label->y + label->height, label->border_color); //左边
+  // LCD_DrawLine(label->x + label->width, label->y, label->x + label->width, label->y + label->height, label->border_color); //右边
+  LCD_Fill_onecolor(0,y_offset,lcd_width, Height+y_offset, 0x9f31);
 
+    u16 *yValuesU16 = (u16 *)yValues;
+    float *yValuesFloat = (float *)yValues;
+
+    float valueRange=1.0f*Height/Maxvalue;
+    // 绘制波形
+    for (u16 i = 0; i < Xpoint; i++)
+    {
+        u16 x = i * (lcd_width * 1.0f / Xpoint);
+        u16 y;
+        if (isfloat)
+            y = Height - ((yValuesFloat[i]) * valueRange) + y_offset;
+        else
+            y = Height - ((yValuesU16[i]) * valueRange) + y_offset;
+
+        // 绘制当前ADC值的波形点
+        LCD_Color_DrawPoint(x, y, color);
+        // 绘制连接上一个ADC值的波形线段
+        if (i > 0)
+        {
+            u16 prev_x = (i - 1) * (lcd_width * 1.0f / Xpoint);
+            u16 prev_y;
+            if (isfloat)
+                prev_y = Height - ((yValuesFloat[i - 1]) * valueRange) + y_offset;
+            else
+                prev_y = Height - ((yValuesU16[i - 1]) * valueRange) + y_offset;
+            LCD_DrawLine(prev_x, prev_y, x, y, color); // 使用指定颜色画线
+        }
+    }
+}
 

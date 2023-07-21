@@ -44,8 +44,8 @@ int main()
 
     if (Fs == 700000)
     {
-//        ADC1_Init2();	  // 高速信号采集dma、等
-//        ADC2_Init2();
+        ADC1_Init2();	  // 高速信号采集dma、等
+        ADC2_Init2();
         TIM2_Init2(9, 5); // 定时器2时钟84M，分频系数84，84M/6=14000K 所以9次为1400k
     } else if(Fs ==28000) {
         ADC1_Init2();	  // 高速信号采集dma、等
@@ -61,17 +61,17 @@ int main()
     Screen_main2_init();
 
     //=========================DDS===========================
-//    GPIO_AD9959_Configuration();
-//    AD9959_Init();
-//    AD9959_enablechannel0(); 				//使能通道0
-//    AD9959_Setwavefrequency(40e6);
-//    AD9959_enablechannel1(); 				//使能通道1
-//    //AD9959_Setwaveamplitute(10e5,2500);
-//    AD9959_Setwavefrequency(10e6);
-//    AD9959_enablechannel2(); 				//使能通道2
-//    AD9959_Setwaveamplitute(40e6,300);
-//    AD9959_enablechannel3(); 				//使能通道3
-//    AD9959_SetAM2(5e6);
+    GPIO_AD9959_Configuration();
+    AD9959_Init();
+    AD9959_enablechannel0(); 				//使能通道0
+    AD9959_Setwavefrequency(40e6);
+    AD9959_enablechannel1(); 				//使能通道1
+    //AD9959_Setwaveamplitute(10e5,2500);
+    AD9959_Setwavefrequency(10e6);
+    AD9959_enablechannel2(); 				//使能通道2
+    AD9959_Setwaveamplitute(40e6,300);
+    AD9959_enablechannel3(); 				//使能通道3
+    AD9959_SetAM2(5e6);
 
 //	AD9833_Init();							 // 初始化与AD9833连接的硬件接口
 //	AD9833_WaveSeting(5000, 0, SIN_WAVE, 0); // 2KHz,	频率寄存器0，正弦波输出 ,初相位0

@@ -19,7 +19,7 @@ void drawpic(void);
 void display_waveform(void);
 void display_fft(void);
 void Display_characteristic(void);
-void drawWaveform(u16 Xpoint, void *yValues, uint8_t isfloat, u16 lcdHeight, u16 y_offset, float valueRange, u16 color);
+
 void useless_main(void);
 
 
@@ -29,16 +29,16 @@ void ADC_progress(void);
 
 void Screen_main(void)
 {
-Button btn_start; //定义一个按钮结构体
-btn_start.x = 100; //设置按钮左上角的x坐标为100
-btn_start.y = 200; //设置按钮左上角的y坐标为200
-btn_start.width = 80; //设置按钮的宽度为80
-btn_start.height = 40; //设置按钮的高度为40
-btn_start.color = 0x895C ; //设置按钮的颜色为红色
-btn_start.text = "Start"; //设置按钮上显示的文字为“开始”
-btn_start.size = 16; //设置文字的大小为16
-btn_start.state = 0; //设置按钮的初始状态为未按下
-btn_start.action = Screen_main; //设置按钮按下时触发的函数为start
+//Button btn_start; //定义一个按钮结构体
+//btn_start.x = 100; //设置按钮左上角的x坐标为100
+//btn_start.y = 200; //设置按钮左上角的y坐标为200
+//btn_start.width = 80; //设置按钮的宽度为80
+//btn_start.height = 40; //设置按钮的高度为40
+//btn_start.color = 0x895C ; //设置按钮的颜色为红色
+//btn_start.text = "Start"; //设置按钮上显示的文字为“开始”
+//btn_start.size = 16; //设置文字的大小为16
+//btn_start.state = 0; //设置按钮的初始状态为未按下
+//btn_start.action = Screen_main; //设置按钮按下时触发的函数为start
 
     Screen_flash_cnt++;
 		//delay_ms(1);
@@ -62,14 +62,14 @@ btn_start.action = Screen_main; //设置按钮按下时触发的函数为start
             // 清空屏幕
             LCD_Fill_onecolor(0, 0, lcd_width - 1, lcd_height - 1, 0xffff);
             u16 waveform_height = lcd_height;				   // 计算波形显示区域的高度
-            float adc_value_range = waveform_height / 4000.0f; // 假设ADC的取值范围为0-4095
-						useless_main();
+            float adc_value_range = 4000.0f; // 假设ADC的取值范围为0-4095
+						//useless_main();
 					
-					  int show_buffer_size = Fs*10/2/frequency;						   // 绘制的范围，避免太多了。
+					  int show_buffer_size = 50;						   // 绘制的范围，避免太多了。
             drawWaveform(show_buffer_size, ADC_Value, 0, lcd_height / 2, lcd_height / 2, adc_value_range, RED);
-            drawWaveform(show_buffer_size, ADC2_Value, 0, lcd_height / 2, lcd_height / 2, adc_value_range, BLUE);
-          LCD_DrawButton(&btn_start); //画出开始按钮  
-					LCD_CheckButton(&btn_start);
+            drawWaveform(show_buffer_size, ADC2_Value, 0, lcd_height / 2, 0, adc_value_range, BLUE);
+//          LCD_DrawButton(&btn_start); //画出开始按钮  
+//					LCD_CheckButton(&btn_start);
 					// for (int i = 0; i < 7; i++)
             // {
             // 	SPI_data[i] = RecvFrom_FPGA(i, 4);
@@ -84,43 +84,13 @@ btn_start.action = Screen_main; //设置按钮按下时触发的函数为start
     }
     else
     {
-        if (Screen_flash_cnt == 0)
-            Display_characteristic2();
+        //if (Screen_flash_cnt == 0)
+//            Display_characteristic2();
         // delay_ms(500);
     }
 }
 
-// 绘制波形的函数,Xpoint:x轴要绘制的点数,yValues:数据,isfloat,输入数据是否是浮点型，仅支持浮点型或u16
-// lcdHeight绘制屏幕范围，y_offset:绘制高度偏移，valueRange：数据分布范围
-void drawWaveform(u16 Xpoint, void *yValues, uint8_t isfloat, u16 lcdHeight, u16 y_offset, float valueRange, u16 color)
-{
-    u16 *yValuesU16 = (u16 *)yValues;
-    float *yValuesFloat = (float *)yValues;
-    // 绘制波形
-    for (u16 i = 0; i < Xpoint; i++)
-    {
-        u16 x = i * (lcd_width * 1.0f / Xpoint);
-        u16 y;
-        if (isfloat)
-            y = lcdHeight - (yValuesFloat[i] * valueRange) + y_offset;
-        else
-            y = lcdHeight - (yValuesU16[i] * valueRange) + y_offset;
 
-        // 绘制当前ADC值的波形点
-        LCD_Color_DrawPoint(x, y, color);
-        // 绘制连接上一个ADC值的波形线段
-        if (i > 0)
-        {
-            u16 prev_x = (i - 1) * (lcd_width * 1.0f / Xpoint);
-            u16 prev_y;
-            if (isfloat)
-                prev_y = lcdHeight - (yValuesFloat[i - 1] * valueRange) + y_offset;
-            else
-                prev_y = lcdHeight - (yValuesU16[i - 1] * valueRange) + y_offset;
-            LCD_DrawLine(prev_x, prev_y, x, y, color); // 使用指定颜色画线
-        }
-    }
-}
 
 void useless_main(void)
 {
@@ -145,7 +115,7 @@ void display_waveform()
     float adc_value_range = waveform_height / 4000.0f; // 假设ADC的取值范围为0-4095
     int show_buffer_size = 1024;					   // 绘制的范围，避免太多了。
 
-    drawWaveform(show_buffer_size, ADC2_Value, 0, lcd_height / 2, 0, adc_value_range, RED);
+    drawWaveform(show_buffer_size, ADC2_Value, 0, lcd_height / 2, 0, 4000, RED);
 }
 
 float fft_value(int n)
@@ -205,7 +175,7 @@ void Display_characteristic()
     {
         uint16_t freq = (i + 1);
         // 设置频率
-        AD9833_WaveSeting(freq * 1e2, 0, SIN_WAVE, 0); // 2KHz, 频率寄存器0，正弦波输出，初相位0
+        //AD9833_WaveSeting(freq * 1e2, 0, SIN_WAVE, 0); // 2KHz, 频率寄存器0，正弦波输出，初相位0
         delay_ms(1);
         TIM_Cmd(TIM2, ENABLE); // 使能定时器2
         while (TIM2->CR1 != 0)

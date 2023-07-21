@@ -32,4 +32,5 @@
   ..\STM32F4_FWLIB\inc\stm32f4xx_dac.h \
   ..\STM32F4_FWLIB\inc\stm32f4xx_dcmi.h \
   ..\STM32F4_FWLIB\inc\stm32f4xx_fsmc.h \
-  C:\Works\keilv537\ARM\ARMCLANG\Bin\..\include\math.h
+  C:\Works\keilv537\ARM\ARMCLANG\Bin\..\include\math.h ..\USER\LCD\lcd.h \
+  C:\Works\keilv537\ARM\ARMCLANG\Bin\..\include\stdlib.h

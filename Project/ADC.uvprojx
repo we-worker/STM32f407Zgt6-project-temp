@@ -666,6 +666,18 @@
         </Group>
         <Group>
           <GroupName>DDS</GroupName>
+          <Files>
+            <File>
+              <FileName>AD9959.C</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\DDS\AD9959.C</FilePath>
+            </File>
+            <File>
+              <FileName>AD9959_Outset.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\DDS\AD9959_Outset.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>UART</GroupName>

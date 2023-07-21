@@ -46,4 +46,7 @@ typedef struct {
 void LCD_Draw_Label(Label *label);
 void LCD_Update_Label(Label *label) ;
 
+void drawWaveform(u16 Xpoint, void *yValues, uint8_t isfloat, u16 Height, u16 y_offset,float Maxvalue, u16 color);
+
+
 #endif

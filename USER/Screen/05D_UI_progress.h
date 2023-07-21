@@ -11,6 +11,6 @@
 void Screen_main2_init(void);
 void Screen_main2(void);
 
-extern uint8_t out_with_sin;
+extern int out_with_sin;
 
 #endif
