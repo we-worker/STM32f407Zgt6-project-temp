@@ -43,7 +43,7 @@ void send_rect_wave(uint32_t input_num)
             PD6_LOW() // 输出低电平
             out_with_sin = 0;
         }
-        delay_us(300); // 延时100us
+        delay_us(1000); // 延时100us
     }
     PD6_LOW()
     out_with_sin = 0;
@@ -90,7 +90,7 @@ void Screen_page0_init(void)
 
     DAC1_Init(); // DAC通道1初始化
 	ADC1_Init();      // adc初始化
-    TIM2_Init(49, 5); // 定时器2时钟84M，分频系数84，84M/84=1000K 所以9次为10.0us,100k
+    TIM2_Init(89, 5); // 定时器2时钟84M，分频系数84，84M/84=1000K 所以9次为10.0us,100k
 }
 
 void Screen_page0_flash(void)

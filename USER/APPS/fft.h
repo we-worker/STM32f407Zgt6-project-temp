@@ -23,10 +23,10 @@ int fft_index2freq(int freq);
 // 获得fft的相位，如果只是正弦波的相位，需要两个正弦波相位做差才可以得到。
 float fft_phase(int index);
 
-// 定义一个函数，实现AMPD算法,找fft峰值
+// 定义一个函数，实现AMPD算法,找fft峰值,以lBufOutArray为输入数组
 // 参数：data是一个一维数组，count是数组的长度
 // 返回值：一个指向波峰所在索引值的数组，以-1结束
-void AMPD(float32_t *data, int count, int16_t *peaks, uint16_t *peaks_num);
+void AMPD(int16_t *peaks, uint16_t *peaks_num);
 int fft_max_index(void);
 
 #endif

@@ -2,6 +2,7 @@
 
 #include "05D_UI.h"
 #include "Wave_page.h"
+#include "Screen3.h"
 
 uint16_t Screen_flash_cnt = 0;
 
@@ -45,6 +46,9 @@ void Page_Change(id)
     case 1:
         Screen_page1_init();
         break;
+    case 2:
+        Screen_page3_init();
+        break;
     default:
         break;
     }
@@ -86,6 +90,9 @@ void Screen_flash(void)
     case 1:
         Screen_page1_flash();
         break;
+    case 2:
+        Screen_page3_flash();
+        break;
     default:
         break;
     }
@@ -107,6 +114,9 @@ void Button_press_handle(u16 id)
             break;
         case 1:
             Page1_handle(id);
+            break;
+        case 2:
+            Page3_handle(id);
             break;
         default:
             break;

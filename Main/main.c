@@ -52,17 +52,18 @@ int main()
     //     TIM2_Init(49, 5); // 定时器2时钟84M，分频系数84，84M/84=1000K 所以9次为10.0us,100k
     // }
     //=========================DDS===PF11-触屏判断引脚冲突-影响不大========================
-//    GPIO_AD9959_Configuration();
-//    AD9959_Init();
-//    AD9959_enablechannel0(); // 使能通道0
-//    AD9959_Setwavefrequency(40e6);
-//    AD9959_enablechannel1(); // 使能通道1
-//    // AD9959_Setwaveamplitute(10e5,2500);
-//    AD9959_Setwavefrequency(10e6);
-//    AD9959_enablechannel2(); // 使能通道2
-//    AD9959_Setwaveamplitute(40e6, 300);
-//    AD9959_enablechannel3(); // 使能通道3
-//    AD9959_SetAM2(5e6);
+    GPIO_AD9959_Configuration();
+    AD9959_Init();
+    AD9959_enablechannel0(); // 使能通道0
+    AD9959_Setwavefrequency(40e6);
+		//AD9959_Setwaveamplitute(40e6,1);
+    AD9959_enablechannel1(); // 使能通道1
+    // AD9959_Setwaveamplitute(10e5,2500);
+    AD9959_Setwavefrequency(10e6);
+    AD9959_enablechannel2(); // 使能通道2
+    AD9959_Setwaveamplitute(40e6, 300);
+    AD9959_enablechannel3(); // 使能通道3
+    AD9959_SetAM2(5e6);
 
     //	AD9833_Init();							 // 初始化与AD9833连接的硬件接口
     //	AD9833_WaveSeting(5000, 0, SIN_WAVE, 0); // 2KHz,	频率寄存器0，正弦波输出 ,初相位0

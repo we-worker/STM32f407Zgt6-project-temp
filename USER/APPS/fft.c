@@ -11,7 +11,6 @@ float32_t lBufInArray[FFT_LENGTH * 2];
 float32_t lBufOutArray[FFT_LENGTH];
 
 
-void AMPD(float32_t *data, int count, int16_t *peaks, uint16_t *peaks_num);
 
 int16_t fft_show_idx = 0; // 用于显示的下标
 
@@ -83,7 +82,9 @@ float fft_value(int index)
 //求解fft数组下标对应的频率
 float fft_freq(int index)
 {
-  return (Fs * 1.0f / FFT_LENGTH) * index;
+  float freqq=(Fs * 1.0f / FFT_LENGTH) * index;
+
+  return freqq+freqq*0.023f;
 }
 //求解频率对应的fft数组下标
 int fft_index2freq(int freq)
@@ -102,7 +103,7 @@ int fft_max_index(void){
 
   // int16_t peaks[FFT_LENGTH / 2]; // fft峰值数组
   // uint16_t peaks_num = 0;        // fft峰值数量
-  arm_max_f32(&lBufOutArray[1], FFT_LENGTH / 2, &fft_maxValue, &fft_index_); // 使用 arm_max_f32 函数快速找到 FFT 输出中的最大值及其索引
+  arm_max_f32(&lBufOutArray[1], FFT_LENGTH / 2-1, &fft_maxValue, &fft_index_); // 使用 arm_max_f32 函数快速找到 FFT 输出中的最大值及其索引
   //                                                                            //	    // 寻找峰值谐波
   // AMPD(lBufOutArray, FFT_LENGTH / 2, peaks, &peaks_num);
   //========================================
@@ -113,8 +114,11 @@ int fft_max_index(void){
 // 定义一个函数，实现AMPD算法，找到不同的峰值点。
 // 参数：data是一个一维数组，count是数组的长度
 // 返回值：一个指向波峰所在索引值的数组，以-1结束
-void AMPD(float32_t *data, int count, int16_t *peaks, uint16_t *peaks_num)
+//  // int16_t peaks[FFT_LENGTH / 2]; // fft峰值数组
+  // uint16_t peaks_num = 0;        // fft峰值数量
+void AMPD(int16_t *peaks, uint16_t *peaks_num)
 {
+  int count=FFT_LENGTH/2;
   // 创建一个和data同样大小的整型数组，用于存储波峰的个数
   int p_data[FFT_LENGTH / 2] = {0};
 
@@ -127,7 +131,7 @@ void AMPD(float32_t *data, int count, int16_t *peaks, uint16_t *peaks_num)
     int row_sum = 0;
     for (int i = k; i < count - k; i++)
     {
-      if (data[i] > data[i - k] && data[i] > data[i + k])
+      if (lBufOutArray[i] > lBufOutArray[i - k] && lBufOutArray[i] > lBufOutArray[i + k])
       {
         row_sum -= 1;
       }
@@ -150,7 +154,7 @@ void AMPD(float32_t *data, int count, int16_t *peaks, uint16_t *peaks_num)
   {
     for (int i = k; i < count - k; i++)
     {
-      if (data[i] > data[i - k] && data[i] > data[i + k])
+      if (lBufOutArray[i] > lBufOutArray[i - k] && lBufOutArray[i] > lBufOutArray[i + k])
       {
         p_data[i] += 1;
       }

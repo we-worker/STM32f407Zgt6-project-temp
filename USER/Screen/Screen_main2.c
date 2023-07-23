@@ -11,147 +11,7 @@
 #include "timer.h"
 #include "UI.h"
 
-uint16_t Screen_flash_cnt = 0; // 屏幕刷新次数计数，实现简易延迟动画。
-uint8_t SPI_data[7];
 
-void drawpic(void);
-void display_waveform(void);
-void display_fft(void);
-void Display_characteristic(void);
-
-void useless_main(void);
-
-double period, frequency, peak_to_peak, average; // 定义ADC的周期、频率、峰峰值、平均值
-void ADC_progress(void);
-
-void Screen_main(void)
-{
-    // Button btn_start; //定义一个按钮结构体
-    // btn_start.x = 100; //设置按钮左上角的x坐标为100
-    // btn_start.y = 200; //设置按钮左上角的y坐标为200
-    // btn_start.width = 80; //设置按钮的宽度为80
-    // btn_start.height = 40; //设置按钮的高度为40
-    // btn_start.color = 0x895C ; //设置按钮的颜色为红色
-    // btn_start.text = "Start"; //设置按钮上显示的文字为“开始”
-    // btn_start.size = 16; //设置文字的大小为16
-    // btn_start.state = 0; //设置按钮的初始状态为未按下
-    // btn_start.action = Screen_main; //设置按钮按下时触发的函数为start
-
-    Screen_flash_cnt++;
-    // delay_ms(1);
-    if (Screen_flash_cnt >= 100)
-        Screen_flash_cnt = 0;
-
-    char display_str[30];
-    BRUSH_COLOR = RED; // 显示颜色变为红色
-
-    if (Screen_flash_cnt == 0)
-    {
-
-        // 高速时需要开关tim2实现采集，不卡顿
-        if (TIM2->CR1 == 0)        // 等待被关闭  说明FTT计算完毕
-            TIM_Cmd(TIM2, ENABLE); // 使能定时器2
-    }
-    if (is_show__wave == 1)
-    {
-        if (Screen_flash_cnt == 0)
-        {
-            // 清空屏幕
-            LCD_Fill_onecolor(0, 0, lcd_width - 1, lcd_height - 1, 0xffff);
-            u16 waveform_height = lcd_height; // 计算波形显示区域的高度
-            float adc_value_range = 4000.0f;  // 假设ADC的取值范围为0-4095
-                                              // useless_main();
-
-            int show_buffer_size = 50; // 绘制的范围，避免太多了。
-            drawWaveform(show_buffer_size, ADC_Value, 0, lcd_height / 2, lcd_height / 2, adc_value_range, RED);
-            drawWaveform(show_buffer_size, ADC2_Value, 0, lcd_height / 2, 0, adc_value_range, BLUE);
-            //          LCD_DrawButton(&btn_start); //画出开始按钮
-            //					LCD_CheckButton(&btn_start);
-            // for (int i = 0; i < 7; i++)
-            // {
-            // 	SPI_data[i] = RecvFrom_FPGA(i, 4);
-            // 	sprintf((char *)display_str, "data:%#x", SPI_data[i]); // 浮点型数据  e-01  就是除于10      /10
-            // 	LCD_DisplayString(10, 200 + 12 * i, 12, display_str);  // 实际电压数值
-            // }
-        }
-    }
-    else if (is_show__wave == 2)
-    {
-        display_fft();
-    }
-    else
-    {
-        // if (Screen_flash_cnt == 0)
-        //            Display_characteristic2();
-        // delay_ms(500);
-    }
-}
-
-void useless_main(void)
-{
-    ADC_progress();
-    char display_str[30];
-
-    BRUSH_COLOR = BLUE;                                        // 显示颜色变为红色
-    sprintf((char *)display_str, "ADC1 freq:%.4f", frequency); // 浮点型数据  e-01  就是除于10      /10
-    LCD_DisplayString(10, 110, 24, display_str);               // 实际电压数值
-
-    sprintf((char *)display_str, "peak to p:%d", peak_to_peak); // 浮点型数据  e-01  就是除于10      /10
-    LCD_DisplayString(10, 170, 24, display_str);                // 实际电压数值
-}
-
-void display_waveform()
-{
-    // 清空屏幕
-    LCD_Fill_onecolor(0, 0, lcd_width - 1, lcd_height / 2 - 1, 0xffff);
-    // 计算波形显示区域的高度
-    u16 waveform_height = lcd_height / 2;
-    // 计算每个ADC值在屏幕上的垂直位置范围
-    float adc_value_range = waveform_height / 4000.0f; // 假设ADC的取值范围为0-4095
-    int show_buffer_size = 1024;                       // 绘制的范围，避免太多了。
-
-    drawWaveform(show_buffer_size, ADC2_Value, 0, lcd_height / 2, 0, 4000, RED);
-}
-
-float fft_value(int n)
-{
-    return sqrtf(lBufOutArray[n] * lBufOutArray[n] + lBufOutArray[n - 1] * lBufOutArray[n - 1] + lBufOutArray[n - 2] * lBufOutArray[n - 2] + lBufOutArray[n + 1] * lBufOutArray[n + 1] + lBufOutArray[n + 2] * lBufOutArray[n + 2]);
-}
-
-void display_fft()
-{
-    FFT(ADC_Value); // 计算fft
-    // 清空屏幕
-    LCD_Fill_onecolor(0, 0, lcd_width - 1, lcd_height / 2 - 1, 0xffff);
-    // 计算波形显示区域的高度
-    u16 waveform_height = lcd_height / 2;
-
-    // 计算每个ADC值在屏幕上的垂直位置范围
-    float value_range = 2000.0f; // 假设ADC的取值范围为0-4095
-
-    // 绘制波形
-    drawWaveform(FFT_LENGTH / 2, lBufOutArray, 1, lcd_height / 2, 0, value_range, RED);
-
-    char display_str[30];
-
-    LCD_DrawLine(fft_show_idx * (lcd_width * 1.0 / FFT_LENGTH * 2), 0, fft_show_idx * (lcd_width * 1.0 / FFT_LENGTH * 2), lcd_height / 2 - 1, BLUE); // 使用白色画线
-    if (Screen_flash_cnt == 0)
-    {
-        BRUSH_COLOR = BLUE;                                                                // 显示颜色变为红色
-        sprintf((char *)display_str, "freq:%.4f", (Fs * 1.0 / FFT_LENGTH) * fft_show_idx); // 浮点型数据  e-01  就是除于10      /10
-        LCD_DisplayString(10, 220, 12, display_str);                                       // 实际电压数值
-
-        float out = fft_value(fft_show_idx);
-
-        double uo_sum = 0;
-        for (int i = -3; i < 3; i++)
-        {
-            uo_sum += lBufOutArray[fft_show_idx + i] * lBufOutArray[fft_show_idx + i];
-        }
-        sprintf((char *)display_str, "value:%.4f", sqrtf(uo_sum)); // 1024/2
-        LCD_DisplayString(120, 220, 12, display_str);              // 实际电压数值																			   // 实际电压数值
-    }
-}
 
 // int phases[1024];
 //  绘制幅频特性曲线和相频特性曲线
@@ -291,88 +151,107 @@ void Display_characteristic()
     }
 }
 
-void ADC_progress()
+
+
+//  绘制幅频特性曲线
+void Display_characteristic2()
 {
-    double max, min;   // 最大值、最小值、峰值、
-    int i, j, k;       // 索引
-    double total_time; // 总时间
-                       //		int M=10; // 测量周期数
-                       //		if(frequency>1000 && Fs==700000)
-                       //			M=frequency/2000; // 测量周期数
-                       //		else if(frequency>1000)
-                       //			M=frequency/200; // 测量周期数
-                       //		else
-                       //			M=1;
+    const int show_len = 256;
+    int real_part[show_len] = {0};
+    int show_index = 0;
 
-    float E = 0.01; // 中心点判断偏移量
-    // 找到最大值和最小值
-    max = ADC_Value[0];
-    min = ADC_Value[0];
-    for (i = 1; i < FFT_LENGTH; i++)
+    int sqrt2_index = 0;
+    int minsqrt2 = 10000;
+    int k_freq = 1e2;
+
+    for (int i = 0; i < show_len; i++)
     {
-        if (ADC_Value[i] > max)
-            max = ADC_Value[i];
-        if (ADC_Value[i] < min)
-            min = ADC_Value[i];
+        uint16_t freq = (i + 1);
+        // 设置频率
+        AD9833_WaveSeting(freq * k_freq, 0, SIN_WAVE, 0); // 2KHz, 频率寄存器0，正弦波输出，初相位0
+        delay_us(10);
+        TIM_Cmd(TIM2, ENABLE); // 使能定时器2
+        while (TIM2->CR1 != 0)
+        {
+        } // 等待被关闭，说明采样完毕
+        uint64_t uo_sum = 0;
+        for (int i = 0; i < 1024; i++)
+        {
+            uo_sum += ADC_Value[i];
+        }
+        uo_sum = uo_sum / 1024;
+        real_part[i] = uo_sum; // 幅度
     }
 
-    // 计算峰值、峰峰值和平均值
-    peak_to_peak = max - min;
-    average = 0;
-    for (i = 0; i < FFT_LENGTH; i++)
-        average += ADC_Value[i];
-    average /= FFT_LENGTH;
+    // 清空屏幕
+		 
+    LCD_Fill_onecolor(0, 0, lcd_width, lcd_height, 0xffff);
 
-    //    // 找到第一个大于平均值的元素的索引
-    //    for (i = 0; i < FFT_LENGTH; i++)
-    //        if (ADC_Value[i] > average + E)
-    //            break;
+    if(real_part[3] < real_part[show_len - 2]-100) {
+        for (int i = 0; i < show_len; i++)
+        {
+            if (fabs(real_part[i] - real_part[show_len-1] * 1.414f / 4) < minsqrt2)
+            {
+                minsqrt2 = fabs(real_part[i] - real_part[show_len-1] * 1.414f / 4);
+                sqrt2_index = i;
+            }
+        }
+        char display_str[30];
 
-    //    // 初始化总时间为零
-    //    total_time = 0;
-
-    //    // 循环测量M个周期的时间
-    //    for (int m = 0; m < M; m++)
-    //    {
-    //        // 找到第一个小于平均值的元素的索引
-    //        for (j = i + 1; j < FFT_LENGTH; j++)
-    //            if (ADC_Value[j] < average - E)
-    //                break;
-
-    //        // 找到第二个大于平均值的元素的索引
-    //        for (k = j + 1; k < FFT_LENGTH; k++)
-    //            if (ADC_Value[k] > average + E)
-    //                break;
-
-    //        // 累加一个周期的时间
-    //        total_time += (k - i) * 1.0f/(Fs);
-
-    //        // 更新i为k，继续下一个周期的测量
-    //        i = k;
-    //    }
-    //    // 计算周期和频率
-    //    period = total_time / M;
-    //    frequency = 1 / period;
-
-    // 使用FFT进行频率计算方案，待定
-    FFT(ADC_Value);
-    // 找到最大频率点
-    int max_i = 1;
-    for (int j = 1; j < FFT_LENGTH / 2; j++)
+        float R3=98.2f,Rs=0.5f;
+        float w=2*PI* (k_freq)*(sqrt2_index+1);
+        float L=sqrtf((R3*R3+2*R3*Rs-7*Rs*Rs)/7/(w*w))*1e6;
+        sprintf((char *)display_str, "Lvalue:%.4f",L*0.9); // 1024/2
+        LCD_DisplayString(50, 24, 24, display_str);							   // 实际电压数值
+    } else if (real_part[3] - real_part[show_len - 2] < 200)
     {
-        if (lBufOutArray[max_i] < lBufOutArray[j])
-            max_i = j;
+        char display_str[30];
+        int uo = real_part[show_len/2];
+        sprintf((char *)display_str, "Rvalue:%.4f", 98.2f * uo / (1098 - uo)); // 1024/2
+        LCD_DisplayString(50, 24, 24, display_str);							   // 实际电压数值																			   // 实际电压数值
     }
-    frequency = (Fs * 1.0 / FFT_LENGTH) * max_i;
-    //		if(frequency>=10e3){
-    //		Fs=700000;
-    //				ADC1_Init2();	  // 高速信号采集dma、等
-    //		ADC2_Init2();
-    //		TIM2_Init2(9, 5); // 定时器2时钟84M，分频系数84，84M/6=14000K 所以9次为1400k
-    //		}else{
-    //					Fs=28000;
-    //				ADC1_Init2();	  // 高速信号采集dma、等
-    //		ADC2_Init2();
-    //		TIM2_Init2(499, 5); // 定时器2时钟84M，分频系数84，84M/6=14000K 所以499次为28k
-    //		}
+    else
+    {
+        for (int i = 0; i < show_len; i++)
+        {
+            if (fabs(real_part[i] - real_part[3] * 1.414f / 2) < minsqrt2)
+            {
+                minsqrt2 = fabs(real_part[i] - real_part[3] * 1.414f / 2);
+                sqrt2_index = i;
+            }
+        }
+
+        char display_str[30];
+        sprintf((char *)display_str, "Cvalue:%.4f", 1 / (2 * PI * (k_freq)*(sqrt2_index+1) * 92.2f) * 1e9); // 1024/2
+        LCD_DisplayString(50, 24, 24, display_str);															   // 实际电压数值																			   // 实际电压数值
+    }
+
+    u16 waveform_height = lcd_height / 2; // 计算波形显示区域的高度
+
+    // 计算每个ADC值在屏幕上的垂直位置范围
+    float adc_value_range1 = waveform_height / 2800.0f; // 假设ADC的取值范围为0-4095
+    int show_buffer_size = show_len;					// 绘制的范围，避免太多了。
+
+    // 绘制幅频波形,相频
+    for (int i = 0; i < show_buffer_size; i++)
+    {
+        int amplitude = real_part[i];
+        //				if(phase>0)
+        //					phase=-80;
+        // 计算波形点的坐标
+        u16 x = i * (lcd_width * 1.0f / show_buffer_size);
+        u16 y1 = lcd_height / 2 - (amplitude * adc_value_range1);
+        // 绘制当前幅度值的波形点
+        LCD_Color_DrawPoint(x, y1, RED);
+
+        // 绘制连接上一个幅度值的波形线段
+        if (i > 0)
+        {
+            u16 prev_x = (i - 1) * (lcd_width * 1.0f / show_buffer_size);
+            u16 prev_y1 = lcd_height / 2 - (real_part[i-1] * adc_value_range1);
+            LCD_DrawLine(prev_x, prev_y1, x, y1, RED); // 使用指定颜色画线
+        }
+    }
+		AD9833_WaveSeting(1000, 0, SIN_WAVE, 0);
+		delay_ms(1000);
 }
