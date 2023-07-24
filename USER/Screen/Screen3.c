@@ -33,7 +33,7 @@ void Screen_page3_flash(void)
         char display_str[30];
         if (Frequency > 10000)
         {
-            sprintf((char *)display_str, "freq:%dkhz      ", (uint32_t)(Frequency/1000+0.5));
+            sprintf((char *)display_str, "freq:%dhz      ",Frequency);
         }
         else
             sprintf((char *)display_str, "freq:%d      ", Frequency);

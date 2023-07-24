@@ -12,14 +12,15 @@ uint8_t page_id = 0;
 
 char *texts9[9] = {"1", "2", "3", "4", "5", "6", "7", "8", "9"}; // 定义一个字符串数组
 
-void Button_press_handle(u16);
+// 假设所有页面刷新函数和处理函数都有相同的类型和参数
+typedef void (*PageFunc)(void);                                                             // 定义一个函数指针类型
+PageFunc page_init_funcs[] = {Screen_page0_init, Screen_page1_init, Screen_page3_init};     // 定义一个存储页面处理函数地址的数组
+PageFunc page_flash_funcs[] = {Screen_page0_flash, Screen_page1_flash, Screen_page3_flash}; // 定义一个存储页面刷新函数地址的数组
+typedef void (*PageHandle)(int);
+PageHandle page_handle_funcs[] = {Page0_handle, Page1_handle, Page3_handle};                  // 定义一个存储页面处理函数地址的数组
 
-// void Screen_2_init()
-//{
-//     drawWaveform(1024, ADC_Value, 0, lcd_height / 2, 0, 3500, 0xfe67);
-//     if (TIM2->CR1 == 0)        // 等待被关闭  说明FTT计算完毕
-//         TIM_Cmd(TIM2, ENABLE); // 使能定时器2
-// }
+
+void Button_press_handle(u16);
 
 void Page_Change(id)
 {
@@ -37,21 +38,21 @@ void Page_Change(id)
 
         LCD_DrawButton(&btn_page[i]); // 画出每个按钮
     }
-
-    switch (page_id)
-    {
-    case 0:
-        Screen_page0_init();
-        break;
-    case 1:
-        Screen_page1_init();
-        break;
-    case 2:
-        Screen_page3_init();
-        break;
-    default:
-        break;
-    }
+    page_init_funcs[page_id]();
+    // switch (page_id)
+    // {
+    // case 0:
+    //     Screen_page0_init();
+    //     break;
+    // case 1:
+    //     Screen_page1_init();
+    //     break;
+    // case 2:
+    //     Screen_page3_init();
+    //     break;
+    // default:
+    //     break;
+    // }
 }
 
 void Screen_init()
@@ -81,21 +82,21 @@ void Screen_flash(void)
     {
         LCD_CheckButton(&btn_page[i]);
     }
-
-    switch (page_id)
-    {
-    case 0:
-        Screen_page0_flash();
-        break;
-    case 1:
-        Screen_page1_flash();
-        break;
-    case 2:
-        Screen_page3_flash();
-        break;
-    default:
-        break;
-    }
+    page_flash_funcs[page_id]();
+    // switch (page_id)
+    // {
+    // case 0:
+    //     Screen_page0_flash();
+    //     break;
+    // case 1:
+    //     Screen_page1_flash();
+    //     break;
+    // case 2:
+    //     Screen_page3_flash();
+    //     break;
+    // default:
+    //     break;
+    // }
 }
 
 void Button_press_handle(u16 id)
@@ -107,19 +108,20 @@ void Button_press_handle(u16 id)
     }
     else
     {
-        switch (page_id)
-        {
-        case 0:
-            Page0_handle(id);
-            break;
-        case 1:
-            Page1_handle(id);
-            break;
-        case 2:
-            Page3_handle(id);
-            break;
-        default:
-            break;
-        }
+        page_handle_funcs[page_id](id);
+        // switch (page_id)
+        // {
+        // case 0:
+        //     Page0_handle(id);
+        //     break;
+        // case 1:
+        //     Page1_handle(id);
+        //     break;
+        // case 2:
+        //     Page3_handle(id);
+        //     break;
+        // default:
+        //     break;
+        // }
     }
 }

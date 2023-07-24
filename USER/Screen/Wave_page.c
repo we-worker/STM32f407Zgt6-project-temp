@@ -16,59 +16,73 @@ bool is_out_freq = 0;
 
 int adc_show_size = 1024; // 绘制的范围，实现自动缩放时间轴
 
-float max_freq = 0;
+float max_freq = 0;     //fft得到的最大频率
 float frequency, peak_to_peak, average; // 定义ADC的周期、频率、峰峰值、平均值
+
+Button button1 = {10, 180, 50, 20, 0xfe67, "<<", 16, 0, Button_press_handle, 1};
+Button btn1;
+// LCD_DrawButton(&btn1); //画出按钮btn1
 
 void Screen_page1_init(void)
 {
 
     LCD_Fill_onecolor(0, 30, lcd_width - 1, lcd_height - 1, 0xffff);
-    for (char i = 0; i < 2; i++)
-    {                                         // 遍历数组
-        btn2[i].x = i * (170) + 10;           // 计算每个按钮的x坐标
-        btn2[i].y = 300;                      // 计算每个按钮的y坐标
-        btn2[i].width = 50;                   // 设置每个按钮的宽度为40
-        btn2[i].height = 20;                  // 设置每个按钮的高度为40
-        btn2[i].color = 0xfe67;               // 设置每个按钮的颜色为蓝色
-        btn2[i].size = 16;                    // 设置每个按钮的文字大小为16
-        btn2[i].state = 0;                    // 设置每个按钮的初始状态为未按下
-        btn2[i].id = i + 1;                   // 设置每个按钮的id为数字
-        btn2[i].action = Button_press_handle; // 设置每个按钮的action为Button_press_handle
-    }
-    btn2[0].text = "<<"; // 把字符串数组的元素赋值给btn9
-    btn2[1].text = ">>";
+
+    btn2[0] = button_init(10, 300, 50, 20, 0xfe67, "<<", 16, 0, Button_press_handle, 1);  // 初始化一个按钮btn1
+    btn2[1] = button_init(180, 300, 50, 20, 0xfe67, ">>", 16, 0, Button_press_handle, 2); // 初始化一个按钮btn1
+
     LCD_DrawButton(&btn2[0]); // 画出每个按钮
     LCD_DrawButton(&btn2[1]); // 画出每个按钮
 
-    btn_data.x = 65;                       // 设置按钮左上角的x坐标为100
-    btn_data.y = 300;                      // 设置按钮左上角的y坐标为200
-    btn_data.width = 50;                   // 设置按钮的宽度为80
-    btn_data.height = 20;                  // 设置按钮的高度为40
-    btn_data.color = 0xfe67;               // 设置按钮的颜色为红色
-    btn_data.text = "Datas";               // 设置按钮上显示的文字为“开始”
-    btn_data.size = 16;                    // 设置文字的大小为16
-    btn_data.state = 0;                    // 设置按钮的初始状态为未按下
-    btn_data.id = 3;                       // 按键ip
-    btn_data.action = Button_press_handle; // 设置按钮按下时触发的函数为start
-    LCD_DrawButton(&btn_data);             // 画出开始按钮
+    btn_data = button_init(65, 300, 50, 20, 0xfe67, "Datas", 16, 0, Button_press_handle, 3); // 初始化一个按钮btn1
+    LCD_DrawButton(&btn_data);                                                               // 画出开始按钮
 
-    Freq_open.x = 125;                      // 设置按钮左上角的x坐标为100
-    Freq_open.y = 300;                      // 设置按钮左上角的y坐标为200
-    Freq_open.width = 50;                   // 设置按钮的宽度为80
-    Freq_open.height = 20;                  // 设置按钮的高度为40
-    Freq_open.color = 0xfe67;               // 设置按钮的颜色为红色
-    Freq_open.text = "freqPB6";             // 设置按钮上显示的文字为“开始”
-    Freq_open.size = 12;                    // 设置文字的大小为16
-    Freq_open.state = 0;                    // 设置按钮的初始状态为未按下
-    Freq_open.id = 4;                       // 按键ip
-    Freq_open.action = Button_press_handle; // 设置按钮按下时触发的函数为start
-
-    LCD_DrawButton(&Freq_open); // 画出开始按钮
+    Freq_open = button_init(125, 300, 50, 20, 0xfe67, "freqPB6", 12, 0, Button_press_handle, 4); // 初始化一个按钮btn1
+    LCD_DrawButton(&Freq_open);                                                                  // 画出开始按钮
 
     ADC1_Init2(); // 高速信号采集dma、等
     ADC2_Init2();
     TIM2_Init2(19, 5); // 定时器2时钟84M，分频系数84，84M/6=14000K 所以9次为1400k
     Fs = 700000;
+}
+
+void auto_change(void)
+{
+    char display_str[30];
+    //======================自动缩放波形======================
+    int max_indx = fft_max_index();
+    max_freq = fft_freq(max_indx);
+    adc_show_size = Fs / max_freq * 5;
+
+    adc_show_size = _constrain(adc_show_size, 5, 1024);
+    //======================自动缩放FFT_FS======================
+
+    if (Frequency > 120e3) // 高频使用等效采用
+    {
+        uint32_t test_freq = ((uint32_t)(1.0f * Frequency / 1e3 + 0.5)) * 1e3; // 这里没有完成，需要知道信号的准确频率才行
+        int fenpin = Frequency / 10e5 + 1;                                      // 定时器频率与信号频率的倍数。
+        uint32_t Fs_tim = test_freq / fenpin;
+         //int delay=0;//自动控制延迟时间
+        int delay = 250e3 / Frequency + 1;
+        // double Fs_tim_true = 14e6 / ((14e6 / Fs_tim) + delay);
+        // Fs = (uint32_t)(1.0f * test_freq / (test_freq - fenpin * Fs_tim_true) * Fs_tim_true + 0.5);
+	    Fs = 1.0f*Frequency/max_freq*Fs;//也不根据采集的波形计算了，直接让fft解算的最大频率值等于频率计的。
+
+        TIM2_Init2((u16)(42e6 / Fs_tim) - 1 + delay, 1);                                 // 定时器2时钟84M，分频系数84，84M/6=14000K 所以499次为28k
+        sprintf((char *)display_str, "Tim2:%d    ", ((u16)(14e6 / Fs_tim) - 1 + delay)); // 1024/2
+        LCD_DisplayString(70, 268, 12, display_str);                                     // 实际电压数值
+    }
+    else
+    {
+        uint32_t Fs_temp = (int)(max_freq / 1000 / 2 + 1) * 4 * 7e3;
+        if (fabs(Fs_temp / (4 * 7e3) - Fs / (4 * 7e3)) >= 2) // 防止来回疯狂变化。
+        {
+            Fs = _constrain(Fs_temp, 1e3, 7e5);
+            TIM2_Init2((u16)(14e6 / Fs) - 1, 5); // 定时器2时钟84M，分频系数84，84M/6=14000K 所以499次为28k
+        }
+        sprintf((char *)display_str, "Tim2:%d    ", (u16)(14e6 / Fs) - 1); // 1024/2
+        LCD_DisplayString(70, 268, 12, display_str);                       // 实际电压数值
+    }
 }
 
 void display_fft()
@@ -97,39 +111,7 @@ void display_fft()
     sprintf((char *)display_str, "value:%.4f", out); // 1024/2
     LCD_DisplayString(120, 280, 12, display_str);    // 实际电压数值																			   // 实际电压数值
 
-    //======================自动缩放波形======================
-    int max_indx = fft_max_index();
-    max_freq = fft_freq(max_indx);
-    adc_show_size = Fs / max_freq * 5;
-
-    adc_show_size = _constrain(adc_show_size, 5, 1024);
-    //======================自动缩放FFT_FS======================
-
-    if (Frequency > 120e3) // 高频使用等效采用
-    {
-        uint32_t test_freq = ((uint32_t)(1.0f * Frequency / 1e3 + 0.5)) * 1e3; // 这里没有完成，需要知道信号的准确频率才行
-        int fenpin = Frequency / 5e5 + 1;                                      // 定时器频率与信号频率的倍数。
-        uint32_t Fs_tim = test_freq / fenpin;
-        // int delay=50;//自动控制延迟时间
-        int delay = 250e3 / Frequency + 1;
-        double Fs_tim_true = 14e6 / ((14e6 / Fs_tim) + delay);
-        Fs = (uint32_t)(1.0f * test_freq / (test_freq - fenpin * Fs_tim_true) * Fs_tim_true + 0.5);
-
-        TIM2_Init2((u16)(14e6 / Fs_tim) - 1 + delay, 5);                                 // 定时器2时钟84M，分频系数84，84M/6=14000K 所以499次为28k
-        sprintf((char *)display_str, "Tim2:%d    ", ((u16)(14e6 / Fs_tim) - 1 + delay)); // 1024/2
-        LCD_DisplayString(70, 268, 12, display_str);                                     // 实际电压数值
-    }
-    else
-    {
-        uint32_t Fs_temp = (int)(max_freq / 1000 / 2 + 1) * 4 * 7e3;
-        if (fabs(Fs_temp / (4 * 7e3) - Fs / (4 * 7e3)) >= 2) // 防止来回疯狂变化。
-        {
-            Fs = _constrain(Fs_temp, 1e3, 7e5);
-            TIM2_Init2((u16)(14e6 / Fs) - 1, 5); // 定时器2时钟84M，分频系数84，84M/6=14000K 所以499次为28k
-        }
-        sprintf((char *)display_str, "Tim2:%d    ", (u16)(14e6 / Fs) - 1); // 1024/2
-        LCD_DisplayString(70, 268, 12, display_str);                       // 实际电压数值
-    }
+    auto_change(); // 自动切换量程和自动调整Fs，等效采样。
 
     sprintf((char *)display_str, "Fs:%d    ", Fs); // 1024/2
     LCD_DisplayString(0, 268, 12, display_str);    // 实际电压数值
