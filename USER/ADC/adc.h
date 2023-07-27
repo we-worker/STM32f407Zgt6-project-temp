@@ -1,9 +1,9 @@
 #ifndef __ADC_H
 #define __ADC_H	
 #include "common.h" 
- 
+ #include "fft.h"
 //ADC_BUFFER_SIZE 最好等于FFT——LENTH
-#define  ADC_BUFFER_SIZE 1024
+#define  ADC_BUFFER_SIZE FFT_LENGTH
 // extern  u16 ADC_Value[ADC_BUFFER_SIZE];
 extern uint16_t ADC_Value[ADC_BUFFER_SIZE];
 extern uint16_t ADC2_Value[ADC_BUFFER_SIZE];

@@ -501,6 +501,11 @@
               <FileType>1</FileType>
               <FilePath>..\USER\KEY\Input_event.c</FilePath>
             </File>
+            <File>
+              <FileName>filter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\APPS\filter.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

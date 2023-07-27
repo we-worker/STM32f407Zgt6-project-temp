@@ -76,7 +76,8 @@ float fft_value(int index)
       continue;
     uo_sum += lBufOutArray[index + i] * lBufOutArray[index + i];
   }
-  return sqrtf(uo_sum);
+  //return sqrtf(uo_sum);
+	return lBufOutArray[index];
 }
 
 //求解fft数组下标对应的频率
@@ -84,7 +85,7 @@ float fft_freq(int index)
 {
   float freqq=(Fs * 1.0f / FFT_LENGTH) * index;
 
-  return freqq+freqq*0.023f;
+  return freqq;
 }
 //求解频率对应的fft数组下标
 int fft_index2freq(int freq)
@@ -93,7 +94,7 @@ int fft_index2freq(int freq)
 }
 
 //获得fft的相位，如果只是正弦波的相位，需要两个正弦波相位做差才可以得到。
-float fft_phase(index){
+float fft_phase(int index){
   return atan2(lBufInArray[2 * index + 1], lBufInArray[2 * index]) * 180.0f / 3.1415926f + 90 + 10.39;
 }
 
@@ -111,69 +112,88 @@ int fft_max_index(void){
 }
 
 
+
+int comp(const void *p1,const void *p2)
+{
+        return  lBufOutArray[*((int*)p2)]>lBufOutArray[*((int*)p1)]?1:-1;
+}
 // 定义一个函数，实现AMPD算法，找到不同的峰值点。
 // 参数：data是一个一维数组，count是数组的长度
 // 返回值：一个指向波峰所在索引值的数组，以-1结束
 //  // int16_t peaks[FFT_LENGTH / 2]; // fft峰值数组
   // uint16_t peaks_num = 0;        // fft峰值数量
-void AMPD(int16_t *peaks, uint16_t *peaks_num)
+void AMPD(int *peaks, int *peaks_num)
 {
-  int count=FFT_LENGTH/2;
-  // 创建一个和data同样大小的整型数组，用于存储波峰的个数
-  int p_data[FFT_LENGTH / 2] = {0};
+	int count = FFT_LENGTH / 2;
+	// 创建一个和data同样大小的整型数组，用于存储波峰的个数
+	int p_data[FFT_LENGTH / 2]={0};
 
-  // 创建一个数组，用于存储每一行的和
-  int arr_rowsum[FFT_LENGTH / 4] = {0};
+	// 创建一个数组，用于存储每一行的和
+	int arr_rowsum[FFT_LENGTH / 4];
 
-  // 遍历每一行，计算每一行的和
-  for (int k = 1; k < count / 2 + 1; k++)
-  {
-    int row_sum = 0;
-    for (int i = k; i < count - k; i++)
-    {
-      if (lBufOutArray[i] > lBufOutArray[i - k] && lBufOutArray[i] > lBufOutArray[i + k])
-      {
-        row_sum -= 1;
-      }
-    }
-    arr_rowsum[k] = row_sum;
-  }
-  // 找到arr_rowsum中最小值的索引
-  int min_index = 0;
-  for (int i = 1; i < count / 2 + 1; i++)
-  {
-    if (arr_rowsum[i] < arr_rowsum[min_index])
-    {
-      min_index = i;
-    }
-  }
-  // 最大窗口长度等于最小值的索引
-  int max_window_length = min_index;
-  // 遍历每一行，统计波峰的个数
-  for (int k = 1; k < max_window_length + 1; k++)
-  {
-    for (int i = k; i < count - k; i++)
-    {
-      if (lBufOutArray[i] > lBufOutArray[i - k] && lBufOutArray[i] > lBufOutArray[i + k])
-      {
-        p_data[i] += 1;
-      }
-    }
-  }
-  // 初始化peaks为-1    // 创建一个数组，用于存储波峰所在的索引值
-  for (int i = 0; i < count; i++)
-  {
-    peaks[i] = -1;
-  }
-  // 遍历p_data，找到波峰所在的索引值，存入peaks中
-  int j = 0;
-  for (int i = 0; i < count; i++)
-  {
-    if (p_data[i] == max_window_length)
-    {
-      peaks[j] = i;
-      j++;
-    }
-  }
-  *peaks_num = j;
+	// 遍历每一行，计算每一行的和
+	for (int k = 1; k < count / 2 + 1; k++)
+	{
+		int row_sum = 0;
+		for (int i = k; i < count - k; i++)
+		{
+			if (lBufOutArray[i] > lBufOutArray[i - k] && lBufOutArray[i] > lBufOutArray[i + k])
+			{
+				row_sum -= 1;
+			}
+		}
+		arr_rowsum[k] = row_sum;
+	}
+	// 找到arr_rowsum中最小值的索引
+	int min_index = 0;
+	for (int i = 1; i < count / 2 + 1; i++)
+	{
+		if (arr_rowsum[i] < arr_rowsum[min_index])
+		{
+			min_index = i;
+		}
+	}
+
+	//======================================
+	// 最大窗口长度等于最小值的索引
+	int max_window_length = 3; // 设置为min_index 这个就是自动调节 ，现在手动调节
+
+	int min_level = (lBufOutArray[2] + lBufOutArray[FFT_LENGTH / 2 - 2]) / 2;
+	min_level = 50; // 判定为峰值的最小值阈值。
+
+	//=======================
+	// 遍历每一行，统计波峰的个数
+
+		for (int i = 1; i < count - max_window_length; i++)
+		{
+				for (int k = 1; k < max_window_length + 1; k++)
+	{
+			if (lBufOutArray[i] > lBufOutArray[i - k] && lBufOutArray[i] > lBufOutArray[i + k])
+			{
+				p_data[i] += 1;
+			}
+		}
+	}
+	// 初始化peaks为-1    // 创建一个数组，用于存储波峰所在的索引值
+	for (int i = 0; i < count; i++)
+	{
+		peaks[i] = -1;
+	}
+	// 遍历p_data，找到波峰所在的索引值，存入peaks中
+	int j = 0;
+	for (int i = 0; i < count; i++)
+	{
+		if (p_data[i] >= max_window_length )//原本是==
+		{
+			if (lBufOutArray[i] < min_level)
+				continue;
+			peaks[j] = i;
+			j++;
+		}
+	}
+	*peaks_num = j;
+	qsort(peaks, *peaks_num,sizeof(int),comp);//调用函数qsort
 }
+
+
+

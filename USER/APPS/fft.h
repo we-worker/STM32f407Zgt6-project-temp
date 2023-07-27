@@ -5,7 +5,7 @@
 
 // FFT长度（16/64/256/1024/4096）,即采样点的个数
 extern uint32_t Fs; // 虚拟是100000  正常使用定时器是20000    //目前最快模式是700000
-#define FFT_LENGTH 1024
+#define FFT_LENGTH 1024  //记得修改  arm_cfft_f32(&arm_cfft_sR_f32_len4096, lBufInArray, 0, 1); // fft变化
 
 void FFT(uint16_t *ADC_Value);
 
@@ -26,7 +26,9 @@ float fft_phase(int index);
 // 定义一个函数，实现AMPD算法,找fft峰值,以lBufOutArray为输入数组
 // 参数：data是一个一维数组，count是数组的长度
 // 返回值：一个指向波峰所在索引值的数组，以-1结束
-void AMPD(int16_t *peaks, uint16_t *peaks_num);
+void AMPD(int *peaks, int *peaks_num);
 int fft_max_index(void);
+void find_max_indices(uint16_t* max_index, uint16_t max_num);
+
 
 #endif

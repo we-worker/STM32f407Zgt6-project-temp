@@ -4,6 +4,8 @@
 #include "timer.h"
 #include "stdbool.h"
 #include "timer4.h"
+#include "filter.h"
+
 
 #define _constrain(amt, low, high) ((amt) < (low) ? (low) : ((amt) > (high) ? (high) : (amt)))
 
@@ -14,7 +16,7 @@ Button Freq_open;
 bool is_show_data = 0;
 bool is_out_freq = 0;
 
-int adc_show_size = 1024; // 绘制的范围，实现自动缩放时间轴
+int adc_show_size = FFT_LENGTH; // 绘制的范围，实现自动缩放时间轴
 
 float max_freq = 0;     //fft得到的最大频率
 float frequency, peak_to_peak, average; // 定义ADC的周期、频率、峰峰值、平均值
@@ -51,8 +53,8 @@ void auto_change(void)
     char display_str[30];
     //======================自动缩放波形======================
     int max_indx = fft_max_index();
-    max_freq = fft_freq(max_indx);
-    adc_show_size = Fs / max_freq * 5;
+    max_freq = (fft_freq(max_indx)+max_freq)/2;
+   adc_show_size = Fs / max_freq * 5;
 
     adc_show_size = _constrain(adc_show_size, 5, 1024);
     //======================自动缩放FFT_FS======================
@@ -74,10 +76,11 @@ void auto_change(void)
     }
     else
     {
-        uint32_t Fs_temp = (int)(max_freq / 1000 / 2 + 1) * 4 * 7e3;
-        if (fabs(Fs_temp / (4 * 7e3) - Fs / (4 * 7e3)) >= 2) // 防止来回疯狂变化。
+        uint32_t Fs_temp = (int)(max_freq / 1000 / 2 + 1) * 1 * 7e3;
+        if (fabs(Fs_temp / (1 * 7e3) - Fs / (1 * 7e3)) >= 4) // 防止来回疯狂变化。
         {
             Fs = _constrain(Fs_temp, 1e3, 7e5);
+					//Fs=30000;
             TIM2_Init2((u16)(14e6 / Fs) - 1, 5); // 定时器2时钟84M，分频系数84，84M/6=14000K 所以499次为28k
         }
         sprintf((char *)display_str, "Tim2:%d    ", (u16)(14e6 / Fs) - 1); // 1024/2
@@ -122,23 +125,28 @@ void display_fft()
 
 void display_fft_datas(void)
 {
-    int16_t peaks[FFT_LENGTH / 2]; // fft峰值数组
-    uint16_t peaks_num = 0;        // fft峰值数量
+    int peaks[FFT_LENGTH / 2]; // fft峰值数组
+    int peaks_num = 0;        // fft峰值数量
     AMPD(peaks, &peaks_num);
 
     char display_str[30];
     BACK_COLOR = 0x9f31; // 背景色
-    for (int i = 0; i < _constrain(peaks_num, 1, 10); i++)
+	  //LCD_Fill_onecolor(0, 30, lcd_width,lcd_height/2, 0x9f31);
+	int show_index=0;
+    for (int i = 0; i < peaks_num; i++)
     {
         float out = fft_value(peaks[i]);
-        if (out <= 10)
+        if (out <= 30 || out >100e4)
             continue;
+        if(fft_freq(peaks[i]))
         sprintf((char *)display_str, "value:%.4f", out);      // 1024/2
-        LCD_DisplayString(120, i * 12 + 30, 12, display_str); // 实际电压数值
+        LCD_DisplayString(120, show_index * 12 + 30, 12, display_str); // 实际电压数值
         float freq = fft_freq(peaks[i]);
         sprintf((char *)display_str, "freq:%.4f", freq);     // 1024/2
-        LCD_DisplayString(10, i * 12 + 30, 12, display_str); // 实际电压数值
+        LCD_DisplayString(10, show_index * 12 + 30, 12, display_str); // 实际电压数值
+				show_index++;
     }
+		LCD_Fill_onecolor(0, show_index * 12 + 30, lcd_width,lcd_height/4, 0x9f31);
     BACK_COLOR = WHITE; // 背景色
 }
 
@@ -243,6 +251,10 @@ void out_freq_show()
     BACK_COLOR = WHITE;                          // 背景色
 }
 
+
+rcPara_t di={0,0};
+
+
 void Screen_page1_flash(void)
 {
 
@@ -258,6 +270,7 @@ void Screen_page1_flash(void)
 
     if (Screen_flash_cnt == 0)
     {
+        
         // 高速时需要开关tim2实现采集，不卡顿
         if (TIM2->CR1 == 0)        // 等待被关闭  说明FTT计算完毕
             TIM_Cmd(TIM2, ENABLE); // 使能定时器2
@@ -265,6 +278,31 @@ void Screen_page1_flash(void)
         {
         } // 等待被关闭，说明采样完毕
 
+//								di.k=2*PI*9000/Fs;
+//				di.lVal=0;
+//        for (int i = 0; i < FFT_LENGTH; i++)
+//        {
+//					float temp=rcLfFiter(&di,ADC_Value[i]);
+//					ADC_Value[i]=_constrain( temp ,0,4095);
+//        }        for (int i = 0; i < FFT_LENGTH; i++)
+//        {
+//					float temp=rcLfFiter(&di,ADC_Value[i]);
+//					ADC_Value[i]=_constrain( temp ,0,4095);
+//        }        for (int i = 0; i < FFT_LENGTH; i++)
+//        {
+//					float temp=rcLfFiter(&di,ADC_Value[i]);
+//					ADC_Value[i]=_constrain( temp ,0,4095);
+//        }        for (int i = 0; i < FFT_LENGTH; i++)
+//        {
+//					float temp=rcLfFiter(&di,ADC_Value[i]);
+//					ADC_Value[i]=_constrain( temp ,0,4095);
+//        }        for (int i = 0; i < FFT_LENGTH; i++)
+//        {
+//					float temp=rcLfFiter(&di,ADC_Value[i]);
+//					ADC_Value[i]=_constrain( temp ,0,4095);
+//        }
+//				
+				
         if (is_show_data)
         {
             display_fft_datas();

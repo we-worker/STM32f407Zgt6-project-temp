@@ -22,7 +22,7 @@ PageHandle page_handle_funcs[] = {Page0_handle, Page1_handle, Page3_handle};    
 
 void Button_press_handle(u16);
 
-void Page_Change(id)
+void Page_Change(int id)
 {
     for (int i = 0; i < page_num; i++)
     {
