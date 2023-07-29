@@ -81,10 +81,21 @@ float fft_value(int index)
 }
 
 //求解fft数组下标对应的频率
-float fft_freq(int index)
+float fft_freq(int index,int need_fix)
 {
   float freqq=(Fs * 1.0f / FFT_LENGTH) * index;
-
+	if(freqq<=1100)
+		freqq=4.41393191648220e-05*freqq*freqq+	0.965728595439243*freqq+	26.8939478861443;
+	else if(freqq<=5200)
+		freqq=2.58219191914616e-06*freqq*freqq+	0.988911502252750*freqq+	48.2850854470916;
+	else if(freqq<=70000)
+			freqq=-3.51278059697917e-07*freqq*freqq+	1.05651004449479*freqq	-783.269371576457;
+	else if(freqq<=9e5)
+		freqq=-6.50181508803556e-06*freqq*freqq+2.06492461566215*freqq-40836.6316886145;
+	else 	
+		freqq=freqq;
+	if(need_fix==0)
+		freqq=(Fs * 1.0f / FFT_LENGTH) * index;
   return freqq;
 }
 //求解频率对应的fft数组下标

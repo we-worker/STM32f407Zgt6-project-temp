@@ -17,7 +17,7 @@ extern int16_t fft_show_idx; // 用于显示的下标
 // 采用周边平和根号的方式，补偿能量泄露问题，获得准确的fft电压幅值。
 float fft_value(int index);
 // 求解fft数组下标对应的频率
-float fft_freq(int index);
+float fft_freq(int index,int need_fix);
 // 求解频率对应的fft数组下标
 int fft_index2freq(int freq);
 // 获得fft的相位，如果只是正弦波的相位，需要两个正弦波相位做差才可以得到。

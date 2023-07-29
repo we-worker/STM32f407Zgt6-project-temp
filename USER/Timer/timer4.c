@@ -49,8 +49,8 @@ void TIM4_Init2(u16 auto_data, u16 fractional)
 
 	GENERAL_TIM4_NVIC_Config();
 	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE); //使能TIM4时钟
-														 // 自动重装载寄存器的值，累计TIM_Period+1个频率后产生一个更新或者中断
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE); //使能TIM4时钟 
+	// 自动重装载寄存器的值，累计TIM_Period+1个频率后产生一个更新或者中断
 	TIM_TimeBaseStructure.TIM_Period =auto_data; //auto_data重载值
 	TIM_TimeBaseStructure.TIM_Prescaler = fractional;	// 时钟预分频数
 	TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;

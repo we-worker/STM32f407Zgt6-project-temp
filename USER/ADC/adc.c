@@ -61,7 +61,6 @@ u16 Get_Adc(u8 ch)
 	return ADC_GetConversionValue(ADC1); // 返回最近一次ADC1规则组的转换结果
 }
 
-
 //====================init2配置了tim2定时器触发adc采集，dma数据搬运，速度更快
 
 // 初始化DMA
@@ -234,7 +233,6 @@ void ADC2_Init2(void)
 	ADC_Cmd(ADC2, ENABLE);
 }
 
-
 // uint16_t dma_inter_count = 0;
 // DMA中断服务函数
 void DMA2_Stream0_IRQHandler(void)
@@ -249,6 +247,101 @@ void DMA2_Stream0_IRQHandler(void)
 		//		if(dma_inter_count==0)//故意慢一点执行。
 
 		TIM_Cmd(TIM2, DISABLE); // 关闭定时器2
-		// FFT(ADC_Value);
+								// FFT(ADC_Value);
 	}
+}
+
+//=========================ADC功能函数=============
+
+// adc数组的平均值，包括线性拟合真实值。
+float ADC_average(uint16_t *adc_value)
+{
+	float average = 0;
+	int i;
+	for (i = 0; i < FFT_LENGTH; i++)
+		average += adc_value[i];
+	average /= FFT_LENGTH;
+
+	average = average / 4096 * 3.3 * 0.983261462083069 - 0.007369084852037; // ADC拟合结果
+	return average;
+}
+
+// adc数组的峰峰值。
+float ADC_peak2peak(uint16_t *adc_value)
+{
+	uint16_t max = adc_value[0];
+	uint16_t min = adc_value[0];
+	for (int i = 1; i < FFT_LENGTH; i++)
+	{
+		if (adc_value[i] > max)
+			max = adc_value[i];
+		if (adc_value[i] < min)
+			min = adc_value[i];
+	}
+	// 计算峰值、峰峰值和平均值
+	return max - min;
+}
+
+// adc数组计算频率.
+float ADC_freq(uint16_t *adc_value)
+{
+	int i, j = 0, k = 0; // 索引
+	double total_time;	 // 总时间
+	float E = 30;		 // 中心点判断偏移量
+
+	float average = ADC_average(adc_value);
+	// 第一个i点，如果波形第一个点就大于平均值，那么说明前面有点波形找不到了。
+	if (adc_value[0] > average + E)
+	{
+		// 找到第一个小于平均值的元素的索引
+		for (i = 0; i < FFT_LENGTH; i++)
+			if (adc_value[i] < average - E)
+				break;
+	}
+	// 找到第一个大于平均值的元素的索引
+	for (; i < FFT_LENGTH; i++)
+		if (adc_value[i] > average + E)
+			break;
+
+	int start_i = i;
+	// 初始化总时间为零
+	total_time = 0;
+	// m代码adc数组中的周期总数
+	float m = 0;
+	while (j < FFT_LENGTH && k < FFT_LENGTH)
+	{
+		// 找到第一个小于平均值的元素的索引
+		for (j = i + 1; j < FFT_LENGTH; j++)
+			if (adc_value[j] < average - E)
+				break;
+		if (j >= FFT_LENGTH)
+			break;
+		// 找到第二个大于平均值的元素的索引
+		for (k = j + 1; k < FFT_LENGTH; k++)
+			if (adc_value[k] > average + E)
+				break;
+		if (k >= FFT_LENGTH)
+			break;
+
+		// 更新i为k，继续下一个周期的测量
+		i = k;
+		m++;
+	}
+	if (j >= FFT_LENGTH)
+	{
+		float t2 = (k - 1) + (average - adc_value[k - 1]) / (adc_value[k] - adc_value[k - 1]);
+		total_time = t2 - (start_i - 1) + (average - adc_value[start_i - 1]) / (adc_value[start_i] - adc_value[start_i - 1]);
+	}
+	else
+	{
+		float t1 = (j - 1) + (average - adc_value[j - 1]) / (adc_value[j] - adc_value[j - 1]);
+		total_time = t1 - (start_i - 1) + (average - adc_value[start_i - 1]) / (adc_value[start_i] - adc_value[start_i - 1]);
+		m += 0.5;
+	}
+
+	// 计算周期和频率
+	float frequency = 0;
+	if (m != 0)
+		frequency = 1.0f * Fs / total_time * m;
+	return frequency;
 }
