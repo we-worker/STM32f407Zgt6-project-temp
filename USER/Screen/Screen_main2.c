@@ -11,8 +11,6 @@
 #include "timer.h"
 #include "UI.h"
 
-
-
 // int phases[1024];
 //  绘制幅频特性曲线和相频特性曲线
 void Display_characteristic()
@@ -151,8 +149,6 @@ void Display_characteristic()
     }
 }
 
-
-
 //  绘制幅频特性曲线
 void Display_characteristic2()
 {
@@ -184,31 +180,33 @@ void Display_characteristic2()
     }
 
     // 清空屏幕
-		 
+
     LCD_Fill_onecolor(0, 0, lcd_width, lcd_height, 0xffff);
 
-    if(real_part[3] < real_part[show_len - 2]-100) {
+    if (real_part[3] < real_part[show_len - 2] - 100)
+    {
         for (int i = 0; i < show_len; i++)
         {
-            if (fabs(real_part[i] - real_part[show_len-1] * 1.414f / 4) < minsqrt2)
+            if (fabs(real_part[i] - real_part[show_len - 1] * 1.414f / 4) < minsqrt2)
             {
-                minsqrt2 = fabs(real_part[i] - real_part[show_len-1] * 1.414f / 4);
+                minsqrt2 = fabs(real_part[i] - real_part[show_len - 1] * 1.414f / 4);
                 sqrt2_index = i;
             }
         }
         char display_str[30];
 
-        float R3=98.2f,Rs=0.5f;
-        float w=2*PI* (k_freq)*(sqrt2_index+1);
-        float L=sqrtf((R3*R3+2*R3*Rs-7*Rs*Rs)/7/(w*w))*1e6;
-        sprintf((char *)display_str, "Lvalue:%.4f",L*0.9); // 1024/2
-        LCD_DisplayString(50, 24, 24, display_str);							   // 实际电压数值
-    } else if (real_part[3] - real_part[show_len - 2] < 200)
+        float R3 = 98.2f, Rs = 0.5f;
+        float w = 2 * PI * (k_freq) * (sqrt2_index + 1);
+        float L = sqrtf((R3 * R3 + 2 * R3 * Rs - 7 * Rs * Rs) / 7 / (w * w)) * 1e6;
+        sprintf((char *)display_str, "Lvalue:%.4f", L * 0.9); // 1024/2
+        LCD_DisplayString(50, 24, 24, display_str);           // 实际电压数值
+    }
+    else if (real_part[3] - real_part[show_len - 2] < 200)
     {
         char display_str[30];
-        int uo = real_part[show_len/2];
+        int uo = real_part[show_len / 2];
         sprintf((char *)display_str, "Rvalue:%.4f", 98.2f * uo / (1098 - uo)); // 1024/2
-        LCD_DisplayString(50, 24, 24, display_str);							   // 实际电压数值																			   // 实际电压数值
+        LCD_DisplayString(50, 24, 24, display_str);                            // 实际电压数值																			   // 实际电压数值
     }
     else
     {
@@ -222,15 +220,15 @@ void Display_characteristic2()
         }
 
         char display_str[30];
-        sprintf((char *)display_str, "Cvalue:%.4f", 1 / (2 * PI * (k_freq)*(sqrt2_index+1) * 92.2f) * 1e9); // 1024/2
-        LCD_DisplayString(50, 24, 24, display_str);															   // 实际电压数值																			   // 实际电压数值
+        sprintf((char *)display_str, "Cvalue:%.4f", 1 / (2 * PI * (k_freq) * (sqrt2_index + 1) * 92.2f) * 1e9); // 1024/2
+        LCD_DisplayString(50, 24, 24, display_str);                                                             // 实际电压数值																			   // 实际电压数值
     }
 
     u16 waveform_height = lcd_height / 2; // 计算波形显示区域的高度
 
     // 计算每个ADC值在屏幕上的垂直位置范围
     float adc_value_range1 = waveform_height / 2800.0f; // 假设ADC的取值范围为0-4095
-    int show_buffer_size = show_len;					// 绘制的范围，避免太多了。
+    int show_buffer_size = show_len;                    // 绘制的范围，避免太多了。
 
     // 绘制幅频波形,相频
     for (int i = 0; i < show_buffer_size; i++)
@@ -248,18 +246,18 @@ void Display_characteristic2()
         if (i > 0)
         {
             u16 prev_x = (i - 1) * (lcd_width * 1.0f / show_buffer_size);
-            u16 prev_y1 = lcd_height / 2 - (real_part[i-1] * adc_value_range1);
+            u16 prev_y1 = lcd_height / 2 - (real_part[i - 1] * adc_value_range1);
             LCD_DrawLine(prev_x, prev_y1, x, y1, RED); // 使用指定颜色画线
         }
     }
-		AD9833_WaveSeting(1000, 0, SIN_WAVE, 0);
-		delay_ms(1000);
+    AD9833_WaveSeting(1000, 0, SIN_WAVE, 0);
+    delay_ms(1000);
 }
 
-
 //  绘制幅频特性曲线
-void Display_characteristic3(void){
- const int show_len = 256;
+void Display_characteristic3(void)
+{
+    const int show_len = 256;
     int real_part[show_len] = {0};
     int show_index = 0;
 
@@ -277,84 +275,67 @@ void Display_characteristic3(void){
         while (TIM2->CR1 != 0)
         {
         } // 等待被关闭，说明采样完毕
-        uint64_t uo_sum = 0;
-        for (int i = 0; i < 1024; i++)
-        {
-            uo_sum += ADC_Value[i];
-        }
-        uo_sum = uo_sum / 1024;
-        real_part[i] = uo_sum; // 幅度
+
+        real_part[i] = ADC_average(ADC_Value); // 幅度
     }
+    AD9833_WaveSeting(1000, 0, SIN_WAVE, 0);
+}
 
-    // 清空屏幕
-		 
-    LCD_Fill_onecolor(0, 0, lcd_width, lcd_height, 0xffff);
+// 粗扫+精细扫描代码框架，功能还未实现，留作准备。
+void Display_characteristic4(void)
+{
 
-    if(real_part[3] < real_part[show_len - 2]-100) {
-        for (int i = 0; i < show_len; i++)
-        {
-            if (fabs(real_part[i] - real_part[show_len-1] * 1.414f / 4) < minsqrt2)
-            {
-                minsqrt2 = fabs(real_part[i] - real_part[show_len-1] * 1.414f / 4);
-                sqrt2_index = i;
-            }
-        }
-        char display_str[30];
+    // 定义变量
+    float freq_start = 1000; // Hz
+    float freq_end = 2000;   // Hz
+    float freq_step = 10;    // Hz
+    int num_steps = (freq_end - freq_start) / freq_step;
+    float real_part[num_steps];
+    float imag_part[num_steps];
+    float amplitude[num_steps];
+    float max_amplitude = 0;
+    float max_frequency = 0;
 
-        float R3=98.2f,Rs=0.5f;
-        float w=2*PI* (k_freq)*(sqrt2_index+1);
-        float L=sqrtf((R3*R3+2*R3*Rs-7*Rs*Rs)/7/(w*w))*1e6;
-        sprintf((char *)display_str, "Lvalue:%.4f",L*0.9); // 1024/2
-        LCD_DisplayString(50, 24, 24, display_str);							   // 实际电压数值
-    } else if (real_part[3] - real_part[show_len - 2] < 200)
+    // 扫描频率范围并记录每个频率的幅度
+    for (int i = 0; i < num_steps; i++)
     {
-        char display_str[30];
-        int uo = real_part[show_len/2];
-        sprintf((char *)display_str, "Rvalue:%.4f", 98.2f * uo / (1098 - uo)); // 1024/2
-        LCD_DisplayString(50, 24, 24, display_str);							   // 实际电压数值																			   // 实际电压数值
+        float freq = freq_start + i * freq_step;
+        AD9833_WaveSeting(freq, 0, SIN_WAVE, 0); // 设置频率
+        delay(5);
+        real_part[i] = ADC_average(ADC_Value); // 获取幅度
     }
-    else
+
+    // 使用二分法查找幅度最大的频率
+    int left = 0;
+    int right = num_steps - 1;
+    while (left <= right)
     {
-        for (int i = 0; i < show_len; i++)
+        int mid = (left + right) / 2;
+        if (amplitude[mid] > max_amplitude)
         {
-            if (fabs(real_part[i] - real_part[3] * 1.414f / 2) < minsqrt2)
-            {
-                minsqrt2 = fabs(real_part[i] - real_part[3] * 1.414f / 2);
-                sqrt2_index = i;
-            }
+            max_amplitude = amplitude[mid];
+            max_frequency = freq_start + mid * freq_step;
         }
-
-        char display_str[30];
-        sprintf((char *)display_str, "Cvalue:%.4f", 1 / (2 * PI * (k_freq)*(sqrt2_index+1) * 92.2f) * 1e9); // 1024/2
-        LCD_DisplayString(50, 24, 24, display_str);															   // 实际电压数值																			   // 实际电压数值
-    }
-
-    u16 waveform_height = lcd_height / 2; // 计算波形显示区域的高度
-
-    // 计算每个ADC值在屏幕上的垂直位置范围
-    float adc_value_range1 = waveform_height / 2800.0f; // 假设ADC的取值范围为0-4095
-    int show_buffer_size = show_len;					// 绘制的范围，避免太多了。
-
-    // 绘制幅频波形,相频
-    for (int i = 0; i < show_buffer_size; i++)
-    {
-        int amplitude = real_part[i];
-        //				if(phase>0)
-        //					phase=-80;
-        // 计算波形点的坐标
-        u16 x = i * (lcd_width * 1.0f / show_buffer_size);
-        u16 y1 = lcd_height / 2 - (amplitude * adc_value_range1);
-        // 绘制当前幅度值的波形点
-        LCD_Color_DrawPoint(x, y1, RED);
-
-        // 绘制连接上一个幅度值的波形线段
-        if (i > 0)
+        if (amplitude[mid] < amplitude[mid + 1])
         {
-            u16 prev_x = (i - 1) * (lcd_width * 1.0f / show_buffer_size);
-            u16 prev_y1 = lcd_height / 2 - (real_part[i-1] * adc_value_range1);
-            LCD_DrawLine(prev_x, prev_y1, x, y1, RED); // 使用指定颜色画线
+            left = mid + 1;
+        }
+        else
+        {
+            right = mid - 1;
         }
     }
-		AD9833_WaveSeting(1000, 0, SIN_WAVE, 0);
-		delay_ms(1000);
+
+    // 在该频率附近进行更精细的扫描，以获得更准确的峰值
+    freq_step = 10; // Hz
+    freq_start = max_frequency - freq_step;
+    freq_end = max_frequency + freq_step;
+    num_steps = (freq_end - freq_start) / freq_step;
+    for (int i = 0; i < num_steps; i++)
+    {
+        float freq = freq_start + i * freq_step;
+        AD9833_WaveSeting(freq, 0, SIN_WAVE, 0); // 设置频率
+        delay(5);
+        real_part[i] = ADC_average(ADC_Value); // 获取幅度
+    }
 }

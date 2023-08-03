@@ -25,11 +25,11 @@ PG5每>RET PG4每>SD2 PD13每>SD0 PB1每>CS PC5每>P3 PC4每>P1
 #define SCLK_1 (GPIO_SetBits(GPIOD,GPIO_Pin_12)) 
 #define SCLK_0 (GPIO_ResetBits(GPIOD,GPIO_Pin_12)) 
 
-#define CS_1 (GPIO_SetBits(GPIOB,GPIO_Pin_1))
-#define CS_0 (GPIO_ResetBits(GPIOB,GPIO_Pin_1))
+#define CS_1 (GPIO_SetBits(GPIOA,GPIO_Pin_8))
+#define CS_0 (GPIO_ResetBits(GPIOA,GPIO_Pin_8))
 
-#define IO_update_1 (GPIO_SetBits(GPIOF,GPIO_Pin_11)) 
-#define IO_update_0 (GPIO_ResetBits(GPIOF,GPIO_Pin_11)) 
+#define IO_update_1 (GPIO_SetBits(GPIOB,GPIO_Pin_6)) 
+#define IO_update_0 (GPIO_ResetBits(GPIOB,GPIO_Pin_6)) 
 
 #define SDIO0_1 (GPIO_SetBits(GPIOD,GPIO_Pin_13))
 #define SDIO0_0 (GPIO_ResetBits(GPIOD,GPIO_Pin_13))
@@ -40,8 +40,8 @@ PG5每>RET PG4每>SD2 PD13每>SD0 PB1每>CS PC5每>P3 PC4每>P1
 #define PS1_1 (GPIO_SetBits(GPIOC,GPIO_Pin_4))
 #define PS1_0 (GPIO_ResetBits(GPIOC,GPIO_Pin_4))
 
-#define PS2_1 (GPIO_SetBits(GPIOB,GPIO_Pin_0))	
-#define PS2_0 (GPIO_ResetBits(GPIOB,GPIO_Pin_0))	
+#define PS2_1 (GPIO_SetBits(GPIOE,GPIO_Pin_6))	
+#define PS2_0 (GPIO_ResetBits(GPIOE,GPIO_Pin_6))	
 
 #define PS3_1 (GPIO_SetBits(GPIOC,GPIO_Pin_5))
 #define PS3_0 (GPIO_ResetBits(GPIOC,GPIO_Pin_5))

@@ -17,20 +17,17 @@ void GPIO_AD9959_Configuration(void)  //I/O端口配置
 	GPIO_InitTypeDef GPIO_InitStructure;
 
 	// 使能IO口时钟
-	RCC_APB2PeriphClockCmd(RCC_AHB1Periph_GPIOD |RCC_AHB1Periph_GPIOE|RCC_AHB1Periph_GPIOG, ENABLE);  
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD |RCC_AHB1Periph_GPIOA|RCC_AHB1Periph_GPIOC|  RCC_AHB1Periph_GPIOB |RCC_AHB1Periph_GPIOF |RCC_AHB1Periph_GPIOE|RCC_AHB1Periph_GPIOG, ENABLE);  
 	
 
 
-  //除A4为复位位，其余为低电平
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;	// 推挽输出
-  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;                 //推挽输出
-	GPIO_Init(GPIOF, &GPIO_InitStructure);
+
+
   //除A4为复位位，其余为低电平
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3 | GPIO_Pin_4  |	GPIO_Pin_5 ;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;	// 推挽输出
+  	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;                 //推挽输出
 	GPIO_Init(GPIOG, &GPIO_InitStructure);
 
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12 | GPIO_Pin_13  |	GPIO_Pin_11;
@@ -38,15 +35,18 @@ void GPIO_AD9959_Configuration(void)  //I/O端口配置
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
 	GPIO_Init(GPIOD, &GPIO_InitStructure);
 
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_0 ;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 ;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;	
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
 	
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4 | GPIO_Pin_5 ;
 	GPIO_Init(GPIOC, &GPIO_InitStructure);
-	
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15 ;
+		
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;
+	GPIO_Init(GPIOE, &GPIO_InitStructure);
+
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15|GPIO_Pin_8 ;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
 }
 

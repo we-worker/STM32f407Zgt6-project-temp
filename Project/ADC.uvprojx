@@ -315,7 +315,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>1</Optim>
+            <Optim>4</Optim>
             <oTime>1</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>0</OneElfS>
@@ -710,14 +710,9 @@
           <GroupName>DDS</GroupName>
           <Files>
             <File>
-              <FileName>AD9959.C</FileName>
+              <FileName>AD9833.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\USER\DDS\AD9959.C</FilePath>
-            </File>
-            <File>
-              <FileName>AD9959_Outset.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\USER\DDS\AD9959_Outset.c</FilePath>
+              <FilePath>..\USER\DDS\AD9833.c</FilePath>
             </File>
           </Files>
         </Group>

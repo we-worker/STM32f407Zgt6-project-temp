@@ -47,8 +47,7 @@ void Screen_page1_init(void)
     LCD_DrawButton(&Freq_open);                                                                  // 画出开始按钮
 
     ADC1_Init2(); // 高速信号采集dma、等
-    //ADC2_Init2();
-		ADC3_Init2();
+    ADC2_Init2();
     TIM2_Init2(19, 5); // 定时器2时钟84M，分频系数84，84M/6=14000K 所以9次为1400k
     Fs = 700000;
 }
@@ -133,12 +132,12 @@ void display_fft_datas(void)
 {
     int peaks[FFT_LENGTH / 2]; // fft峰值数组
     int peaks_num = 0;         // fft峰值数量
-    AMPD(peaks, &peaks_num);
+		AMPD(peaks, &peaks_num);
 
     char display_str[30];
     BACK_COLOR = 0x9f31; // 背景色
-    BRUSH_COLOR=BLACK;	//画笔颜色
-    // LCD_Fill_onecolor(0, 30, lcd_width,lcd_height/2, 0x9f31);
+	BRUSH_COLOR=BLACK;	//画笔颜色
+                         // LCD_Fill_onecolor(0, 30, lcd_width,lcd_height/2, 0x9f31);
     int show_index = 0;
     for (int i = 0; i < peaks_num; i++)
     {
@@ -161,7 +160,7 @@ void display_fft_datas(void)
 
 
 //int set_phase=0;
-//float average2[1024];
+//float average2[1024]; 
 //int average_index=0;
 
 void ADC_progress()
@@ -177,18 +176,18 @@ void ADC_progress()
 //        uo_som+=ADC_Value[i];
 //    }
 //    uo_som=uo_som/FFT_LENGTH;
-
+		
     BACK_COLOR = 0x9f31;                                                    // 背景色
     sprintf((char *)display_str, "adc_freq:%.0f", frequency);               // 1024/2
     LCD_DisplayString(120, 50, 12, display_str);                            // 实际电压数值
     //average = average / 4096 * 3.3 * 0.983261462083069 - 0.007369084852037; // ADC拟合结果
-    // int max_indx = fft_max_index();
+		// int max_indx = fft_max_index();
     sprintf((char *)display_str, "average:%.2f",  average  );                  // 1024/2
     LCD_DisplayString(120, 62, 12, display_str);                            // 实际电压数值
     sprintf((char *)display_str, "peak_to_peak:%.4f", peak_to_peak);        // 1024/2
     LCD_DisplayString(120, 74, 12, display_str);                            // 实际电压数值
     BACK_COLOR = WHITE;                                                     // 背景色
-
+    
 
 
 //    if(average_index>=1024)
@@ -213,30 +212,29 @@ void ADC_progress()
 }
 
 
-int deta_f_value[2]= {0};
-int f_value[30]= {0};
+int deta_f_value[2]={0};
+int f_value[5]={0};
 int f_value_index=0;
 int f_value_sum=0;
-int f_value_sum_min=10000;
-double sum_min_freq=0;;
-int phase_1=0;
+int f_value_sum_old=0;
+
 
 int last_f_value=0;
 int f_value_flag=1;
 
-double set_freq=100e3-1.2;
+double set_freq=100e3-0.8;
 
-void DDS_out(void) {
-    deta_f_value[1]=fft_value(146)-last_f_value;
-    last_f_value=fft_value(146);
-    char display_str[30];
-
+void DDS_out(void){
+	deta_f_value[1]=fft_value(146)-last_f_value;
+	last_f_value=fft_value(146);
+	 char display_str[30];
+	
 
 //deta_f_value[0]=1.0*acos(deta_f_value[0]/1000.0)*100;
 //deta_f_value[1]=1.0*acos(deta_f_value[1]/1000.0)*100;
-    sprintf((char *)display_str, "%.2f,%d,%d,%d,%d\n",fft_value(146),deta_f_value[0],deta_f_value[1],f_value_sum,		ADC_GetConversionValue(ADC3));               // 1024/2
-
-    USART_OUT(USART6,(uint8_t *)display_str);
+	 sprintf((char *)display_str, "%.2f,%d,%d\n",fft_value(146),deta_f_value[0],deta_f_value[1]);               // 1024/2
+	
+	USART_OUT(USART6,(uint8_t *)display_str);
 //	if(fft_value(146)<900){
 //	if(deta_f_value[0]>0){
 //		if(f_value_flag>=1&&deta_f_value[1]>deta_f_value[0]){
@@ -253,57 +251,36 @@ void DDS_out(void) {
 //	}
 //}
 
-    f_value[f_value_index++]=fft_value(146);
-    if(f_value_index>=30) {
-        f_value_index=0;
+f_value[f_value_index++]=fft_value(146);
+if(f_value_index>=5){
+	f_value_index=0;
+	
+	
+	f_value_sum=0;
+	for(int i=1;i<5;i++){
+		f_value_sum+=abs(f_value[i]-f_value[i-1]);
+	}
+	if(f_value_sum>1000){
+		f_value_flag=1;
+				set_freq+=f_value_flag*0.1;
+	  AD9833_WaveSeting(set_freq, 0, SIN_WAVE, 0); // 2KHz,	频率寄存器0，正弦波输出 ,初相位0			//1HZ
+	}	
+
+}
 
 
-        f_value_sum=0;
-        for(int i=1; i<30; i++) {
-            f_value_sum+=abs(f_value[i]-f_value[i-1]);
-        }
-				if(f_value_sum_min>f_value_sum){
-					f_value_sum_min=f_value_sum;
-					sum_min_freq=set_freq;
-				}
-				if(f_value_sum>3*f_value_sum_min){
-				set_freq=sum_min_freq-0.2;
-				}
-        if(f_value_sum>82) {
-            f_value_flag=1;
-            set_freq+=f_value_flag*0.1;
-            AD9833_WaveSeting(set_freq, 0, SIN_WAVE, 0); // 2KHz,	频率寄存器0，正弦波输出 ,初相位0			//1HZ
-					delay_ms(10);
-        }else{
-//					phase_1=0;
-//					for(int i=0;i<360;i++){
-//							if(fft_value(146)>30){
-
-//							phase_1+=1;
-//						  AD9833_WaveSeting(set_freq, 0, SIN_WAVE, phase_1); // 2KHz,	频率寄存器0，正弦波输出 ,初相位0
-//delay_ms(100);								//1HZ
-//							}
-//					}
-					
-				}
-				
-				if(set_freq>100e3+1){
-					set_freq=sum_min_freq-0.2;
-				}
-					
-
-    }
 
 
-    sprintf((char *)display_str, "deta_f_value0:%d\t", deta_f_value[0]);               // 1024/2
+
+						    sprintf((char *)display_str, "deta_f_value0:%d\t", deta_f_value[0]);               // 1024/2
     LCD_DisplayString(120, 86, 12, display_str);                            // 实际电压数值
-    deta_f_value[0]=deta_f_value[1];
+   deta_f_value[0]=deta_f_value[1];
     BACK_COLOR = 0x9f31;                                                    // 背景色
     sprintf((char *)display_str, "set_freq:%.2f", set_freq);               // 1024/2
     LCD_DisplayString(120, 50, 12, display_str);                            // 实际电压数值
-    sprintf((char *)display_str, "f_value_sum:%d  ", f_value_sum);               // 1024/2
+	    sprintf((char *)display_str, "f_value_flag:%d  ", f_value_flag);               // 1024/2
     LCD_DisplayString(120, 62, 12, display_str);                            // 实际电压数值
-    sprintf((char *)display_str, "deta_f_value1:%d", deta_f_value[1]);               // 1024/2
+		    sprintf((char *)display_str, "deta_f_value1:%d", deta_f_value[1]);               // 1024/2
     LCD_DisplayString(120, 74, 12, display_str);                            // 实际电压数值
 
 }
@@ -379,7 +356,7 @@ void Screen_page1_flash(void)
         {
 //            drawWaveform(adc_show_size, ADC_Value, 0, lcd_height / 2 - 30, 30, 4096, RED);
 //            ADC_progress();
-            DDS_out();
+					DDS_out();
         }
         if (is_out_freq)
             out_freq_show();
