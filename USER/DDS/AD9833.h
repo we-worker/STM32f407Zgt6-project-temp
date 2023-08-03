@@ -10,5 +10,7 @@
 void AD9833_Init(void);
 void AD9833_WaveSeting(double frequence,unsigned int frequence_SFR,unsigned int WaveMode,unsigned int Phase );
 void AD9833_Init_GPIO(void);
-void AD9833_AmpSet(unsigned char amp);		 				    
+void AD9833_AmpSet(unsigned char amp);		 
+
+void SetAD9833PhaseRegister(unsigned int Phase);
 #endif

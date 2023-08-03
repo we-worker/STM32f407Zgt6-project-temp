@@ -502,14 +502,14 @@
               <FilePath>..\USER\KEY\Input_event.c</FilePath>
             </File>
             <File>
-              <FileName>filter.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\USER\APPS\filter.c</FilePath>
-            </File>
-            <File>
               <FileName>timer9_phase.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\USER\Timer\timer9_phase.c</FilePath>
+            </File>
+            <File>
+              <FileName>pid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\APPS\pid.c</FilePath>
             </File>
           </Files>
         </Group>

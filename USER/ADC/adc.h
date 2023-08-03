@@ -7,6 +7,8 @@
 // extern  u16 ADC_Value[ADC_BUFFER_SIZE];
 extern uint16_t ADC_Value[ADC_BUFFER_SIZE];
 extern uint16_t ADC2_Value[ADC_BUFFER_SIZE];
+extern uint16_t ADC3_Value[ADC_BUFFER_SIZE];
+
 
 void ADC1_Init(void);  // ADC通道初始化
 u16 Get_Adc(u8 ch);	   // 获得某个通道值

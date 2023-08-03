@@ -14,6 +14,7 @@ typedef struct PID
 
 } PID;
 
+int Follow_PID(PID *s_PID, float dac_out);
 
 #endif
 

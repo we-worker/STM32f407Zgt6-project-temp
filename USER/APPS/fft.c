@@ -73,8 +73,8 @@ float fft_value(int index)
 			continue;
 		uo_sum += lBufOutArray[index + i] * lBufOutArray[index + i];
 	}
-	// return sqrtf(uo_sum);
-	return lBufOutArray[index];
+	return sqrtf(uo_sum);
+	//return lBufOutArray[index];
 }
 
 // 求解fft数组下标对应的频率
@@ -200,5 +200,5 @@ void AMPD(int *peaks, int *peaks_num)
 		}
 	}
 	*peaks_num = j;
-	qsort(peaks, *peaks_num, sizeof(int), comp); // 调用函数qsort
+  qsort(peaks, *peaks_num, sizeof(int), comp); // 调用函数qsort
 }

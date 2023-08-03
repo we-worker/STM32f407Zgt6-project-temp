@@ -113,7 +113,15 @@ void AD9833_AmpSet(unsigned char amp)
 //   	CS_1();
 }
 
-
+/* 设置相位寄存器的值 */
+void SetAD9833PhaseRegister(unsigned int Phase)
+{
+	//AD9833_Write(0x2100);
+int Phs_data=Phase|0xC000;	//相位值
+// Phase&=0x0FFF;
+// Phase|=0xD000;
+AD9833_Write(Phs_data);	//设置相位
+}
 
 /*
 *********************************************************************************************************

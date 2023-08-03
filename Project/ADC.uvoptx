@@ -152,18 +152,50 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>344</LineNumber>
+          <LineNumber>16</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134233054</Address>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>..\USER\APPS\pid.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>56</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>..\USER\Screen\Wave_page.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>227</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134232916</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\USER\ADC\adc.c</Filename>
+          <Filename>..\USER\Screen\Wave_page.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\ADC\../USER/ADC/adc.c\344</Expression>
+          <Expression>\\ADC\../USER/Screen/Wave_page.c\227</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow2>
@@ -291,6 +323,36 @@
           <count>24</count>
           <WinNumber>2</WinNumber>
           <ItemText>ADC3-&gt;DR</ItemText>
+        </Ww>
+        <Ww>
+          <count>25</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>feed_back_freq,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>26</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>set_freq</ItemText>
+        </Ww>
+        <Ww>
+          <count>27</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>f_value_sum_min,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>28</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>f_value_sum,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>29</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>f_value,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>30</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>phase_1,0x0A</ItemText>
         </Ww>
       </WatchWindow2>
       <MemoryWindow4>
@@ -518,8 +580,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\USER\APPS\filter.c</PathWithFileName>
-      <FilenameWithoutPath>filter.c</FilenameWithoutPath>
+      <PathWithFileName>..\USER\Timer\timer9_phase.c</PathWithFileName>
+      <FilenameWithoutPath>timer9_phase.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -530,8 +592,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\USER\Timer\timer9_phase.c</PathWithFileName>
-      <FilenameWithoutPath>timer9_phase.c</FilenameWithoutPath>
+      <PathWithFileName>..\USER\APPS\pid.c</PathWithFileName>
+      <FilenameWithoutPath>pid.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

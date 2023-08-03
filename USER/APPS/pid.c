@@ -2,6 +2,7 @@
 #include "dac.h"
 #include "adc.h"
 #include "lcd.h"
+#include "stdio.h"
 
 extern u16 dac1val;
 extern u8 dac1StopFlag;
@@ -18,11 +19,11 @@ PID dac_pid = {
 };
 
 // 电压调整pid
-int Follow_PID(PID *s_PID, float adc_data1, float dac_out)
+int Follow_PID(PID *s_PID, float error)
 {
 	float iError = 0;
 	int output = 0;
-	iError = adc_data1 - dac_out; // 误差值计算
+	iError =-error; // 误差值计算
 	s_PID->error_acc += iError;	  // 积分
 	output = s_PID->kp * iError + s_PID->ki * s_PID->error_acc * 0.5f + s_PID->kd * iError - s_PID->lastError;
 
