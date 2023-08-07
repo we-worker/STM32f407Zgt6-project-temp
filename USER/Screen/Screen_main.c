@@ -8,16 +8,16 @@ uint16_t Screen_flash_cnt = 0;
 
 #define page_num 3
 Button btn_page[page_num];
-uint8_t page_id = 0;
+uint8_t page_id = 1;
 
 char *texts9[9] = {"1", "2", "3", "4", "5", "6", "7", "8", "9"}; // 定义一个字符串数组
 
 // 假设所有页面刷新函数和处理函数都有相同的类型和参数
 typedef void (*PageFunc)(void);                                                             // 定义一个函数指针类型
-PageFunc page_init_funcs[] = {Screen_page0_init, Screen_page1_init, Screen_page3_init};     // 定义一个存储页面处理函数地址的数组
-PageFunc page_flash_funcs[] = {Screen_page0_flash, Screen_page1_flash, Screen_page3_flash}; // 定义一个存储页面刷新函数地址的数组
+PageFunc page_init_funcs[] = {Screen_page1_init, Screen_page3_init};     // 定义一个存储页面处理函数地址的数组
+PageFunc page_flash_funcs[] = {Screen_page1_flash, Screen_page3_flash}; // 定义一个存储页面刷新函数地址的数组
 typedef void (*PageHandle)(int);
-PageHandle page_handle_funcs[] = {Page0_handle, Page1_handle, Page3_handle};                  // 定义一个存储页面处理函数地址的数组
+PageHandle page_handle_funcs[] = { Page1_handle, Page3_handle};                  // 定义一个存储页面处理函数地址的数组
 
 
 void Button_press_handle(u16);

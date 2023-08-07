@@ -19,15 +19,28 @@ PID dac_pid = {
 };
 
 // 电压调整pid
-int Follow_PID(PID *s_PID, float error)
+int Follow_PID(PID *s_PID, float error,int isPI)
 {
-	float iError = 0;
+	// float iError = 0;
 	int output = 0;
-	iError =-error; // 误差值计算
-	s_PID->error_acc += iError;	  // 积分
-	output = s_PID->kp * iError + s_PID->ki * s_PID->error_acc * 0.5f + s_PID->kd * iError - s_PID->lastError;
+	// iError =-error; // 误差值计算
+	// float error = 2200-nowpeak;
+	if (isPI==1)
+	{
+			s_PID->error_acc += error;	  // 积分
+	}else{
+		s_PID->error_acc -= error;	  // 积分
+	}
+	
 
-	s_PID->lastError = iError; // error值存储
+	// output = s_PID->kp * iError + s_PID->ki * s_PID->error_acc * 0.5f + s_PID->kd * iError - s_PID->lastError;
+	output = s_PID->kp * error + s_PID->ki * s_PID->error_acc  * 0.5f + s_PID->kd * (error - s_PID->lastError);
+	// output += -0.17 * (2800-nowpeak);
+	// if (output > 400)
+	// 	{output =400;}
+	// else if(output < -400)
+	// 	{output =-400;}
+	s_PID->lastError = error; // error值存储
 
 	return (output);
 }

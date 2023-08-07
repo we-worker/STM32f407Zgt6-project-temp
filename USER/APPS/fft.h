@@ -7,7 +7,7 @@
 extern uint32_t Fs; // 虚拟是100000  正常使用定时器是20000    //目前最快模式是700000
 #define FFT_LENGTH 1024  //记得修改  arm_cfft_f32(&arm_cfft_sR_f32_len4096, lBufInArray, 0, 1); // fft变化
 
-void FFT(uint16_t *ADC_Value);
+void FFT(uint16_t *ADC1_Value);
 
 extern float32_t lBufOutArray[FFT_LENGTH];
 extern float32_t lBufInArray[FFT_LENGTH * 2];

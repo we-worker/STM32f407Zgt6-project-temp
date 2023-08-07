@@ -20,9 +20,9 @@ void phase_init(void)
 	GPIO_PinAFConfig(GPIOE, GPIO_PinSource6, GPIO_AF_TIM9); // GPIOA0 复用位定时器 4
 	GPIO_PinAFConfig(GPIOE, GPIO_PinSource5, GPIO_AF_TIM9); // GPIOA0 复用位定时器 4
 
-	// Configure TIM9 to run at 1 MHz
+	// Configure TIM9 to run at 2 MHz
 	TIM_TimeBaseStructure.TIM_Period = 0xFFFF;
-	TIM_TimeBaseStructure.TIM_Prescaler = 71;
+	TIM_TimeBaseStructure.TIM_Prescaler = 81;
 	TIM_TimeBaseStructure.TIM_ClockDivision = 0;
 	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
 	TIM_TimeBaseInit(TIM9, &TIM_TimeBaseStructure);

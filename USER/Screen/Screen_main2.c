@@ -40,10 +40,10 @@ void Display_characteristic()
         // 计算每个ADC值在屏幕上的垂直位置范围
         float adc_value_range = waveform_height / 2000.0f; // 假设ADC的取值范围为0-4095
         int show_buffer_size = 50;                         // 绘制的范围，避免太多了。
-        //		drawWaveform(show_buffer_size, ADC_Value, 0, lcd_height / 2, 0, adc_value_range, RED);
+        //		drawWaveform(show_buffer_size, ADC1_Value, 0, lcd_height / 2, 0, adc_value_range, RED);
         //		drawWaveform(show_buffer_size, ADC2_Value, 0, lcd_height / 2, 0, adc_value_range, BLUE);
         LCD_DrawLine(100, 0, 100, lcd_height - 1, BLUE); // 使用
-        FFT(ADC_Value);                                  // 计算fft
+        FFT(ADC1_Value);                                  // 计算fft
         // 找到最大频率点
         int max_i = 1;
         for (int j = 1; j < FFT_LENGTH / 2; j++)
@@ -173,7 +173,7 @@ void Display_characteristic2()
         uint64_t uo_sum = 0;
         for (int i = 0; i < 1024; i++)
         {
-            uo_sum += ADC_Value[i];
+            uo_sum += ADC1_Value[i];
         }
         uo_sum = uo_sum / 1024;
         real_part[i] = uo_sum; // 幅度
@@ -276,7 +276,7 @@ void Display_characteristic3(void)
         {
         } // 等待被关闭，说明采样完毕
 
-        real_part[i] = ADC_average(ADC_Value); // 幅度
+        real_part[i] = ADC_average(ADC1_Value); // 幅度
     }
     AD9833_WaveSeting(1000, 0, SIN_WAVE, 0);
 }
@@ -302,7 +302,7 @@ void Display_characteristic4(void)
         float freq = freq_start + i * freq_step;
         AD9833_WaveSeting(freq, 0, SIN_WAVE, 0); // 设置频率
         delay(5);
-        real_part[i] = ADC_average(ADC_Value); // 获取幅度
+        real_part[i] = ADC_average(ADC1_Value); // 获取幅度
     }
 
     // 使用二分法查找幅度最大的频率
@@ -336,6 +336,6 @@ void Display_characteristic4(void)
         float freq = freq_start + i * freq_step;
         AD9833_WaveSeting(freq, 0, SIN_WAVE, 0); // 设置频率
         delay(5);
-        real_part[i] = ADC_average(ADC_Value); // 获取幅度
+        real_part[i] = ADC_average(ADC1_Value); // 获取幅度
     }
 }

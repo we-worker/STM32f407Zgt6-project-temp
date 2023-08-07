@@ -315,7 +315,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>4</Optim>
+            <Optim>1</Optim>
             <oTime>1</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>0</OneElfS>
@@ -502,14 +502,14 @@
               <FilePath>..\USER\KEY\Input_event.c</FilePath>
             </File>
             <File>
-              <FileName>timer9_phase.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\USER\Timer\timer9_phase.c</FilePath>
-            </File>
-            <File>
               <FileName>pid.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\USER\APPS\pid.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer9_phase.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\Timer\timer9_phase.c</FilePath>
             </File>
           </Files>
         </Group>

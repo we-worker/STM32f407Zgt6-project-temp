@@ -74,16 +74,16 @@ void TIM2_IRQHandler(void)
 
 
         //		//下面两行配合adc——init原始，实现定时器软触发。
-        //ADC_Value[adc1_data_count++] = Get_Adc(ADC_Channel_6);
+        //ADC1_Value[adc1_data_count++] = Get_Adc(ADC_Channel_6);
                 // u16 t2 = Get_Adc(ADC_Channel_7);
 //        if (adc1_data_count >= FFT_LENGTH)
 //        {
 //            adc1_data_count=0;
-//			FFT(ADC_Value);
+//			FFT(ADC1_Value);
             //自动前移数据
             //adc1_data_count = ADC_BUFFER_SIZE;
-//			memmove(&ADC_Value[0], &ADC_Value[1], (ADC_BUFFER_SIZE - 1) * sizeof(int));
-//			ADC_Value[ADC_BUFFER_SIZE - 1] = Get_Adc(ADC_Channel_6);
+//			memmove(&ADC1_Value[0], &ADC1_Value[1], (ADC_BUFFER_SIZE - 1) * sizeof(int));
+//			ADC1_Value[ADC_BUFFER_SIZE - 1] = Get_Adc(ADC_Channel_6);
         //}
 
         TIM_ClearITPendingBit(TIM2, TIM_IT_Update); // 清除中断标志位

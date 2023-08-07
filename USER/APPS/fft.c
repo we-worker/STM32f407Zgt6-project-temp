@@ -5,7 +5,7 @@
 #include "adc.h"
 #include "stdlib.h"
 
-uint32_t Fs = 10; // 方便后续需要自动修改Fs
+uint32_t Fs = 700e3; // 方便后续需要自动修改Fs
 
 float32_t lBufInArray[FFT_LENGTH * 2];
 float32_t lBufOutArray[FFT_LENGTH];
@@ -20,7 +20,7 @@ int16_t fft_show_idx = 0; // 用于显示的下标
 //   {
 //     fx =  512 * arm_sin_f32(2 * PI * i * 600.0f / Fs+PI/4*5)+23 * arm_sin_f32(2 * PI * i * 3000.0f / Fs+PI);
 
-//     ADC_Value[i] = fx + 1024;
+//     ADC1_Value[i] = fx + 1024;
 //   }
 // }
 
@@ -33,12 +33,12 @@ float Han_Win(u16 i, float value)
 	return Wn;
 }
 
-void FFT(uint16_t *ADC_Value)
+void FFT(uint16_t *ADC1_Value)
 {
 	// InitBufInArray();
 	for (int i = 0; i < FFT_LENGTH; i++)
 	{
-		lBufInArray[i * 2] = ADC_Value[i]; // 实部赋值//虚拟测试ADC_Value
+		lBufInArray[i * 2] = ADC1_Value[i]; // 实部赋值//虚拟测试ADC_Value
 		lBufInArray[i * 2 + 1] = 0;		   // 虚部赋值
 	}
 

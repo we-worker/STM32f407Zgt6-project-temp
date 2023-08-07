@@ -55,22 +55,27 @@ initValuePack(9600);
 //  AD9959_SetAM2(5e6);
 
   AD9833_Init();							 // 初始化与AD9833连接的硬件接口
-  AD9833_WaveSeting(100000-0.5, 0, SIN_WAVE, 0); // 2KHz,	频率寄存器0，正弦波输出 ,初相位0
-  AD9833_AmpSet(100);						 // 设置幅值，幅值最大 255
+  AD9833_WaveSeting(30000, 0, SIN_WAVE, 0,1); // 2KHz,	频率寄存器0，正弦波输出 ,初相位0
+	
+  AD9833_WaveSeting(90000, 0, SIN_WAVE, 0,2); // 2KHz,	频率寄存器0，正弦波输出 ,初相位0
+  //AD9833_AmpSet(100);						 // 设置幅值，幅值最大 255
   //=================================
 
   Screen_init();
+  
   // phase_init();
+	//int phas0=0;
   while (1)
   {
     //		  AD9959_enablechannel1(); // 使能通道1
-    //	AD9959_Setwavephase(10e6,phas0);
-    //		phas0+=30;
-    //		if(phas0>180)
-    //			phas0=0;
-
-    // delay_ms(500);
-
+    
+		//AD9833_WaveSeting(100000-0.5, 0, SIN_WAVE, 3360,1); // 2KHz,	频率寄存器0，正弦波输出 ,初相位0
+//    phas0+=30;
+//    if(phas0>=4096)
+//    phas0=0;
+//		SetAD9833PhaseRegister(phas0,1);
+		
+//    delay_ms(50);
     input_event();
     Screen_flash();
   }

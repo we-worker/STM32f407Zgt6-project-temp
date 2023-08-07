@@ -7,4 +7,6 @@ void Screen_page0_init(void);
 void Screen_page0_flash(void);
 void Page0_handle(int id);
 
+extern uint32_t input_num;
+
 #endif

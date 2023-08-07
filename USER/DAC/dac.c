@@ -72,9 +72,9 @@ void Dac1_Set_Vol(u16 vol)
 void DAC1_Init2(void)
 {  
 	
-		for(int i =0 ;i < 128 ; i++)
+		for(int i =0 ;i < 64 ; i++)
 	{
-			dac1_sinval[i] = 512.0f*sin((1.0f/64) * PI*i) + 512; 
+			dac1_sinval[i] = 512.0f*sin((1.0f/32) * PI*i) + 512; 
 	}
 	
   GPIO_InitTypeDef  GPIO_InitStructure;
@@ -108,7 +108,7 @@ void DAC1_Init2(void)
 	DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)&DAC->DHR12R1; //外设地址
 	DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)&dac1_sinval; //内存地址
 	DMA_InitStructure.DMA_DIR = DMA_DIR_MemoryToPeripheral; //传输方向：内存到外设
-	DMA_InitStructure.DMA_BufferSize = 128; //传输数据量
+	DMA_InitStructure.DMA_BufferSize = 64; //传输数据量
 	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable; //外设地址不增加
 	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable; //内存地址不增加
 	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord; //外设数据大小：半字

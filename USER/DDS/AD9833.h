@@ -8,9 +8,9 @@
 #define SQU_WAVE 	2		//�������
 
 void AD9833_Init(void);
-void AD9833_WaveSeting(double frequence,unsigned int frequence_SFR,unsigned int WaveMode,unsigned int Phase );
+void AD9833_WaveSeting(double frequence,unsigned int frequence_SFR,unsigned int WaveMode,unsigned int Phase,uint8_t drive_id );
 void AD9833_Init_GPIO(void);
 void AD9833_AmpSet(unsigned char amp);		 
 
-void SetAD9833PhaseRegister(unsigned int Phase);
+void SetAD9833PhaseRegister(unsigned int Phase,uint8_t drive_id);
 #endif
