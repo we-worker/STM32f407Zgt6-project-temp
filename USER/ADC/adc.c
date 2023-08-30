@@ -412,9 +412,9 @@ void ADC12_Init3(void)
 	GPIO_Init(GPIOA, &GPIO_InitStructure);			 // 初始化
 
 	ADC_CommonInitStructure.ADC_Mode = ADC_Mode_Independent;					  // 双模式，同时采样
-	ADC_CommonInitStructure.ADC_TwoSamplingDelay = ADC_TwoSamplingDelay_10Cycles; // 两个采样阶段之间的延迟10个时钟
+	ADC_CommonInitStructure.ADC_TwoSamplingDelay = ADC_TwoSamplingDelay_5Cycles; // 两个采样阶段之间的延迟10个时钟
 	ADC_CommonInitStructure.ADC_DMAAccessMode = ADC_DMAAccessMode_Disabled;		  // DMA模式1，两个ADC交替存放
-	ADC_CommonInitStructure.ADC_Prescaler = ADC_Prescaler_Div4;					  // 预分频4分频。ADCCLK=PCLK2/4=84/4=21Mhz,ADC时钟最好不要超过36Mhz
+	ADC_CommonInitStructure.ADC_Prescaler = ADC_Prescaler_Div2;					  // 预分频4分频。ADCCLK=PCLK2/4=84/4=21Mhz,ADC时钟最好不要超过36Mhz
 	ADC_CommonInit(&ADC_CommonInitStructure);									  // 初始化
 
 	ADC_InitStructure.ADC_Resolution = ADC_Resolution_12b; // 12位模式
@@ -427,7 +427,7 @@ void ADC12_Init3(void)
 	ADC_Init(ADC2, &ADC_InitStructure);					   // ADC初始化
 
 	// 配置ADC1通道6，第一个转换，采样时间为480个周期
-	ADC_RegularChannelConfig(ADC2, ADC_Channel_2, 1, ADC_SampleTime_15Cycles);
+	ADC_RegularChannelConfig(ADC2, ADC_Channel_2, 1, ADC_SampleTime_3Cycles);
 
 	// 使能DMA请求
 	ADC_DMARequestAfterLastTransferCmd(ADC2, ENABLE);
@@ -488,9 +488,9 @@ void ADC12_Init3(void)
 	GPIO_Init(GPIOA, &GPIO_InitStructure);				   // 初始化
 
 	ADC_CommonInitStructure.ADC_Mode = ADC_Mode_Independent;					  // 双模式，同时采样
-	ADC_CommonInitStructure.ADC_TwoSamplingDelay = ADC_TwoSamplingDelay_10Cycles; // 两个采样阶段之间的延迟10个时钟
+	ADC_CommonInitStructure.ADC_TwoSamplingDelay = ADC_TwoSamplingDelay_5Cycles; // 两个采样阶段之间的延迟10个时钟
 	ADC_CommonInitStructure.ADC_DMAAccessMode = ADC_DMAAccessMode_Disabled;		  // DMA模式1，两个ADC交替存放
-	ADC_CommonInitStructure.ADC_Prescaler = ADC_Prescaler_Div4;					  // 预分频4分频。ADCCLK=PCLK2/4=84/4=21Mhz,ADC时钟最好不要超过36Mhz
+	ADC_CommonInitStructure.ADC_Prescaler = ADC_Prescaler_Div2;					  // 预分频4分频。ADCCLK=PCLK2/4=84/4=21Mhz,ADC时钟最好不要超过36Mhz
 	ADC_CommonInit(&ADC_CommonInitStructure);									  // 初始化
 
 	ADC_InitStructure.ADC_Resolution = ADC_Resolution_12b; // 12位模式
@@ -503,7 +503,7 @@ void ADC12_Init3(void)
 	ADC_Init(ADC1, &ADC_InitStructure);					   // ADC初始化
 
 	// 配置ADC1通道6，第一个转换，采样时间为480个周期
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_1, 1, ADC_SampleTime_15Cycles);
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_1, 1, ADC_SampleTime_3Cycles);
 
 	// 使能DMA请求
 	ADC_DMARequestAfterLastTransferCmd(ADC1, ENABLE);
@@ -618,3 +618,9 @@ float ADC_freq(uint16_t *adc_value)
 		frequency = 1.0f * Fs / total_time * m;
 	return frequency;
 }
+
+
+
+// 相位
+// 频率准确度
+// 零输入时、零输出

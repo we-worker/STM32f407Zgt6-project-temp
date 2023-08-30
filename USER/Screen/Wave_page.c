@@ -7,7 +7,6 @@
 #include "filter.h"
 // #include "05D_UI.h"
 
-
 // #include "AD9959.h"
 // #include "AD9959_Outset.h"
 #include "pid.h"
@@ -21,16 +20,15 @@ Button btn_data;
 Button Freq_open;
 
 Button Debug;
-bool Debug_Mode=0;//    调试模式。
-int Debug_phase[21][21]={53};
+bool Debug_Mode = 0; //    调试模式。
+int Debug_phase[21][21] = {53};
 
 Button btnPhase;
-bool is_phase=0;
-int phase_set=0;
+bool is_phase = 0;
+int phase_set = 0;
 
 bool is_show_data = 0;
 bool is_out_freq = 0;
-
 
 int adc_show_size = FFT_LENGTH; // 绘制的范围，实现自动缩放时间轴
 
@@ -81,7 +79,7 @@ PID phase_pid2 = {
 
 };
 /// @brief ////////////////////////////
-void ADC_progress();
+
 
 void Screen_page1_init(void)
 {
@@ -95,14 +93,14 @@ void Screen_page1_init(void)
     LCD_DrawButton(&btn2[1]); // 画出每个按钮
 
     btn_data = button_init(65, 300, 50, 20, 0xfe67, "Double", 16, 0, Button_press_handle, 3); // 初始化一个按钮btn1
-    LCD_DrawButton(&btn_data);                                                               // 画出开始按钮
+    LCD_DrawButton(&btn_data);                                                                // 画出开始按钮
 
     Freq_open = button_init(125, 300, 50, 20, 0xfe67, "Start", 12, 0, Button_press_handle, 4); // 初始化一个按钮btn1
     LCD_DrawButton(&Freq_open);                                                                // 画出开始按钮
-    Debug = button_init(125, 280, 50, 20, 0xfe67, "Debug", 12, 0, Button_press_handle, 5); // 初始化一个按钮btn1
-    LCD_DrawButton(&Debug);                                                                // 画出开始按钮
-    btnPhase = button_init(65, 280, 50, 20, 0xfe67, "Phase", 12, 0, Button_press_handle, 6); // 初始化一个按钮btn1
-    LCD_DrawButton(&btnPhase);                                                                // 画出开始按钮
+    Debug = button_init(180, 100, 50, 20, 0xfe67, "start2", 12, 0, Button_press_handle, 5);     // 初始化一个按钮btn1
+    LCD_DrawButton(&Debug);                                                                    // 画出开始按钮
+    btnPhase = button_init(65, 280, 50, 20, 0xfe67, "Phase", 12, 0, Button_press_handle, 6);   // 初始化一个按钮btn1
+    LCD_DrawButton(&btnPhase);                                                                 // 画出开始按钮
 
     ADC1_Init2(); // 高速信号采集dma、等
     ADC2_Init2();
@@ -177,15 +175,15 @@ void display_fft_datas(void)
             float freq = fft_freq(peaks[0], 0);
             base_freq[0][0] = ((int)(freq / 5e3 + 0.5)) * 5e3;
 
-            sprintf((char *)display_str, "value:%.4f  sin", fft_value(peaks[0]));          // 1024/2
-            LCD_DisplayString(120, show_index * 12 + 30, 12, display_str); // 实际电压数值
+            sprintf((char *)display_str, "value:%.4f  sin", fft_value(peaks[0])); // 1024/2
+            LCD_DisplayString(120, show_index * 12 + 30, 12, display_str);        // 实际电压数值
             show_index++;
-            base_freq[1][1] = TRI_WAVE; // 设置为正弦波。
+            base_freq[1][1] = TRI_WAVE; // 设置为三角。
             freq = fft_freq(peaks[1], 0);
             base_freq[1][0] = ((int)(freq / 5e3 + 0.5)) * 5e3;
 
-            sprintf((char *)display_str, "value:%.4f  TRI", fft_value(peaks[1]));          // 1024/2
-            LCD_DisplayString(120, show_index * 12 + 30, 12, display_str); // 实际电压数值
+            sprintf((char *)display_str, "value:%.4f  TRI", fft_value(peaks[1])); // 1024/2
+            LCD_DisplayString(120, show_index * 12 + 30, 12, display_str);        // 实际电压数值
             show_index++;
         }
         else
@@ -194,15 +192,15 @@ void display_fft_datas(void)
             float freq = fft_freq(peaks[0], 0);
             base_freq[0][0] = ((int)(freq / 5e3 + 0.5)) * 5e3;
 
-            sprintf((char *)display_str, "value:%.4f  TRI", fft_value(peaks[0]));          // 1024/2
-            LCD_DisplayString(120, show_index * 12 + 30, 12, display_str); // 实际电压数值
+            sprintf((char *)display_str, "value:%.4f  TRI", fft_value(peaks[0])); // 1024/2
+            LCD_DisplayString(120, show_index * 12 + 30, 12, display_str);        // 实际电压数值
             show_index++;
             base_freq[1][1] = SIN_WAVE; // 设置为正弦波。
             freq = fft_freq(peaks[1], 0);
             base_freq[1][0] = ((int)(freq / 5e3 + 0.5)) * 5e3;
 
-            sprintf((char *)display_str, "value:%.4f  sin", fft_value(peaks[1]));          // 1024/2
-            LCD_DisplayString(120, show_index * 12 + 30, 12, display_str); // 实际电压数值
+            sprintf((char *)display_str, "value:%.4f  sin", fft_value(peaks[1])); // 1024/2
+            LCD_DisplayString(120, show_index * 12 + 30, 12, display_str);        // 实际电压数值
             show_index++;
         }
     }
@@ -211,104 +209,170 @@ void display_fft_datas(void)
 
         // for (int i = 0; i < 2; i++)
         // {
-            float out1 = fft_value(peaks[0]);
-            float out2 = fft_value(peaks[1]);
+        float out1 = fft_value(peaks[0]);
+        float out2 = fft_value(peaks[1]);
 
-            // float xiebo = fft_value(fft_index2freq(fft_freq(peaks[i], 1)) * 3);
-            // sprintf((char *)display_str, "xiebo:%.4f;", xiebo); // 1024/2
-            // LCD_DisplayString(120, 100, 12, display_str);       // 实际电压数值
-            if ((out2+out1)/2 > 520)
-            {
-                base_freq[0][1] = SIN_WAVE; // 设置为正弦波。
-                base_freq[1][1] = SIN_WAVE; // 设置为正弦波。
+        // float xiebo = fft_value(fft_index2freq(fft_freq(peaks[i], 1)) * 3);
+        // sprintf((char *)display_str, "xiebo:%.4f;", xiebo); // 1024/2
+        // LCD_DisplayString(120, 100, 12, display_str);       // 实际电压数值
+        if ((out2 + out1) / 2 > 520)
+        {
+            base_freq[0][1] = SIN_WAVE; // 设置为正弦波。
+            base_freq[1][1] = SIN_WAVE; // 设置为正弦波。
 
-                sprintf((char *)display_str, "value:%.4f  sin", out1);          // 1024/2
-                LCD_DisplayString(120, show_index * 12 + 30, 12, display_str); // 实际电压数值
-                show_index++;
-                sprintf((char *)display_str, "value:%.4f  sin", out2);          // 1024/2
-                LCD_DisplayString(120, show_index * 12 + 30, 12, display_str); // 实际电压数值
-                show_index++;
-                
-            }
-            else
-            {
-                base_freq[0][1] = TRI_WAVE; // 设置为三角波。
-                base_freq[1][1] = TRI_WAVE; // 设置为三角波。
+            sprintf((char *)display_str, "value:%.4f  sin", out1);         // 1024/2
+            LCD_DisplayString(120, show_index * 12 + 30, 12, display_str); // 实际电压数值
+            show_index++;
+            sprintf((char *)display_str, "value:%.4f  sin", out2);         // 1024/2
+            LCD_DisplayString(120, show_index * 12 + 30, 12, display_str); // 实际电压数值
+            show_index++;
+        }
+        else
+        {
+            base_freq[0][1] = TRI_WAVE; // 设置为三角波。
+            base_freq[1][1] = TRI_WAVE; // 设置为三角波。
 
-                sprintf((char *)display_str, "value:%.4f  thi", out1);          // 1024/2
-                LCD_DisplayString(120, show_index * 12 + 30, 12, display_str); // 实际电压数值
-                show_index++;
-                               sprintf((char *)display_str, "value:%.4f  thi", out2);          // 1024/2
-                LCD_DisplayString(120, show_index * 12 + 30, 12, display_str); // 实际电压数值
-                show_index++;
-            }
+            sprintf((char *)display_str, "value:%.4f  thi", out1);         // 1024/2
+            LCD_DisplayString(120, show_index * 12 + 30, 12, display_str); // 实际电压数值
+            show_index++;
+            sprintf((char *)display_str, "value:%.4f  thi", out2);         // 1024/2
+            LCD_DisplayString(120, show_index * 12 + 30, 12, display_str); // 实际电压数值
+            show_index++;
+        }
 
-            float freq = fft_freq(peaks[0], 0);
-            base_freq[0][0] = ((int)(freq / 5e3 + 0.5)) * 5e3;
-            freq = fft_freq(peaks[1], 0);
-            base_freq[1][0] = ((int)(freq / 5e3 + 0.5)) * 5e3;
-
+        float freq = fft_freq(peaks[0], 0);
+        base_freq[0][0] = ((int)(freq / 5e3 + 0.5)) * 5e3;
+        freq = fft_freq(peaks[1], 0);
+        base_freq[1][0] = ((int)(freq / 5e3 + 0.5)) * 5e3;
         // }
     }
-		show_index=0;
-                sprintf((char *)display_str, "freq:%d  ;", base_freq[0][0]); // 1024/2
-            LCD_DisplayString(10, show_index * 12 + 30, 12, display_str);               // 实际电压数值
-            show_index++;
-                        sprintf((char *)display_str, "freq:%d  ;",base_freq[1][0]); // 1024/2
-            LCD_DisplayString(10, show_index * 12 + 30, 12, display_str);               // 实际电压数值
-            show_index++;
+    show_index = 0;
+    sprintf((char *)display_str, "freq:%d  ;", base_freq[0][0]);  // 1024/2
+    LCD_DisplayString(10, show_index * 12 + 30, 12, display_str); // 实际电压数值
+    show_index++;
+    sprintf((char *)display_str, "freq:%d  ;", base_freq[1][0]);  // 1024/2
+    LCD_DisplayString(10, show_index * 12 + 30, 12, display_str); // 实际电压数值
+    show_index++;
     LCD_Fill_onecolor(0, show_index * 12 + 30, lcd_width, lcd_height / 4, 0x9f31);
     BACK_COLOR = WHITE; // 背景色
+
+    //测试用途
+//    base_freq[0][0]=20e3;
+//    base_freq[1][0]=60e3;
+//    base_freq[0][1]=1;
+//    base_freq[1][1]=1;
+    if (fft_value(peaks[0]) < 30) // 没有输入
+       base_freq[0][0]=0;
+    if (fft_value(peaks[1]) < 30) // 没有输入
+       base_freq[1][0]=0;
+
 
     set_freq = base_freq[0][0] - 0; // 设置频率
     feed_back_freq[0] = fft_index2freq(base_freq[0][0]);
     f_value_sum_min = 1000000; // 保存谐波变化差值之和 最小值
 
-    // f_value[f_value_index++] = fft_value(feed_back_freq[0]);
-    // if(f_value_index>=30)
-    //     f_value_index=0;
+
     AD9833_WaveSeting(set_freq, 0, base_freq[0][1], 0, 1); // 2KHz,	频率寄存器0，正弦波输出 ,初相位0
     set_freq = base_freq[1][0] - 0;                        // 设置频率
     AD9833_WaveSeting(set_freq, 0, base_freq[1][1], 0, 2); // 2KHz,	频率寄存器0，正弦波输出 ,初相位0
     freq_change_count = 3;
+
+}
+
+
+void display_fft_datas2(void)
+{
+    int peaks[FFT_LENGTH / 2]; // fft峰值数组
+    int peaks_num = 0;         // fft峰值数量
+    AMPD(peaks, &peaks_num);
+
+    char display_str[30];
+    BACK_COLOR = 0x9f31; // 背景色
+    BRUSH_COLOR = BLACK; // 画笔颜色
+    // LCD_Fill_onecolor(0, 30, lcd_width,lcd_height/2, 0x9f31);
+    int show_index = 0;
+
+    if (peaks[0] > peaks[1])
+    {
+        int t = peaks[0];
+        peaks[0] = peaks[1];
+        peaks[1] = t;
+    }
+    if (fft_freq(peaks[0],1)>40e3 && fft_value(peaks[0])>100 &&fft_value(peaks[0]*3)>15)
+    {
+        base_freq[0][1] = TRI_WAVE; // 设置为三角。
+        sprintf((char *)display_str, "value:%.4f  TRI", fft_value(peaks[1])); // 1024/2
+            LCD_DisplayString(120, show_index * 12 + 30, 12, display_str);        // 实际电压数值
+            show_index++;
+    }
+    else if (fft_value(peaks[0])>100 && fft_value(peaks[0]*3)>15&& fft_value(peaks[0]*5)>15){
+        base_freq[0][1] = TRI_WAVE; // 设置为三角。
+        sprintf((char *)display_str, "value:%.4f  TRI", fft_value(peaks[1])); // 1024/2
+            LCD_DisplayString(120, show_index * 12 + 30, 12, display_str);        // 实际电压数值
+            show_index++;
+    }else{
+        base_freq[0][1] = SIN_WAVE; // 设置为正弦波。
+        sprintf((char *)display_str, "value:%.4f  sin", fft_value(peaks[0])); // 1024/2
+            LCD_DisplayString(120, show_index * 12 + 30, 12, display_str);        // 实际电压数值
+            show_index++;
+    }
+    float freq = fft_freq(peaks[0], 0);
+    base_freq[0][0] = ((int)(freq / 5e3 + 0.5)) * 5e3;
+
+    if (fft_freq(peaks[1],1)>55e3 && fft_value(peaks[1])>100 &&fft_value(peaks[1]*3)>15)
+    {
+        base_freq[1][1] = TRI_WAVE; // 设置为三角。
+        sprintf((char *)display_str, "value:%.4f  TRI", fft_value(peaks[1])); // 1024/2
+            LCD_DisplayString(120, show_index * 12 + 30, 12, display_str);        // 实际电压数值
+            show_index++;
+    }
+    else if (fft_value(peaks[1])>100 && fft_value(peaks[1]*3)>15&& fft_value(peaks[1]*5)>15){
+        base_freq[1][1] = TRI_WAVE; // 设置为三角。
+        sprintf((char *)display_str, "value:%.4f  TRI", fft_value(peaks[1])); // 1024/2
+            LCD_DisplayString(120, show_index * 12 + 30, 12, display_str);        // 实际电压数值
+            show_index++;
+    }else{
+        base_freq[1][1] = SIN_WAVE; // 设置为正弦波。
+        sprintf((char *)display_str, "value:%.4f  sin", fft_value(peaks[1])); // 1024/2
+            LCD_DisplayString(120, show_index * 12 + 30, 12, display_str);        // 实际电压数值
+            show_index++;
+    }
+    freq = fft_freq(peaks[1], 0);
+    base_freq[1][0] = ((int)(freq / 5e3 + 0.5)) * 5e3;
+
+    show_index = 0;
+    sprintf((char *)display_str, "freq:%d  ;", base_freq[0][0]);  // 1024/2
+    LCD_DisplayString(10, show_index * 12 + 30, 12, display_str); // 实际电压数值
+    show_index++;
+    sprintf((char *)display_str, "freq:%d  ;", base_freq[1][0]);  // 1024/2
+    LCD_DisplayString(10, show_index * 12 + 30, 12, display_str); // 实际电压数值
+
+    if (fft_value(peaks[0]) < 30) // 没有输入
+       base_freq[0][0]=0;
+    if (fft_value(peaks[1]) < 30) // 没有输入
+       base_freq[1][0]=0;
+
+
+    set_freq = base_freq[0][0] - 0; // 设置频率
+    feed_back_freq[0] = fft_index2freq(base_freq[0][0]);
+    f_value_sum_min = 1000000; // 保存谐波变化差值之和 最小值
+
+
+    AD9833_WaveSeting(set_freq, 0, base_freq[0][1], 0, 1); // 2KHz,	频率寄存器0，正弦波输出 ,初相位0
+    set_freq = base_freq[1][0] - 0;                        // 设置频率
+    AD9833_WaveSeting(set_freq, 0, base_freq[1][1], 0, 2); // 2KHz,	频率寄存器0，正弦波输出 ,初相位0
+    freq_change_count = 3;
+
 }
 
 int error[2];
 float set_freqs[2] = {0, 1};
 
-float f_GradDesO(int *error, float *FREQ) // 传入error[2]与freq[2]
-{
-    int temp_freq;
-    float learn_speed = 0.0001;
-    temp_freq = -learn_speed * error[1] * (error[1] - error[0]) / (FREQ[1] - FREQ[0]);
 
-    float re_phase = FREQ[1] + temp_freq;
-    if (re_phase >= 101e3)
-        re_phase = 101e3;
-    while (re_phase < 4e3)
-        re_phase = 4e3;
-    return re_phase;
-}
 
 int Perror[2];
 float nowPhaseis[2];
 
-int phase_ChangeD(int *error, float *Phase) // 传入error[2]与freq[2]
-{
-    // int return_flag = 0;
-    if ((error[1] - error[0]) / (Phase[1] - Phase[0]) >= 0)
-    {
-        // return_flag = 1;
-        return 1;
-    }
-    else if ((error[1] - error[0]) / (Phase[1] - Phase[0]) < 0)
-    {
-        // return_flag = 0;
-        return 0;
-    }
-    return 0;
-    // return return_flag;
-}
 
 int phase_count = 0;
 int peak_count = 0;
@@ -345,41 +409,7 @@ void DDS_out(void)
         phase_1 = phase_1 - deta;
         deta = Follow_PID(&phase_pid2, set_peak2 - nowpeak2 + fft_show_idx, 1);
         phase_2 = phase_2 + deta;
-        
-        // if(nowpeak2 < lowest_peak2)
-        // {
-        //     lowest_peak2 = nowpeak2;
-        // }
-        // if (set_peak2-fft_show_idx<=lowest_peak2+lowphase_add){
-        // //if (lowest_peak2<1500){
-        //     set_peak2 =lowest_peak2+lowphase_add;
-        // 			fft_show_idx=0;
-        //     // deta =Follow_PID(&phase_pid2, set_peak2 - nowpeak2-fft_show_idx, 1);
-        // }
-        // else{
-        //     phase_2 = phase_2;
-        //     if (phase_count==0)
-        //     {
-        //         set_peak2-=10;
-        //     }
 
-        // }
-
-        // deta_peak2[0]=deta_peak2[1];
-        // deta_peak2[1]=fabs( nowpeak2-peak2peak_last2);
-        // peak2peak_last2=nowpeak2;
-
-        // phase_ChangeD(peak2peak_last2, phase_2)
-        // if (fft_show_idx+goal_phase<=lowest_peak1+lowphase_add){
-        //     set_phase = lowest_peak1+lowphase_add;
-        // }
-        // else{
-        //     set_phase = fft_show_idx+goal_phase;
-        // }
-        // sprintf((char *)display_str, "%.2f,%.2f,%.2f,%d\n", fft_value(feed_back_freq[0]), nowpeak, peak2peak_last, phase_1); // 1024/2
-        // USART_OUT(USART6, (uint8_t *)display_str);
-        // sprintf((char *)display_str, "%.2f,%d,%d,%d\n", nowpeak2, set_peak2,phase_2,lowest_peak2); // 1024/2
-        // USART_OUT(USART6, (uint8_t *)display_str);
 
         while (phase_1 >= 4095)
             phase_1 -= 4095;
@@ -399,9 +429,9 @@ int phase3 = 0;
 float phase3_cor = 50 * 4096 / 360 + 10;
 
 PID phase_pid3 = {
-    .kp = 1.5,      // 0.8
-    .ki =-0, // 0.00001
-    .kd = 0,    // 0.001
+    .kp = 0.8, // 0.8
+    .ki = 0,  // 0.00001
+    .kd = 0,   // 0.001
     .error_acc = 0,
     .lastError = 0
 
@@ -414,31 +444,38 @@ void double_dds_out()
 {
     // TIM2_Init2(9, 5); // 定时器2时钟84M，分频系数84，84M/6=14000K 所以9次为1400k
     // Fs = 1400000;
+    float32_t average1 = 0;
+    float32_t average2 = 0;
+    for (int k = 0; k < FFT_LENGTH; k++) {
+        average1 += ADC1_Value[k];
+        average2 += ADC2_Value[k];
+    }
+    average2 /= FFT_LENGTH;
+    average1 /= FFT_LENGTH;
 
     int first_p[2] = {0};
     float t2, t1;
     for (int j = 0; j < 3; j++)
     {
-        int i = 5;
+        int i = 10;
+        float32_t average;
         uint16_t *adc_value;
         if (j == 0 || j == 2)
         {
             adc_value = ADC2_Value;
+            average=average2;
         }
         else
         {
-
             adc_value = ADC1_Value;
             i = first_p[0] - 1; // 后一相位必定只能在0-360
+            average=average1;
         }
 
-        float32_t average = 0;
-        for (int k = 0; k < FFT_LENGTH; k++)
-            average += adc_value[k];
-        average /= FFT_LENGTH;
+
         int E = 10;
         if (j == 2)
-        { // 往前找
+        {   // 往前找
             i = first_p[1] + 2;
             // 第一个i点，如果波形第一个点就大于平均值，那么说明前面有点波形找不到了。
             if (adc_value[i] < average)
@@ -473,88 +510,70 @@ void double_dds_out()
 
         if (j == 0 || j == 2)
 
-          //  t1 = (first_p[0] - 1) + (average - adc_value[first_p[0] - 1]) / (adc_value[first_p[0]] - adc_value[first_p[0] - 1]);
-				t1 = first_p[0] ;
+            t1 = (first_p[0] - 1) + (average - adc_value[first_p[0] - 1]) / (adc_value[first_p[0]] - adc_value[first_p[0] - 1]);
+        //t1 = first_p[0];
         else
-           // t2 = (first_p[1] - 1) + (average - adc_value[first_p[1] - 1]) / (adc_value[first_p[1]] - adc_value[first_p[1] - 1]);
-				t2=first_p[1];
+            t2 = (first_p[1] - 1) + (average - adc_value[first_p[1] - 1]) / (adc_value[first_p[1]] - adc_value[first_p[1] - 1]);
+        //t2 = first_p[1];
     }
-    // phase3=(t2-t1)/(700e3/100e3)*4096;
     float pass_time = (t2 - t1) / (Fs / base_freq[1][0]) * 4096; // 过零点
 
     if (pass_time >= 4095)
-            pass_time -= 4095;
-        if (pass_time < 0)
-            pass_time += 4095;
-
+        pass_time -= 4095;
+    if (pass_time < 0)
+        pass_time += 4095;
 
     //     pass_time /=4;
-        // pass_time_n = 4095 -pass_time;
-        // phase3_cor = fft_show_idx * 4096 / 360;
-        phase3_cor = phase_set * 4096 / 360  + Debug_phase[(int)(base_freq[0][0]/5e3)][(int)(base_freq[1][0]/5e3)]* 4096 / 360;
-        // phase3_cor = fft_show_idx * 4096 / 360  + 10* 4096 / 360;
-        // phase3_cor +=20 * 4096 / 360;
-        // int deta = Follow_PID(&phase_pid3, pass_time - phase3_cor, 1);
-        // phase3 -= deta;
-        int deta = 8;
-            char display_str[50];
-            // base_freq[1][0]=90e3;
+    // pass_time_n = 4095 -pass_time;
+    // phase3_cor = fft_show_idx * 4096 / 360;
+    // phase3_cor = phase_set * 4096 / 360 + Debug_phase[(int)(base_freq[0][0] / 5e3)][(int)(base_freq[1][0] / 5e3)] * 4096 / 360;
+    phase3_cor = phase_set * 4096 / 360 ;
+    // phase3_cor +=20 * 4096 / 360;
+    //int deta = Follow_PID(&phase_pid3, pass_time - phase3_cor, 1);
+    // phase3 -= deta;
+    int deta = 8;
+    char display_str[50];
+    // base_freq[1][0]=90e3;
     //    sprintf((char *)display_str, "pass_time:%.2f   ;", pass_time); // 1024/2
     //    LCD_DisplayString(10, 42, 12, display_str);                  // 实际电压数值
-        // step_count++;
-        // if (step_count>10){
-        //     step_count = 0;
+    // step_count++;
+    // if (step_count>10){
+    //     step_count = 0;
+    if(fabs(pass_time - (phase3_cor))>200&&fabs(pass_time - (phase3_cor))){
+        phase3 -= deta;
+    }
+    if (pass_time > phase3_cor && fabs(pass_time - (phase3_cor)) > 2047)
+    {
+        phase3 += deta;
+    }
+    else if (pass_time < phase3_cor && fabs(pass_time - (phase3_cor)) < 2047)
+    {
+        phase3 += deta;
+    }
+    else if (pass_time < phase3_cor && fabs(pass_time - (phase3_cor)) > 2047)
+    {
+        phase3 -= deta;
+    }
 
-
-            if (pass_time >= phase3_cor && fabs(pass_time -(phase3_cor)) < 2047){
-                phase3 -= deta;
-            }
-            if (pass_time >= phase3_cor && fabs(pass_time -(phase3_cor)) > 2047){
-                phase3 += deta;
-            }
-            else if(pass_time < phase3_cor && fabs(pass_time -(phase3_cor)) < 2047) {
-                phase3 += deta;
-            }
-            else if(pass_time < phase3_cor && fabs(pass_time -(phase3_cor)) > 2047){
-                phase3 -= deta;
-            }
-
-
-            // if (pass_time >= phase3_cor-10){
-            //     phase3 -= 10;
-            // }
-            // if (pass_time < phase3_cor-10){
-            //     phase3 += 10;
-            // }
-        // }
-        
-
-        while (phase3 >= 4095)
-            phase3 -= 4075;
-        while (phase3 < 0)
-            phase3 += 4075;
-        SetAD9833PhaseRegister(phase3, 2);
-        // SetAD9833PhaseRegister(-phase3, 2);
+    // if (pass_time >= phase3_cor-10){
+    //     phase3 -= 10;
     // }
-    //char display_str[30];
-    // sprintf((char *)display_str, "%.2f,%.2f,%d\n", pass_time, phase3_cor, phase3); // 1024/2
+    // if (pass_time < phase3_cor-10){
+    //     phase3 += 10;
+    // }
+    // }
+
+    while (phase3 >= 4095)
+        phase3 -= 4075;
+    while (phase3 < 0)
+        phase3 += 4075;
+    SetAD9833PhaseRegister(phase3, 2);
+    // }
+//    char display_str[30];
+//		sprintf((char *)display_str, "%.2f,%.2f,%d\n", pass_time, phase3_cor, phase3); // 1024/2
     // USART_OUT(USART6, (uint8_t *)display_str);
     // pass_time/=11;
-    // if (pass_time - phase3_cor > 0)
-    // {
-    //     phase3 = 200;
-    // }
-    // else
-    // {
-    //     phase3 = 0;
-    // }
 
-    // if (pass_time >= phase3_cor){
-    //     phase3 -= 5;
-    // }
-    // else{
-    //     phase3 += 5;
-    // }
 
     // char display_str[30];
     // sprintf((char *)display_str, "%.2f,%.2f,%d\n", pass_time, phase3_cor, phase3); // 1024/2
@@ -562,8 +581,8 @@ void double_dds_out()
     // phase3=-phase3;
 
     //char display_str[50];
-//    sprintf((char *)display_str, "Point_toP:%.2f   ;", t2 - t1); // 1024/2
-//    LCD_DisplayString(10, 50, 12, display_str);                  // 实际电压数值
+//        sprintf((char *)display_str, "Point_toP:%.2f   ;", t2 - t1); // 1024/2
+//        LCD_DisplayString(10, 50, 12, display_str);                  // 实际电压数值
     // if(fabs(fabs(t2-t1)-phase3)>1){
     // drawWaveform(50, ADC2_Value, 0, lcd_height / 2 - 60, 60, 4096, RED);
     // drawWaveform(50, ADC1_Value, 0, lcd_height / 2 - 60, lcd_height / 2, 4096, RED);
@@ -575,7 +594,6 @@ void double_dds_out()
     // }
     // phase3=fabs(t2-t1);
 }
-
 
 void Screen_page1_flash(void)
 {
@@ -592,7 +610,6 @@ void Screen_page1_flash(void)
     LCD_CheckButton(&Debug);
     LCD_CheckButton(&btnPhase);
 
-
     //
 
     if (Screen_flash_cnt == 0)
@@ -608,22 +625,24 @@ void Screen_page1_flash(void)
         if (is_show_data)
         {
 
-					char display_str[50];
-            sprintf((char *)display_str, "phase:%d+%d;",phase_set,Debug_phase[(int)(base_freq[0][0]/5e3)][(int)(base_freq[1][0]/5e3)]); // 1024/2
-            LCD_DisplayString(10, 174, 24, display_str); 
-            double_dds_out();
+            //char display_str[50];
+            // sprintf((char *)display_str, "phase:%d+%d;", phase_set, Debug_phase[(int)(base_freq[0][0] / 5e3)][(int)(base_freq[1][0] / 5e3)]); // 1024/2
+            // LCD_DisplayString(10, 174, 24, display_str);
+            if(is_phase==0)//方便一键启动
+                double_dds_out();
             // double_dds_out2();
 
             //  SetAD9833PhaseRegister(550, 2);
-            // ADC_progress();
+
             // 开启AD转换器
+						delay_ms(10);//这里等待，可以不让单片机工作，优化波形。
         }
         else
         {
             // 开启AD转换器
             ADC_Cmd(ADC3, DISABLE);
             // drawWaveform(adc_show_size, ADC3_Value, 0, lcd_height / 2 - 30, 30, 4096, RED);
-            //            ADC_progress();
+
             if (freq_change_count < 2)
             {
                 // display_fft(2);
@@ -642,21 +661,19 @@ void Screen_page1_flash(void)
                 Page1_handle(btn2[i].id);
             }
         }
-        if (Debug_Mode)
-        {
-            Debug_phase[(int)(base_freq[0][0]/5e3)][(int)(base_freq[1][0]/5e3)]=fft_show_idx;
-                    char display_str[50];
-            sprintf((char *)display_str, "Debug_Mode" ); // 1024/2
-            LCD_DisplayString(10, 150, 24, display_str); 
-            sprintf((char *)display_str, "phase:%d,%d==%d   ;",phase_set,(int)(base_freq[1][0]/5e3),Debug_phase[(int)(base_freq[0][0]/5e3)][(int)(base_freq[1][0]/5e3)]); // 1024/2
-            LCD_DisplayString(10, 174, 24, display_str); 
-        }
+        // if (Debug_Mode)
+        // {
+        //     Debug_phase[(int)(base_freq[0][0] / 5e3)][(int)(base_freq[1][0] / 5e3)] = fft_show_idx;
+        //     char display_str[50];
+        //     sprintf((char *)display_str, "Debug_Mode"); // 1024/2
+        //     LCD_DisplayString(10, 150, 24, display_str);
+        //     sprintf((char *)display_str, "phase:%d,%d==%d   ;", phase_set, (int)(base_freq[1][0] / 5e3), Debug_phase[(int)(base_freq[0][0] / 5e3)][(int)(base_freq[1][0] / 5e3)]); // 1024/2
+        //     LCD_DisplayString(10, 174, 24, display_str);
+        // }
 
-        if(is_phase){
-            phase_set=fft_show_idx;
-					char display_str[50];
-            sprintf((char *)display_str, "phase:%d+%d;",phase_set,Debug_phase[(int)(base_freq[0][0]/5e3)][(int)(base_freq[1][0]/5e3)]); // 1024/2
-            LCD_DisplayString(10, 174, 24, display_str); 
+        if (is_phase)
+        {
+            phase_set = fft_show_idx;
 
         }
         
@@ -667,47 +684,61 @@ void Page1_handle(int id)
 {
     if (id == 1)
     {
-        LCD_Fill_onecolor(0, 60, lcd_width,  280, 0x9f31);
+        LCD_Fill_onecolor(0, 174, lcd_width, 280, 0x9f31);
         fft_show_idx -= 1;
         char display_str[50];
-        // sprintf((char *)display_str, "set_peak2:%d,fft_show_idx:%d   ;", set_peak2, fft_show_idx); // 1024/2
-        // LCD_DisplayString(10, 100, 12, display_str);                                               // 实际电压数值
-
-        // base_freq[1][0]-=0.1;
-        // AD9833_WaveSeting( base_freq[1][0], 0, base_freq[1][1], 0,2); // 2KHz,	频率寄存器0，正弦波输出 ,初相位0
+        if (is_show_data==1)
+        {
+            char display_str[50];
+            sprintf((char *)display_str, "phase:%d+%d;", phase_set, Debug_phase[(int)(base_freq[0][0] / 5e3)][(int)(base_freq[1][0] / 5e3)]); // 1024/2
+            LCD_DisplayString(10, 174, 24, display_str);
+        }
     }
     else if (id == 2)
     {
-        LCD_Fill_onecolor(0, 60, lcd_width,  280, 0x9f31);
+        LCD_Fill_onecolor(0, 174, lcd_width, 280, 0x9f31);
         fft_show_idx += 1;
         char display_str[50];
+        if (is_show_data==1)
+        {
+            char display_str[50];
+            sprintf((char *)display_str, "phase:%d+%d;", phase_set, Debug_phase[(int)(base_freq[0][0] / 5e3)][(int)(base_freq[1][0] / 5e3)]); // 1024/2
+            LCD_DisplayString(10, 174, 24, display_str);
+        }
+
         // sprintf((char *)display_str, "phase:%d,fft_show_idx:%d   ;", fft_show_idx * 4096 / 360 , fft_show_idx); // 1024/2
         // LCD_DisplayString(10, 100, 12, display_str);                                               // 实际电压数值
-                                             // 实际电压数值
+        // 实际电压数值
         // base_freq[1][0]+=0.1;
         //  AD9833_WaveSeting( base_freq[1][0], 0, base_freq[1][1], 0,2); // 2KHz,	频率寄存器0，正弦波输出 ,初相位0
     }
     else if (id == 3)
     {
-        LCD_Fill_onecolor(0, 60, lcd_width,  280, 0x9f31);
+        LCD_Fill_onecolor(0, 60, lcd_width, 280, 0x9f31);
         is_show_data = 1 - is_show_data;
-    
-            char display_str[50];
-            sprintf((char *)display_str, "phase:%d+%d;",phase_set,Debug_phase[(int)(base_freq[0][0]/5e3)][(int)(base_freq[1][0]/5e3)]); // 1024/2
-        LCD_DisplayString(10, 100, 24, display_str);       
+
+        char display_str[50];
+
         if (is_show_data)
+        {
             ADC12_Init3();
+            Fs =700000*4;
+            TIM2_Init2(9, 2); // 定时器2时钟84M，分频系数84，84M/6=14000K 所以9次为1400k
+            sprintf((char *)display_str, "phase:%d+%d;", phase_set, Debug_phase[(int)(base_freq[0][0] / 5e3)][(int)(base_freq[1][0] / 5e3)]); // 1024/2
+            LCD_DisplayString(10, 174, 24, display_str);
+        }
         else
         {
             ADC1_Init2(); // 高速信号采集dma、等
             ADC2_Init2();
+            TIM2_Init2(19, 5); // 定时器2时钟84M，分频系数84，84M/6=14000K 所以9次为1400k
+            Fs = 700000;
+            sprintf((char *)display_str, "                        "); // 1024/2
+            LCD_DisplayString(10, 174, 24, display_str);
         }
     }
     else if (id == 4)
     {
-        // is_out_freq = 1 - is_out_freq;
-        // if (is_out_freq)
-        // {
 
         ADC_Cmd(ADC3, ENABLE);
         // 高速时需要开关tim2实现采集，不卡顿
@@ -718,51 +749,63 @@ void Page1_handle(int id)
         } // 等待被关闭，说明采样完毕
 
         display_fft(3);
-        display_fft_datas();
-        // }
-        // else
-        // {
-        //     TIM_Cmd(TIM4, DISABLE);
-        //     TIM_Cmd(TIM3, DISABLE);
-        // }
-    }else if(id==5){
-        Debug_Mode=1-Debug_Mode;
-        LCD_Fill_onecolor(0, 60, lcd_width,  280, 0x9f31);
+        Debug_Mode=0;
+        if(Debug_Mode==0)
+            display_fft_datas2();
+        else
+            display_fft_datas();
+        //Page1_handle(3);
+                    char display_str[50];
+            sprintf((char *)display_str, "fft_way_1"); // 1024/2
+            LCD_DisplayString(10, 150, 24, display_str);
+
     }
-    else if(id==6){
-        is_phase=1-is_phase;
-        LCD_Fill_onecolor(0, 60, lcd_width,  280, 0x9f31);
+    else if (id == 5)
+    {
+        Debug_Mode = 1;
+        if (is_phase == 1 && Debug_Mode == 1)
+            is_phase = 0;
+        LCD_Fill_onecolor(0, 60, lcd_width, 280, 0x9f31);
+
+        ADC_Cmd(ADC3, ENABLE);
+        // 高速时需要开关tim2实现采集，不卡顿
+        if (TIM2->CR1 == 0)        // 等待被关闭  说明FTT计算完毕
+            TIM_Cmd(TIM2, ENABLE); // 使能定时器2
+        while (TIM2->CR1 != 0)
+        {
+        } // 等待被关闭，说明采样完毕
+
+        display_fft(3);
+        if(Debug_Mode==0)
+            display_fft_datas2();
+        else
+            display_fft_datas();
+                if(Debug_Mode==0){
+
+            char display_str[50];
+            sprintf((char *)display_str, "fft_way_1"); // 1024/2
+            LCD_DisplayString(10, 150, 24, display_str);
+        }else{
+            char display_str[50];
+            sprintf((char *)display_str, "fft_way_2"); // 1024/2
+            LCD_DisplayString(10, 150, 24, display_str);
+        }
+    }
+    else if (id == 6)
+    {
+        is_phase = 1 - is_phase;
+        if (is_phase == 1 && Debug_Mode == 1)
+            Debug_Mode = 0;
+        if(is_phase==0) {
+            char display_str[50];
+            sprintf((char *)display_str, "                 "); // 1024/2
+            LCD_DisplayString(10, 162, 12, display_str);
+        } else {
+            char display_str[50];
+            sprintf((char *)display_str, "phase_change_mode"); // 1024/2
+            LCD_DisplayString(10, 162, 12, display_str);
+        }
     }
 }
 
-void ADC_progress()
-{
 
-    // 计算峰值、峰峰值和平均值
-    peak_to_peak = ADC_peak2peak(ADC1_Value);
-    average = ADC_average(ADC1_Value);
-    frequency = ADC_freq(ADC1_Value);
-    char display_str[30];
-
-    BACK_COLOR = 0x9f31;                                      // 背景色
-    sprintf((char *)display_str, "adc_freq:%.0f", frequency); // 1024/2
-    LCD_DisplayString(120, 50, 12, display_str);              // 实际电压数值
-
-    sprintf((char *)display_str, "average:%.2f", average);           // 1024/2
-    LCD_DisplayString(120, 62, 12, display_str);                     // 实际电压数值
-    sprintf((char *)display_str, "peak_to_peak:%.4f", peak_to_peak); // 1024/2
-    LCD_DisplayString(120, 74, 12, display_str);                     // 实际电压数值
-    BACK_COLOR = WHITE;                                              // 背景色
-}
-
-void out_freq_show()
-{
-    char display_str[30];
-    BACK_COLOR = 0x9f31; // 背景色
-    if (Frequency > 10000)
-        sprintf((char *)display_str, "OutFreq:%dkhz      ", (uint32_t)(Frequency / 1000.0f + 0.5));
-    else
-        sprintf((char *)display_str, "OutFreq:%d      ", Frequency);
-    LCD_DisplayString(120, 36, 12, display_str); // 实际电压数值
-    BACK_COLOR = WHITE;                          // 背景色
-}
